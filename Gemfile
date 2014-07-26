@@ -5,6 +5,7 @@ gem 'rails', '4.0.0'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'jquery-rails', '3.0.4'
 gem 'pg', '0.17.1' #http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
+gem 'rails_admin'
 
 group :development, :test do
   gem 'rspec-rails', '2.14.0'
