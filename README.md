@@ -1,7 +1,7 @@
 v1
 store people's birthdays
   [x] get a postgres database running
-  [] institute Person - first name, last name, birthday, email
+  [x] institute Person - first name, last name, birthday, email
 v2
   look into admin page rails libraries to display them - be able to see people
 v3
