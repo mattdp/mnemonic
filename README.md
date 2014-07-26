@@ -8,8 +8,12 @@ v3 - SKIP since rails_admin is pretty awesome
   bulk editing - might be best to do all edits in a dumped csv, and reupload
   bulk adding - line without ID => new person with those attributes
 v4 notifications - have things show frontpage on the day they are used
-  [] implement notification model
+  [x] implement notification model
+  [x] figure out and implement how tied to Person
+    [x] Person has_many events, so need person_id in events
   [] implement birthday notifier generator
+    [] if no birthday event in current year, create one
+    [] dismissed default to yes if start date + 1 month < today when generator run
   [] make a frontpage with notifications showing up there
     [] controller and simple view
     [] link to admin panel
