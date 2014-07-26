@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726215159) do
+ActiveRecord::Schema.define(version: 20140726232430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: true do |t|
+    t.date     "start_date"
+    t.date     "fade_date"
+    t.string   "fade_action"
+    t.boolean  "dismissed"
+    t.string   "content"
+    t.string   "notes"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", force: true do |t|
     t.date     "birthday"
