@@ -1,6 +1,7 @@
 v1
 store people's birthdays
-  institute Person - first name, last name, birthday, email
+  [x] get a postgres database running
+  [] institute Person - first name, last name, birthday, email
 v2
   look into admin page rails libraries to display them - be able to see people
 v3
@@ -16,6 +17,7 @@ have a view of what people want and what people are looking for
 have people's attributes decaying over time, ie want apartment lasts 2 months
 store notes on people
 be difficult to access for intruders - exposed rails app probably not the answer, running off local might be
+backup data - where does it live? note in README; time machine should take care of it
 
 bulk uploading
 map relationships to each other
