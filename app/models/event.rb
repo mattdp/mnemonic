@@ -21,13 +21,15 @@ class Event < ActiveRecord::Base
   def self.birthday_generator
     Person.find_each do |person|
       if person.birthday
-
+        recent = person.farthest_from_big_bang_event("birthday")
+        person.create_new_birthday_event unless (recent.present? && recent.start_date.year == Event.current_date.year)
       end
     end
   end
 
-  def self.most_recent_event(person,type)
-    Event.where("person_id = ? and type = ?",person.id,type).order("created_at").take(1)
+  #function so easily switched for testing
+  def self.current_date
+    Date.today
   end
 
 end
