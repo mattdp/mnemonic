@@ -1,7 +1,14 @@
 <%= link_to "Add and edit objects", "/admin" %>
 
 <h2>Upcoming birthdays</h2>
-put stuff here
-
+<table>
+  <% @birthdays.each do |event| %>
+    <%= render partial: "/displays/individual_event", locals: {event: event} %>
+  <% end %>
+</table>
 <h2>Outstanding wants and haves</h2>
-<p>NOT IMPLEMENTED</p>
+<table>
+  <% @wants_and_has.each do |event| %>
+    <%= render partial: "/displays/individual_event", locals: {event: event} %>
+  <% end %>
+</table>

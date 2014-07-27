@@ -32,4 +32,17 @@ class Event < ActiveRecord::Base
     Date.today
   end
 
+  def self.get(event_type,visible=true)
+    if visible
+      Event.where("event_type = ? and dismissed = false",event_type)
+    else
+      Event.where("event_type = ?",event_type)
+    end
+  end
+
+  def self.get_displayable(event_type)
+    events = Event.get(event_type,true).select{|e| e.start_date && e.start_date <= Event.current_date}
+    return events.select{|e| e.fade_date.nil? || Event.current_date > e.fade_date}
+  end
+
 end

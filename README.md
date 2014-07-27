@@ -15,13 +15,13 @@ v4 notifications - have things show frontpage on the day they are used
     [x] be able to figure out most recent event
     [x] if no birthday event in current year, create one
     [x] dismissed default to yes if start date + 1 month < today when generator run [never happens with the next_birthday stuff]
-  [] make a frontpage with notifications showing up there
+  [x] make a frontpage with notifications showing up there
     [x] set current date in model for testing; normally set to Date.today  
     [x] controller and simple view
     [x] link to admin panel
-    [] show content and notes for events that exist and aren't dismissed
-    [] implement start_date and fade_date
-    [] partialize; split into birthdays and wants/haves
+    [x] show content and notes for events that exist and aren't dismissed
+    [x] implement start_date and fade_date
+    [x] partialize; split into birthdays and wants/haves
 v5 dismissal
 
 NEXT
