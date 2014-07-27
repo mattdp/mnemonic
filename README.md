@@ -16,25 +16,23 @@ v4 notifications - have things show frontpage on the day they are used
     [x] if no birthday event in current year, create one
     [x] dismissed default to yes if start date + 1 month < today when generator run [never happens with the next_birthday stuff]
   [] make a frontpage with notifications showing up there
-    [] controller and simple view
-    [] link to admin panel
-    [] set current date in controller for testing; normally set to Date.today
+    [x] set current date in model for testing; normally set to Date.today  
+    [x] controller and simple view
+    [x] link to admin panel
     [] show content and notes for events that exist and aren't dismissed
     [] implement start_date and fade_date
     [] partialize; split into birthdays and wants/haves
-v5 
-notifications - have things show frontpage until dismissed (could have sessions, hit button and computes back to last time button hit)
+v5 dismissal
 
 NEXT
-have a view of what people want and what people are looking for
-have people's attributes decaying over time, ie want apartment lasts 2 months
+add information about what people want and what people are looking for
 store notes on people
-be difficult to access for intruders - exposed rails app probably not the answer, running off local might be
 backup data - where does it live? note in README; time machine should take care of it
 implement email for fade_action
 
 bulk uploading
 map relationships to each other
+enough security to not just run it local
 social network connections for harvesting
 offshore worker connections for harvesting
 
