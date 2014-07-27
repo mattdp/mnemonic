@@ -11,10 +11,10 @@ v4 notifications - have things show frontpage on the day they are used
   [x] implement notification model
   [x] figure out and implement how tied to Person
     [x] Person has_many events, so need person_id in events
-  [] implement birthday notifier generator
+  [x] implement birthday notifier generator
     [x] be able to figure out most recent event
-    [] if no birthday event in current year, create one
-    [] dismissed default to yes if start date + 1 month < today when generator run
+    [x] if no birthday event in current year, create one
+    [x] dismissed default to yes if start date + 1 month < today when generator run [never happens with the next_birthday stuff]
   [] make a frontpage with notifications showing up there
     [] controller and simple view
     [] link to admin panel

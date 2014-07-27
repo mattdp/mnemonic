@@ -34,6 +34,7 @@ class Person < ActiveRecord::Base
     end
   end
 
+  #naming something that is either most recent or farthest in the future is hard
   def farthest_from_big_bang_event(type)
     Event.where("person_id = ? AND event_type = ? AND start_date IS NOT NULL",self.id,type) \
     .order("start_date desc").take(1)
@@ -45,6 +46,7 @@ class Person < ActiveRecord::Base
     event.start_date = self.next_birthday - 7.days
     event.event_type = "birthday"
     event.content = "#{self.first_name} #{self.last_name}: Turns #{self.age(self.next_birthday)} on #{self.next_birthday.to_s}"
+    event.dismissed = false
     event.save
   end
 
