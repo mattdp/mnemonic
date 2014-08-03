@@ -6,10 +6,10 @@
 #  start_date  :date
 #  fade_date   :date
 #  fade_action :string(255)
-#  dismissed   :boolean
+#  dismissed   :boolean          default(FALSE)
 #  content     :string(255)
-#  notes       :string(255)
-#  type        :string(255)
+#  notes       :text
+#  event_type  :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #  person_id   :integer
