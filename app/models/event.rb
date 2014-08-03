@@ -42,7 +42,7 @@ class Event < ActiveRecord::Base
 
   def self.get_displayable(event_type)
     events = Event.get(event_type,true).select{|e| e.start_date && e.start_date <= Event.current_date}
-    return events.select{|e| e.fade_date.nil? || Event.current_date > e.fade_date}
+    return events.select{|e| e.fade_date.nil? || Event.current_date < e.fade_date}
   end
 
 end
