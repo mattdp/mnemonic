@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726235931) do
+ActiveRecord::Schema.define(version: 20140803063121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20140726235931) do
     t.date     "start_date"
     t.date     "fade_date"
     t.string   "fade_action"
-    t.boolean  "dismissed"
+    t.boolean  "dismissed",   default: false
     t.string   "content"
-    t.string   "notes"
+    t.text     "notes"
     t.string   "event_type"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140726235931) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
   end
 
 end
