@@ -23,12 +23,23 @@ v4 notifications - have things show frontpage on the day they are used
     [x] implement start_date and fade_date
     [x] partialize; split into birthdays and wants/haves
 v5 dismissal
+  [] default false dismiss; set notes on event to text; add notes (text) on person 
+  [] button to set dismiss to true
+upload phase
+  100 people
+  10 wants/needs
+  see how this works and if it proves at all useful in the next week, then come back with more updates next weekend
+
 
 NEXT
 add information about what people want and what people are looking for
 store notes on people
 backup data - where does it live? note in README; time machine should take care of it
 implement email for fade_action
+think about tags - seems a lot like SB - start with tags and families, with goal of select one for a list, and think about modifiers longer term
+  people can call late in SF
+  interested in activity X or Y
+  location
 
 bulk uploading
 map relationships to each other
