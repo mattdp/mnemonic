@@ -23,8 +23,10 @@ v4 notifications - have things show frontpage on the day they are used
     [x] implement start_date and fade_date
     [x] partialize; split into birthdays and wants/haves
 v5 dismissal
-  [] default false dismiss; set notes on event to text; add notes (text) on person 
-  [] button to set dismiss to true
+  [x] default false dismiss; set notes on event to text; add notes (text) on person 
+  [x] button to set dismiss to true
+    [x] link to do that
+    [x] controller implementing it
 upload phase
   100 people
   10 wants/needs
