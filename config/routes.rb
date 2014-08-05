@@ -3,4 +3,6 @@ Mnemonic::Application.routes.draw do
 
   root 'displays#index'
 
+  get '/events/dismiss/:id', to: 'events#dismiss', as: 'events_dismiss'
+
 end

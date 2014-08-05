@@ -32,6 +32,11 @@ class Event < ActiveRecord::Base
     Date.today
   end
 
+  def dismiss
+    self.dismissed = true
+    self.save
+  end
+
   def self.get(event_type,visible=true)
     if visible
       Event.where("event_type = ? and dismissed = false",event_type)
