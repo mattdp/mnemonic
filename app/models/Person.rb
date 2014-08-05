@@ -51,4 +51,9 @@ class Person < ActiveRecord::Base
     event.save
   end
 
+  def self.facebook_mass_importer
+    v2_fb_access_token = "CAACEdEose0cBAIrAZAzqxQS71hWQVhj95OVDrUhpPgUfkdLO6AWq4iAT2tgcj8jdL1ZC6U69ZBrvgZAvgS8F6SfnsiNN1w60Se8LxkfU0j5SoFXUwB7vEbIRtlNDCUOae9XsQPwcr7ZCOHSPhBXvAvF66tPb6nNAkusbCmGE5YWLi2PurjKZAZAzIAuZC1AO58HACUvcYbKoxoFQx5LTEnPg"
+    v1_fb_access_token = "CAACEdEose0cBAEV4BGSMD4TBD5qCxZBX0QYsboqGThQqAplfk8BN4ZCDrfmhtpRiZBZCbaW2XY6LHPG7DaHiK1UDGFSyfxMkGZAKG5GN4WVgifV19khavZAe9DuuFSMH6gDuzR1fKXEFZAY7sWhZB2vgb12xyi7ihx1jcshnJkxG7gEazvuuN6HWRc7f7j5nZC6AJZC4SdqKA7PUqZBZBr4qgo1X"
+  end
+
 end
