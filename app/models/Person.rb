@@ -17,6 +17,7 @@ include ActionView::Helpers::DateHelper
 
 class Person < ActiveRecord::Base
   has_many :events
+  has_many :taggings
 
   # modified http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def age(on_date = Event.current_date)
