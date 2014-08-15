@@ -185,6 +185,7 @@ DEPENDENCIES
   jquery-rails (= 3.0.4)
   koala (~> 1.10.0rc)
   launchy (= 2.4.0)
+  nokogiri (= 1.6.0)
   pg (= 0.17.1)
   pry (= 0.9.12.2)
   pry-nav (= 0.2.3)
