@@ -1,0 +1,26 @@
+<h2><%= @person.full_name %>-edit page</h2>
+
+<p><strong>Current tags:</strong></p>
+
+<ul>
+  <% @person.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<p><strong>Add tag:</strong></p>
+<%= form_tag person_path(@person), method: :patch do %>
+
+  <table>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= check_box_tag "tag_ids[]", tag.id, false%></td>
+        <td><%= tag.name %></td>
+      </tr>
+    <% end %>
+  </table> 
+
+  <%= submit_tag "Submit changes" %>
+
+<% end %>
+

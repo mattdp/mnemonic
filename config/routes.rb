@@ -5,4 +5,6 @@ Mnemonic::Application.routes.draw do
 
   get '/events/dismiss/:id', to: 'events#dismiss', as: 'events_dismiss'
 
+  resources :people, only: [:edit, :update]
+
 end
