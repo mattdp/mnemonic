@@ -2,14 +2,17 @@
 #
 # Table name: people
 #
-#  id         :integer          not null, primary key
-#  birthday   :date
-#  first_name :string(255)
-#  last_name  :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  notes      :text
+#  id           :integer          not null, primary key
+#  birthday     :date
+#  first_name   :string(255)
+#  last_name    :string(255)
+#  email        :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  notes        :text
+#  how_met      :text
+#  url_linkedin :string(255)
+#  url_facebook :string(255)
 #
 
 require 'action_view'
@@ -18,6 +21,33 @@ include ActionView::Helpers::DateHelper
 class Person < ActiveRecord::Base
   has_many :events
   has_many :taggings
+  has_many :tags, :through => :taggings
+  has_many :verbs, :through => :taggings
+
+  def add_tag(tag_id)
+    tag = Tag.find_by_id(tag_id)
+    return false if self.tags.include?(tag)
+    self.tags << tag
+    return true
+  end
+
+  def remove_tags(tag_id)
+    self.tags.destroy(tag_id)
+  end
+
+  def has_tag?(tag_id)
+    t = Tag.find_by_id(tag_id)
+    return false if t.nil?    
+    if self.tags.include?(t)
+      return true
+    else
+      return false
+    end
+  end
+
+  def full_name
+    return "#{self.first_name} #{self.last_name}"
+  end
 
   # modified http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def age(on_date = Event.current_date)

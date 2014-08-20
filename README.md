@@ -1,3 +1,7 @@
+START USING DAY TO DAY
+
+[] person page - date tag in, sentence of tagging and of what want
+
 v6 upload phase
   SPEC
     100 people
@@ -13,11 +17,12 @@ v6 upload phase
     [] pull in all fb friends and their birthdays
 
 v? tags
-  think about tags - seems a lot like SB - start with tags and families, with goal of select one for a list, and think about modifiers longer term
-    people can call late in SF
-    interested in activity X or Y
-    location
+  [] for a given tag 
+    [] have a page on the site
+    [] show all people tagged with it and their emails
+    [] have a copyable list at the top for all the emails with commas
 
+[] launch in 1 click - rails s, postgres, firefox. 
 
 NEXT
 add information about what people want and what people are looking for
@@ -25,6 +30,7 @@ store notes on people
 backup data - where does it live? note in README; time machine should take care of it
 implement email for fade_action
 
+remove tags
 map relationships to each other
 enough security to not just run it local - should this be a server only accessible from certain machines or something?
 social network connections for harvesting (FB, LI, email?)
