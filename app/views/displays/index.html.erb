@@ -13,3 +13,9 @@
     <%= render partial: "/displays/individual_event", locals: {event: event} %>
   <% end %>
 </table>
+<h2>Recent taggings</h2>
+<table>
+  <% @recent_taggings.each do |tagging| %>
+    <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
+  <% end %>
+</table>

@@ -1,15 +1,5 @@
 START USING DAY TO DAY
 
-[x] usable admin pages
-  http://localhost:3000/admin/tagging/new
-    tags have info in name field
-    [x] verb - could change description to name
-    [x] person - need a way that when people save, their full name goes into name field
-      could just be on create it gets combined, i like that a lot
-    [x] generate all blank names link on home page
-[x] person page - sentence of tagging verb and of content (date tag in)
-[x] person page accessable from eyeball on the admin page
-
 v6 upload phase
   SPEC
     100 people
@@ -24,15 +14,14 @@ v6 upload phase
     [] allow batch program to create new users, checking if that fb_id exists already
     [] pull in all fb friends and their birthdays
 
+[] launch in 1 click - rails s, postgres, firefox. 
+
+NEXT
 v? tags
   [] for a given tag 
     [] have a page on the site
     [] show all people tagged with it and their emails
     [] have a copyable list at the top for all the emails with commas
-
-[] launch in 1 click - rails s, postgres, firefox. 
-
-NEXT
 add information about what people want and what people are looking for
 store notes on people
 backup data - where does it live? note in README; time machine should take care of it

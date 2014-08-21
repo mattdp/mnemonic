@@ -4,7 +4,7 @@
 
 <ul>
   <% @person.taggings.each do |tagging| %>
-    <li><%= "#{@person.first_name} #{tagging.verb.name} #{tagging.tag.name}" %></li>
+    <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
   <% end %>
 </ul>
 
