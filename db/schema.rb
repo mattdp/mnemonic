@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821011038) do
+ActiveRecord::Schema.define(version: 20140821011222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140821011038) do
     t.text     "how_met"
     t.string   "url_linkedin"
     t.string   "url_facebook"
+    t.string   "name"
   end
 
   create_table "taggings", force: true do |t|

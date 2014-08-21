@@ -3,8 +3,8 @@
 <p><strong>Current tags:</strong></p>
 
 <ul>
-  <% @person.tags.each do |tag| %>
-    <li><%= tag.name %></li>
+  <% @person.taggings.each do |tagging| %>
+    <li><%= "#{@person.first_name} #{tagging.verb.name} #{tagging.tag.name}" %></li>
   <% end %>
 </ul>
 

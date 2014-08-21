@@ -13,6 +13,7 @@
 #  how_met      :text
 #  url_linkedin :string(255)
 #  url_facebook :string(255)
+#  name         :string(255)
 #
 
 require 'action_view'
@@ -47,6 +48,16 @@ class Person < ActiveRecord::Base
 
   def full_name
     return "#{self.first_name} #{self.last_name}"
+  end
+
+  #for showing up well on rails admin pages
+  def generate_name
+    self.name = self.full_name
+    self.save
+  end
+
+  def self.generate_all_blank_names
+    Person.all.select{|p| p.name.nil? or p.name.empty?}.map{|p| p.generate_name}
   end
 
   # modified http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
