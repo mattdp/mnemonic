@@ -14,4 +14,10 @@ class PeopleController < ActionController::Base
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
 
+  def generate_names
+    Person.generate_all_blank_names
+
+    redirect_to root_path, notice: 'Name generation attempted.'
+  end
+
 end

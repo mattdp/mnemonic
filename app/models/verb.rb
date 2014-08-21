@@ -11,9 +11,4 @@
 class Verb < ActiveRecord::Base
   has_many :taggings
   has_many :people, :through => :taggings
-
-  def name #testing for admin console
-    self.description
-  end
-
 end

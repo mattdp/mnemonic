@@ -1,13 +1,14 @@
 START USING DAY TO DAY
 
-[] usable admin pages
+[x] usable admin pages
   http://localhost:3000/admin/tagging/new
     tags have info in name field
     [x] verb - could change description to name
-    [] person - need a way that when people save, their full name goes into name field
+    [x] person - need a way that when people save, their full name goes into name field
       could just be on create it gets combined, i like that a lot
-[] person page - sentence of tagging verb and of content (date tag in)
-[] person page accessable from eyeball on the admin page
+    [x] generate all blank names link on home page
+[x] person page - sentence of tagging verb and of content (date tag in)
+[x] person page accessable from eyeball on the admin page
 
 v6 upload phase
   SPEC
