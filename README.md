@@ -1,22 +1,10 @@
 START USING DAY TO DAY
 
-v6 upload phase
-  SPEC
-    100 people
-    10 wants/needs
-    see how this works and if it proves at all useful in the next week, then come back with more updates next weekend
-    POSSIBLE SOLUTIONS
-      https://github.com/arsduo/koala
-  STEPS
-    [x] harvest the fb calendar data
-    [] have crawler able to get birthdays, ages (2014 pull), profile links from a file
-    [] from all files
-    [] allow batch program to create new users, checking if that fb_id exists already
-    [] pull in all fb friends and their birthdays
-
 [] launch in 1 click - rails s, postgres, firefox. 
 
 NEXT
+harvest birthdays from all the facebook people
+
 v? tags
   [] for a given tag 
     [] have a page on the site
