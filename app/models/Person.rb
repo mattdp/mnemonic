@@ -60,6 +60,17 @@ class Person < ActiveRecord::Base
     Person.all.select{|p| p.name.nil? or p.name.empty?}.map{|p| p.generate_name}
   end
 
+  def name_split_guesser
+    self.first_name = /\A([\S]*)/.match(self.name)[1]
+    self.last_name = /\A[\S]*\S([^\S].*)/.match(self.name)[1].strip
+    self.save
+  end
+
+  def self.all_name_split_guesser
+    eligibles = Person.all.select{|p| (p.first_name.nil? or p.first_name.empty?) and (p.last_name.nil? or p.last_name.empty?) }
+    eligibles.map{|p| p.name_split_guesser}
+  end
+
   # modified http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def age(on_date = Event.current_date)
     dob = self.birthday
