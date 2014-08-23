@@ -1,6 +1,7 @@
 START USING DAY TO DAY
 
 [] launch in 1 click - rails s, postgres, firefox. 
+  https://discussions.apple.com/thread/140325?start=0&tstart=0
 
 NEXT
 harvest birthdays from all the facebook people

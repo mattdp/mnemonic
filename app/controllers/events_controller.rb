@@ -4,8 +4,6 @@ class EventsController < ActionController::Base
     @event = Event.find(params[:id])
     @event.dismiss
 
-    binding.pry
-
     redirect_to root_path, notice: "Event dismissed."
   end
   
