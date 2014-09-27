@@ -1,0 +1,13 @@
+<%= form_tag :action => "new_submission", :controller => "taggings" do %>
+
+  <h2>Select 1 verb</h2>
+
+  <%= render partial: "taggings/checkbox_lister", locals: {model_name: "Verb", models: @verbs} %>
+
+  <h2>Select 1 tag</h2>
+
+  <%= render partial: "taggings/checkbox_lister", locals: {model_name: "Tag", models: @tags} %>
+
+  <p><%= submit_tag "Create" %></p>
+
+<% end %>
