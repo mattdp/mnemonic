@@ -25,6 +25,14 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      nil
+    end
+  end
+
   def add_tag(tag_id)
     tag = Tag.find_by_id(tag_id)
     return false if self.tags.include?(tag)
