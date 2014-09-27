@@ -1,8 +1,8 @@
 START USING DAY TO DAY
 
 interface for tagging - goal is make mass addition of tags much more usable.
-  [] intro page: every verb and every tag listed, check 2, submit form
-  [] second page: have list of every person, with ^ stored in url
+  [x] intro page: every verb and every tag listed, check 2, submit form
+  [x] second page: have list of every person, with ^ stored in url
   [] submit second page to make tagging for each person selected for that verb/tag, iff it doesn't already exist
   [] performance help, if needed
 

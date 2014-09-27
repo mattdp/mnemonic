@@ -1,0 +1,12 @@
+<ul>
+  <% models.each do |model| %>
+    <li>
+      <% if interaction == "radio" %>
+        <%= radio_button_tag "#{model_name}", model.id, false %>
+      <% else %>
+        <%= check_box_tag "#{model_name}[]", model.id, false %>
+      <% end %>
+      <%= "#{model.name} (ID: #{model.id})" %>
+    </li>
+  <% end %>
+</ul>
