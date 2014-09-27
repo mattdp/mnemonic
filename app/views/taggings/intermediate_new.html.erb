@@ -1,1 +1,14 @@
-you made it!
+<h2><%="Which people for '#{@verb.name} #{@tag.name}'?" %></h2>
+
+<p>This can only create, it cannot destroy taggings. It won't double-tag.</p>
+
+<%= form_tag :action => "create", :controller => "taggings" do %>
+
+  <%= hidden_field_tag :verb_id, @verb.id %>
+  <%= hidden_field_tag :tag_id, @tag.id %>
+
+  <%= render partial: "taggings/selection_lister", locals: {interaction: "checkbox", model_name: "Person", models: @people} %>
+
+  <p><%= submit_tag "Create" %></p>
+
+<% end %>

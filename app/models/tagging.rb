@@ -16,4 +16,13 @@ class Tagging < ActiveRecord::Base
   belongs_to :person
   belongs_to :verb
 
+  def self.create_without_duplicates(person_id,verb_id,tag_id)
+    tagging = Tagging.where("person_id = ? and verb_id = ? and tag_id = ?", person_id, verb_id, tag_id)
+    if tagging == []
+      return Tagging.create({person_id: person_id, verb_id: verb_id, tag_id: tag_id})
+    else
+      return nil
+    end
+  end
+
 end

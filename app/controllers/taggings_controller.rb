@@ -12,9 +12,18 @@ class TaggingsController < ActionController::Base
   end
 
   def intermediate_new #second new page, choose person(s) for verb and tag
+    @people = Person.all
+    @verb = Verb.find(params[:verb_id])
+    @tag = Tag.find(params[:tag_id])
   end
 
   def create #upon submission of intermediate_new
+    people_ids = params[:Person]
+    people_ids.each do |person_id|
+      Tagging.create_without_duplicates(person_id, params[:verb_id], params[:tag_id])
+    end
+
+    redirect_to new_tagging_path
   end
 
 end

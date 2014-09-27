@@ -1,12 +1,14 @@
+<%= link_to "Back to home", root_path %>
+
 <%= form_tag :action => "new_submission", :controller => "taggings" do %>
 
   <h2>Select 1 verb</h2>
 
-  <%= render partial: "taggings/checkbox_lister", locals: {model_name: "Verb", models: @verbs} %>
+  <%= render partial: "taggings/selection_lister", locals: {interaction: "radio", model_name: "Verb", models: @verbs} %>
 
   <h2>Select 1 tag</h2>
 
-  <%= render partial: "taggings/checkbox_lister", locals: {model_name: "Tag", models: @tags} %>
+  <%= render partial: "taggings/selection_lister", locals: {interaction: "radio", model_name: "Tag", models: @tags} %>
 
   <p><%= submit_tag "Create" %></p>
 
