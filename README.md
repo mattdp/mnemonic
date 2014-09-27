@@ -1,10 +1,15 @@
 START USING DAY TO DAY
 
-[] launch in 1 click - rails s, postgres, firefox. 
-  https://discussions.apple.com/thread/140325?start=0&tstart=0
+interface for tagging - goal is make mass addition of tags much more usable.
+  [] intro page: every verb and every tag listed, check 2, submit form
+  [] second page: have list of every person, with ^ stored in url
+  [] submit second page to make tagging for each person selected for that verb/tag, iff it doesn't already exist
+  [] performance help, if needed
 
-NEXT
-harvest birthdays from all the facebook people
+birthday harvester
+  harvest birthdays from all the facebook people
+    crawler from own account is dangerous
+    crawler from other account doesn't have enough info, probably
 
 v? tags
   [] for a given tag 

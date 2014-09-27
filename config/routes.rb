@@ -9,4 +9,7 @@ Mnemonic::Application.routes.draw do
   get '/people/:id', to: 'people#edit'
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
 
+  resources :taggings, only: [:new]
+  get '/taggings/live_search', to: 'taggings#live_search'
+
 end
