@@ -13,6 +13,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  person_id   :integer
+#  year        :integer
 #
 
 class Event < ActiveRecord::Base
@@ -22,7 +23,7 @@ class Event < ActiveRecord::Base
     Person.find_each do |person|
       if person.birthday
         recent = person.farthest_from_big_bang_event("birthday")
-        person.create_new_birthday_event unless (recent.present? && recent[0].start_date.year == person.next_birthday.year)
+        person.create_new_birthday_event unless (recent.present? && recent[0].year == person.next_birthday.year)
       end
     end
   end

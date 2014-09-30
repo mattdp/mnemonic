@@ -1,5 +1,8 @@
 START USING DAY TO DAY
 
+starting from 1/1,
+  last done: all of 1/19
+
 interface for tagging - goal is make mass addition of tags much more usable.
   [x] intro page: every verb and every tag listed, check 2, submit form
   [x] second page: have list of every person, with ^ stored in url
