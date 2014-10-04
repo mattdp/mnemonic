@@ -21,9 +21,11 @@ class Event < ActiveRecord::Base
 
   def self.birthday_generator
     Person.find_each do |person|
-      if person.birthday
+      if person.birthday && !person.estranged?
         recent = person.farthest_from_big_bang_event("birthday")
-        person.create_new_birthday_event unless (recent.present? && recent[0].year == person.next_birthday.year)
+        if (recent.present? && recent[0].year == person.next_birthday.year)        
+          person.create_new_birthday_event
+        end
       end
     end
   end
