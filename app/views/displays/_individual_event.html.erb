@@ -1,4 +1,9 @@
 <tr>
+  <td>
+    <% if person = event.person and person.first_name %>
+       <%= link_to "#{person.first_name}", "#{person.link_string}" %>
+    <% end %>
+  </td>  
   <td><strong><%= event.content %></strong></td>
   <td><%= event.notes %></td>
   <td>
