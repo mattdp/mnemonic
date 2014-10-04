@@ -4,7 +4,7 @@
 
 <h2>Upcoming birthdays</h2>
 <table>
-  <% @birthdays.each do |event| %>
+  <% @birthdays.sort.each do |event| %>
     <%= render partial: "/displays/individual_event", locals: {event: event} %>
   <% end %>
 </table>
