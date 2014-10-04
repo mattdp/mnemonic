@@ -1,5 +1,10 @@
 <tr>
   <td><strong><%= event.content %></strong></td>
   <td><%= event.notes %></td>
+  <td>
+    <% if event.person and event.person.email %>
+       <%= mail_to "#{event.person.email}" %>
+    <% end %>
+  </td>  
   <td><%= link_to "Dismiss", events_dismiss_path(event.id) %></td>
 </tr>
