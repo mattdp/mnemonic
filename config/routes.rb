@@ -14,4 +14,7 @@ Mnemonic::Application.routes.draw do
   match '/taggings/new_submission', to: 'taggings#new_submission', via: :post, as: 'taggings_new_submission'
   get '/taggings/intermediate_new/:verb_id/:tag_id', to: 'taggings#intermediate_new', as: "taggings_intermediate_new"
 
+  resources :tags, only: [:index]
+  get '/tags/:name_for_link', to: 'tags#show', as: 'tag'
+
 end

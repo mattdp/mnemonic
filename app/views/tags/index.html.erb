@@ -1,0 +1,10 @@
+<%= link_to "Home", root_path %>
+
+<h1>Listing of all tags</h1>
+<ul>
+  <% @tags.each do |tag| %>
+    <li>
+      <%= link_to "#{tag.name}", tag_path(tag.name_for_link) %>
+    </li>
+  <% end %>
+</ul>
