@@ -1,0 +1,7 @@
+<h1><%= @tag.name %></h1>
+
+<ul>
+  <% @people.each do |person| %>
+    <li><%= link_to "#{person.name}", "/admin/person/#{person.id}/edit" %></li>
+  <% end %>
+</ul>

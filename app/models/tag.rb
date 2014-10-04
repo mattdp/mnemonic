@@ -18,4 +18,8 @@ class Tag < ActiveRecord::Base
     return words.downcase.gsub(/\W+/, "")
   end
 
+  def tagged_people
+    self.taggings.map{|tagging| tagging.person}
+  end
+
 end
