@@ -25,10 +25,14 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
+  def self.email_list(people)
+    emails = people.select{|person| person.email.present?}.map{|person| person.email}
+    emails.join ", "
+  end
+
   def link_string
     "/admin/person/#{self.id}/edit"
   end
-
 
   def estranged?
     estranged_id = Tag.find_by_name("estranged").id
