@@ -7,8 +7,6 @@ linkedin exporting - consider how use this to work in professional connections a
   https://help.linkedin.com/app/answers/detail/a_id/50191/
 
 v? tags
-  [] for a given tag 
-    [] have a page on the site
     [] show all people tagged with it and their emails
     [] have a copyable list at the top for all the emails with commas
 

@@ -3,8 +3,13 @@
 
 <h1><%= @tag.name %></h1>
 
-<ul>
+<p>Emails: <%= @email_list %></p>
+
+<table>
   <% @people.each do |person| %>
-    <li><%= link_to "#{person.name}", "#{person.link_string}" %></li>
+    <tr>
+      <td><%= link_to "#{person.name}", "#{person.link_string}" %></td>
+      <td><%= mail_to "#{person.email}" %>
+    </tr>
   <% end %>
-</ul>
+</table>

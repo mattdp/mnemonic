@@ -19,7 +19,11 @@ class Tag < ActiveRecord::Base
   end
 
   def tagged_people
-    self.taggings.map{|tagging| tagging.person}
+    self.taggings.map{|tagging| tagging.person}.sort_by{|person| person.last_name}
+  end
+
+  def self.all_sorted
+    Tag.all.sort_by{|tag| tag.name}
   end
 
 end
