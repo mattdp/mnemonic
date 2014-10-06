@@ -39,4 +39,105 @@ class TextParser
 
   end
 
+  def self.birthday_loader(test_mode=true)
+
+    current_year = Date.today.year
+
+    harvested = []
+    [1,2,3,4,5,6,7,9,11,12].each do |month_number| #omit october, that was manual; august errors
+      harvested.concat(TextParser.parse_calendar_page(month_number))
+    end
+
+    harvested.each do |human|
+      if person = Person.find_by_url_facebook(human[:url_facebook])
+        verbose_string = "#{human[:name]} located."
+      else 
+        person = Person.create({name: human[:name], url_facebook: human[:url_facebook]}) unless test_mode
+        verbose_string = "#{human[:name]} created."
+      end
+
+      if person
+        if person.birthday
+          verbose_string += "\tBirthday already in place."
+        else
+          if person[:age]
+            #2014 birthday (year of calendar pull) - age = old birthday
+            year = (Date.new(2014,human[:month],human[:day]) - human[:age].years).year
+          else
+            year = 1900
+          end
+          person.birthday = Date.new(year,human[:month],human[:day]) unless test_mode
+          person.save
+          verbose_string += "\tBirthday set to #{person.birthday.to_s}"
+        end
+      end
+
+      puts verbose_string
+
+    end
+
+    return true
+
+  end
+
+# output format
+# [{:name=>"Mark Trevail", :age=>27, :month=>10, :day=>2},
+#  {:name=>"Steven Harley", :month=>10, :day=>4}, ...
+
+  def self.parse_calendar_page(month_number)
+    file = File.open("/Users/matt/rails_projects/mnemonic/app/assets/fb_calendars-140814_pull/#{month_number}.html")
+    doc = Nokogiri::HTML(file)
+    conclusions = []
+
+    hidden_code_blocks = doc.xpath("//code[@class = 'hidden_elem']")
+    hidden_code_blocks.each do |code_block|
+      payload = Nokogiri::HTML(code_block.children.text)
+      birthday_links = payload.xpath("//a[contains(@aria-label,'birthday')]")
+      birthday_links.each do |birthday_link|
+
+        #puts birthday_link
+
+        person = {}
+
+        person[:name] = birthday_link.children[0].attributes["alt"].value
+
+        person[:url_facebook] = birthday_link.attributes["href"].value
+
+        possible_age_string = birthday_link.attributes["aria-label"].value
+        possible_age = possible_age_string.match(/.*\(([\d]*)/)
+        person[:age] = possible_age[1].to_i if possible_age
+
+        #pull up to div "class", value = "fbCalendarList" }), #(Attr:0x3fef46f0ee8c { name = "id", value = "fbCalendarDay1002"
+        pointer = birthday_link
+        n = 0
+        while n < 11 do
+          pointer = pointer.parent
+          n += 1
+        end
+        date_text = pointer.children[0].children[0].children[0].children[0].children[0].text
+        date = Date.parse(date_text) #failing in august
+        person[:month] = date.month
+        person[:day] = date.day
+
+        conclusions << person
+      end
+    end
+
+    return conclusions
+    # DEAD END - the data is hidden elsewhere and merged on page load, somehow even on my computer local copy
+    # # .fbCalendarList #fbCalendarDay1002 <-- MMDD
+    # # maybe iterate through the lists that have calendar days
+
+    # #two_levels_above_date = doc.xpath("//div[@class = 'clearfix mvm mhl fbCalendarListContent']")[0]
+    # pagelet_string = "//div[@class = 'clearfix mvm mhl fbCalendarListContent']/div[1]/div[contains(@id,'pagelet_calendar')]"
+    # pagelets = doc.xpath("#{pagelet_string}")
+    
+    # #get to the links for birthdays, from there figure out how to get the dates
+
+    # link_addendum = "/div"#[1]/ul[1]/li[1]/table[1]"
+    # links = doc.xpath("#{pagelet_string}#{link_addendum}")
+
+
+  end
+
 end
