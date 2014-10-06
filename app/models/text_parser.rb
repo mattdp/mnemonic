@@ -39,7 +39,7 @@ class TextParser
 
   end
 
-  def self.birthday_loader(test_mode=true)
+  def self.birthday_loader
 
     current_year = Date.today.year
 
@@ -52,7 +52,8 @@ class TextParser
       if person = Person.find_by_url_facebook(human[:url_facebook])
         verbose_string = "#{human[:name]} located."
       else 
-        person = Person.create({name: human[:name], url_facebook: human[:url_facebook]}) unless test_mode
+        person = Person.create({name: human[:name], url_facebook: human[:url_facebook]})
+        person.save
         verbose_string = "#{human[:name]} created."
       end
 
@@ -66,9 +67,10 @@ class TextParser
           else
             year = 1900
           end
-          person.birthday = Date.new(year,human[:month],human[:day]) unless test_mode
+          birthdate = Date.new(year,human[:month],human[:day]).strftime('%Y-%m-%d')
+          person.birthday = birthdate
           person.save
-          verbose_string += "\tBirthday set to #{person.birthday.to_s}"
+          verbose_string += "\tBirthday set to #{person.birthday}"
         end
       end
 
