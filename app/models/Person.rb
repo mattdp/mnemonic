@@ -25,6 +25,24 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
+  def self.simple_name_splitter
+    people = Person.where('first_name IS NULL and last_name IS NULL')
+    people.each do |person|
+      person.simple_name_splitter_helper
+    end
+  end
+
+  def simple_name_splitter_helper
+    split = self.name.split(" ")
+    if split && split.count == 2
+      self.first_name = split[0]
+      self.last_name = split[1]
+      self.save
+      return "#{self.name} split!"
+    end
+    return "#{self.name} not split."
+  end
+
   def self.email_list(people)
     emails = people.select{|person| person.email.present?}.map{|person| person.email}
     emails.join ", "
