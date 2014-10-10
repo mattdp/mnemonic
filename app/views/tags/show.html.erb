@@ -6,10 +6,12 @@
 <p>Emails: <%= @email_list %></p>
 
 <table>
-  <% @people.each do |person| %>
+  <% @taggings.each do |tagging| %>
+    <% person = tagging.person %>
     <tr>
       <td><%= link_to "#{person.name}", "#{person.link_string}" %></td>
-      <td><%= mail_to "#{person.email}" %>
+      <td><%= "#{tagging.verb.name}" %></td>
+      <td><%= mail_to "#{person.email}" %></td>
     </tr>
   <% end %>
 </table>
