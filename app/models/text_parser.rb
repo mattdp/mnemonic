@@ -44,7 +44,7 @@ class TextParser
     current_year = Date.today.year
 
     harvested = []
-    [1,2,3,4,5,6,7,9,11,12].each do |month_number| #omit october, that was manual; august errors
+    [8].each do |month_number| #omit october, that was manual; august errors
       harvested.concat(TextParser.parse_calendar_page(month_number))
     end
 
@@ -90,6 +90,7 @@ class TextParser
     file = File.open("/Users/matt/rails_projects/mnemonic/app/assets/fb_calendars-140814_pull/#{month_number}.html")
     doc = Nokogiri::HTML(file)
     conclusions = []
+    verbose = true
 
     hidden_code_blocks = doc.xpath("//code[@class = 'hidden_elem']")
     hidden_code_blocks.each do |code_block|
@@ -97,7 +98,7 @@ class TextParser
       birthday_links = payload.xpath("//a[contains(@aria-label,'birthday')]")
       birthday_links.each do |birthday_link|
 
-        #puts birthday_link
+        puts birthday_link if verbose
 
         person = {}
 
@@ -117,11 +118,16 @@ class TextParser
           n += 1
         end
         date_text = pointer.children[0].children[0].children[0].children[0].children[0].text
-        date = Date.parse(date_text) #failing in august
-        person[:month] = date.month
-        person[:day] = date.day
 
-        conclusions << person
+        puts date_text if verbose
+
+        if date_text != "Tomorrow" #special case in the day after did the crawl
+          date = Date.parse(date_text) #failing in august
+          person[:month] = date.month
+          person[:day] = date.day
+
+          conclusions << person
+        end
       end
     end
 
