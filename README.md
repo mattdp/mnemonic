@@ -4,8 +4,6 @@ START USING DAY TO DAY
   [] have 'estranged' display elsewhere
   [] have next buttons not just at bottom
 
-[] add verbs to display on tags pages
-
 [] figure out linkedin importing
 ---
 
