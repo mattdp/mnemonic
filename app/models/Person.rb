@@ -14,6 +14,7 @@
 #  url_linkedin :string(255)
 #  url_facebook :string(255)
 #  name         :string(255)
+#  phone        :string(255)
 #
 
 require 'action_view'
