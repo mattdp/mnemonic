@@ -10,7 +10,6 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  notes        :text
-#  how_met      :text
 #  url_linkedin :string(255)
 #  url_facebook :string(255)
 #  name         :string(255)
