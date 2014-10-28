@@ -7,7 +7,17 @@
   <%= hidden_field_tag :verb_id, @verb.id %>
   <%= hidden_field_tag :tag_id, @tag.id %>
 
-  <%= render partial: "taggings/selection_lister", locals: {interaction: "checkbox", model_name: "Person", models: @people} %>
+  <h3>Not estranged</h3>
+
+  <p><%= submit_tag "Create" %></p>
+
+  <%= render partial: "taggings/selection_lister", locals: {interaction: "checkbox", model_name: "Person", models: @not_estranged} %>
+
+  <p><%= submit_tag "Create" %></p>
+
+  <h3>Estranged</h3>
+
+  <%= render partial: "taggings/selection_lister", locals: {interaction: "checkbox", model_name: "Person", models: @estranged} %>
 
   <p><%= submit_tag "Create" %></p>
 

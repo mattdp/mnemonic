@@ -12,7 +12,8 @@ class TaggingsController < ActionController::Base
   end
 
   def intermediate_new #second new page, choose person(s) for verb and tag
-    @people = Person.all
+    @estranged = Person.select_group(:estranged)
+    @not_estranged = Person.select_group(:not_estranged)
     @verb = Verb.find(params[:verb_id])
     @tag = Tag.find(params[:tag_id])
   end

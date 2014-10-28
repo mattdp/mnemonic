@@ -26,6 +26,18 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
+  def self.select_group(symbol)
+    estranged_tag = Tag.find_by_name("estranged")
+    estranged_people = Tagging.where("tag_id = ?",estranged_tag.id).map{|tagging| tagging.person}.uniq
+    if symbol == :estranged
+      estranged_people
+    elsif symbol == :not_estranged
+      Person.all.reject{|person| estranged_people.include?(person)}
+    else
+      return "This should not happen. select_group error."
+    end
+  end
+
   def self.simple_name_splitter
     people = Person.where('first_name IS NULL and last_name IS NULL')
     people.each do |person|
@@ -150,5 +162,16 @@ class Person < ActiveRecord::Base
     v2_fb_access_token = "CAACEdEose0cBAIrAZAzqxQS71hWQVhj95OVDrUhpPgUfkdLO6AWq4iAT2tgcj8jdL1ZC6U69ZBrvgZAvgS8F6SfnsiNN1w60Se8LxkfU0j5SoFXUwB7vEbIRtlNDCUOae9XsQPwcr7ZCOHSPhBXvAvF66tPb6nNAkusbCmGE5YWLi2PurjKZAZAzIAuZC1AO58HACUvcYbKoxoFQx5LTEnPg"
     v1_fb_access_token = "CAACEdEose0cBAEV4BGSMD4TBD5qCxZBX0QYsboqGThQqAplfk8BN4ZCDrfmhtpRiZBZCbaW2XY6LHPG7DaHiK1UDGFSyfxMkGZAKG5GN4WVgifV19khavZAe9DuuFSMH6gDuzR1fKXEFZAY7sWhZB2vgb12xyi7ihx1jcshnJkxG7gEazvuuN6HWRc7f7j5nZC6AJZC4SdqKA7PUqZBZBr4qgo1X"
   end
+
+# OLD MIGRATORS
+
+# def migrate_met_to_notes
+#   Person.find_each do |person|
+#     if person.how_met.present?
+#       person.notes = "#{person.notes} /// #{person.how_met}"
+#       person.save
+#     end
+#   end
+# end
 
 end

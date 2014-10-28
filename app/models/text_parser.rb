@@ -1,5 +1,17 @@
 class TextParser
 
+  require 'csv'
+  require 'shellwords'
+
+  #keep getting invalid byte sequence, maybe import this file, clean it, and export - eliminate commas, do normal CSV?
+  def self.get_linkedin_profiles
+    File.open("/Users/matt/rails_projects/mnemonic/app/assets/li_contacts-141004_pull/Connections.csv", "r") do |infile|
+      while (line = infile.gets)
+        puts Shellwords.shellwords(line)
+      end 
+    end
+  end
+
   def self.get_facebook_profiles
     file = File.open("/Users/matt/rails_projects/mnemonic/app/assets/fb_friendlist/140820.html")
     doc = Nokogiri::HTML(file)
