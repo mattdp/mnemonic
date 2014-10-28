@@ -19,11 +19,13 @@
 class Event < ActiveRecord::Base
   belongs_to :person
 
-  def self.birthday_generator
+  def self.birthday_generator(verbose=false)
     Person.find_each do |person|
       if person.birthday && !person.estranged?
         recent = person.farthest_from_big_bang_event("birthday")
-        if (recent.present? && recent[0].year == person.next_birthday.year)        
+        if (recent.present? && recent[0].year == person.next_birthday.year)
+          puts "Skipping #{person.name}, next birthday already in place"
+        else    
           person.create_new_birthday_event
         end
       end
