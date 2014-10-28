@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010041314) do
+ActiveRecord::Schema.define(version: 20141028222814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20141010041314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes"
-    t.text     "how_met"
     t.string   "url_linkedin"
     t.string   "url_facebook"
     t.string   "name"
