@@ -1,12 +1,22 @@
-<title><%= @person.full_name %> - edit page</title>
+<title><%= @person.display_name %> - edit page</title>
 
-<p><strong>Current tags:</strong></p>
-
-<ul>
-  <% @person.taggings.each do |tagging| %>
-    <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
-  <% end %>
-</ul>
+<div class="biography">
+  <div class="basics">
+    <p><strong><%= @person.display_name %></strong></p>
+    <p><%= @person.display_birthday %></p>
+    <p><%= @person.display_age %></p>
+    <p><%= mail_to @person.email %></p>
+    <p><%= @person.phone %></p>
+    <%= render partial: "people/social_links", locals: {person: @person} %>
+  </div>
+  <div class="detailing">
+    <div class="current_tags">
+      <% @person.taggings.each do |tagging| %>
+        <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <p><strong>Add tag:</strong></p>
 <%= form_tag person_path(@person), method: :patch do %>
