@@ -25,6 +25,8 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
+  before_save {|person| person.name = person.display_name if !person.name.present?}
+
   def self.select_group(symbol)
     estranged_tag = Tag.find_by_name("estranged")
     estranged_people = Tagging.where("tag_id = ?",estranged_tag.id).map{|tagging| tagging.person}.uniq
@@ -130,7 +132,7 @@ class Person < ActiveRecord::Base
 
   #for showing up well on rails admin pages
   def generate_name
-    self.name = self.colloquial_name
+    self.name = self.display_name
     self.save
   end
 
