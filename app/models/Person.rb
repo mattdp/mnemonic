@@ -98,13 +98,39 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def full_name
-    return "#{self.first_name} #{self.last_name}"
+  def display_name
+    if (self.first_name.present? && self.last_name.present?)
+      return "#{self.first_name} #{self.last_name}"
+    elsif self.name.present?
+      return self.name
+    elsif self.first_name.present?
+      return self.first_name
+    else
+      return nil
+    end
+  end
+
+  def display_birthday
+    b = self.birthday
+    if b.present?
+      if b.year == 1900
+        return b.strftime("%B %d")
+      else
+        return b.strftime("%B %d, %Y")
+      end
+    else
+      return nil
+    end
+  end
+
+  def display_age
+    return "#{self.age} years old" if age.present? #it's ok that some people are 1.
+    return nil
   end
 
   #for showing up well on rails admin pages
   def generate_name
-    self.name = self.full_name
+    self.name = self.colloquial_name
     self.save
   end
 
@@ -126,6 +152,7 @@ class Person < ActiveRecord::Base
   # modified http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def age(on_date = Event.current_date)
     dob = self.birthday
+    return nil if dob.nil?
     on_date.year - dob.year - ((on_date.month > dob.month || (on_date.month == dob.month && on_date.day >= dob.day)) ? 0 : 1)
   end
 

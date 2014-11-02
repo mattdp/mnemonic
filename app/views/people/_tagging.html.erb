@@ -1,5 +1,5 @@
 <% if tagging.verb %>
-  <li><%= "#{tagging.person.first_name} #{tagging.verb.name} #{tagging.tag.name}" %></li>
+  <li><%= "#{tagging.verb.name} " %><strong><%= "#{tagging.tag.name}" %></strong></li>
 <% else %>
-  <li><%= "#{tagging.person.first_name} -> #{tagging.tag.name}" %></li>
+  <li><%= "#{tagging.person.first_name} -> " %><strong><%= "#{tagging.tag.name}" %></strong></li>
 <% end %>

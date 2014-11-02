@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+
+.picture {
+  color: blue;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+}
