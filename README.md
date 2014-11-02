@@ -1,6 +1,10 @@
 START USING DAY TO DAY
 
 [] when save person and name field is blank, automatically update name fields if first last in there, or if name easily splittable
+  if first and last name blank, and name and name splittable, put in first and last name
+  if name blank, and first name, put in first + space last name
+
+[] taggings new flow - do with search boxes, not with checkboxes. goal is to learn how to use these, since they make other flows feasible. could half-ass with hidden javascript, but i'd love to duplicate what rails_admin has
 
 [] main issue - not using due to
   [] spin up - it's not always just there
@@ -22,18 +26,9 @@ START USING DAY TO DAY
   [] figure out how highlighting potential duplicates
   [] test on a small fraction of the data set
   [] run on whole thing
-
-[] certain fields, such as met_at, should probably be tags
-  met_at is a verb, really, and points to a set of events
-  [x] met at verb
-  [] append met_at to notes for all people
-  [] migrate and get rid of met at, since it's now in notes
 ---
 
-linkedin exporting - consider how use this to work in professional connections automatically
-  https://help.linkedin.com/app/answers/detail/a_id/50191/
-
-backup data - where does it live? note in README; time machine should take care of it
+backup data - where does it live? note in README; time machine should take care of it for now
 implement email for fade_action
 
 map relationships to each other
