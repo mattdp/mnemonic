@@ -79,15 +79,11 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def add_tag(tag_id)
+  def add_tag(tag_id, verb_id = nil)
     tag = Tag.find_by_id(tag_id)
     return false if self.tags.include?(tag)
-    self.tags << tag
-    return true
-  end
-
-  def remove_tags(tag_id)
-    self.tags.destroy(tag_id)
+    verb_id = tag.most_common_verb_id if verb_id.nil?
+    Tagging.create_without_duplicates(self.id,verb_id,tag.id)
   end
 
   def has_tag?(tag_id)
@@ -126,7 +122,7 @@ class Person < ActiveRecord::Base
   end
 
   def display_age
-    return "#{self.age} years old" if age.present? #it's ok that some people are 1.
+    return "#{self.age} years old" if (age.present? && self.birthday.year != 1900) #it's ok that some people are 1.
     return nil
   end
 
