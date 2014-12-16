@@ -1,5 +1,17 @@
 START USING DAY TO DAY
 
+[] explicitly tie birthdays to dates - shouldn't just be text
+  [x] happening_date addition
+  [x] have the actual birthday go into the happening_date
+    [x] person.create_birthday_event action change
+  [x] destroy and reconstruct all birthdays
+  [] on homepage, sort birthdays by happening_date
+[] birthdays and events in same flow
+  [] integrate all events with a happening_date, between start_ and fade_ dates, into one top flow
+  [] add events from google drive goal a day, as tests to see if fits real life
+
+----
+
 [] taggings new flow - do with search boxes, not with checkboxes. goal is to learn how to use these, since they make other flows feasible. could half-ass with hidden javascript, but i'd love to duplicate what rails_admin has
   https://shellycloud.com/blog/2013/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch - need elasticsearch running
   https://github.com/crowdint/rails3-jquery-autocomplete - less clear example, don't need a full search engine through
@@ -13,6 +25,8 @@ START USING DAY TO DAY
     maybe - trying this in a text file
       batch file - one line of each instruction, execute afterwards
       ability to add multiple tags to a person easily, with suggested verb
+
+[] can ifttt tie directly into this - like on new friend/LI connection, send http request or email?
 
 [] figure out linkedin importing
   [] reader for the import - print line by line, get same number of lines
