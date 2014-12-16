@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028222814) do
+ActiveRecord::Schema.define(version: 20141216223010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20141028222814) do
     t.date     "start_date"
     t.date     "fade_date"
     t.string   "fade_action"
-    t.boolean  "dismissed",   default: false
+    t.boolean  "dismissed",      default: false
     t.string   "content"
     t.text     "notes"
     t.string   "event_type"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141028222814) do
     t.datetime "updated_at"
     t.integer  "person_id"
     t.integer  "year"
+    t.date     "happening_date"
   end
 
   create_table "people", force: true do |t|

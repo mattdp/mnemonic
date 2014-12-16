@@ -174,8 +174,10 @@ class Person < ActiveRecord::Base
   def create_new_birthday_event
     event = Event.new
     event.person = self
-    event.start_date = self.next_birthday - 7.days
-    event.year = self.next_birthday.year
+    next_birthday = self.next_birthday
+    event.start_date = next_birthday - 7.days
+    event.happening_date = next_birthday
+    event.year = next_birthday.year
     event.event_type = "birthday"
     event.content = "#{self.first_name} #{self.last_name}: Turns #{self.age(self.next_birthday)} on #{self.next_birthday.to_s}"
     event.dismissed = false
