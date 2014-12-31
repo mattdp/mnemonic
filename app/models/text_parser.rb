@@ -3,13 +3,43 @@ class TextParser
   require 'csv'
   require 'shellwords'
 
+  FIRST_NAME = 0
+  LAST_NAME = 0
+  EMAIL_ADDRESS = 0
+
   #keep getting invalid byte sequence, maybe import this file, clean it, and export - eliminate commas, do normal CSV?
+  #step 1: get a linkedin export, find/replace "," with ""
+  #step 2: upload to google sheets and back, to fix a utf-8 encoding problem
+  #step 3: f/r """ with " so don't have to get rid of quotes around every string
   def self.get_linkedin_profiles
-    File.open("/Users/matt/rails_projects/mnemonic/app/assets/li_contacts-141004_pull/Connections.csv", "r") do |infile|
-      while (line = infile.gets)
-        puts Shellwords.shellwords(line)
-      end 
+    location = "/Users/matt/rails_projects/mnemonic/app/assets/li_contacts-141004_pull/connections_v2.csv"
+    CSV.new(open(location)).each do |row|
+      #this currently returns each row, as it should!
     end
+  end
+
+  #input a row from the CSV
+  #give back either a new Person or the existing Person 
+  def decide_if_update_or_new(row)
+
+    # repeated logic of if this returns something, return that, with last bit being a new person when tests aren't satisfied
+
+    # if email address same
+    p = Person.where("email = ?",row[EMAIL_ADDRESS]).take(1)
+    return p if p.present?
+
+    # DONT HAVE PROFILE NAME else if linkedin profile url same, ideally domainatrixed to standardize
+
+    # else if the firstname lastname are unique in the db, is this same lowercase without spaces
+    p = Person.where("first_name = ? and last_name",row[FIRST_NAME],row[LAST_NAME]).take(1)
+    return p if p.present?
+
+    # else if the full name is unique in the db, is this same lowercase without spaces
+    p = Person.where("name = ?","#{row[FIRST_NAME]} #{row[LAST_NAME]}").take(1)
+    return p if p.present?
+
+    # if all tests fail and it's a new person
+    return Person.create
   end
 
   def self.get_facebook_profiles
