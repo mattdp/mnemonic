@@ -189,6 +189,20 @@ class Person < ActiveRecord::Base
     v1_fb_access_token = "CAACEdEose0cBAEV4BGSMD4TBD5qCxZBX0QYsboqGThQqAplfk8BN4ZCDrfmhtpRiZBZCbaW2XY6LHPG7DaHiK1UDGFSyfxMkGZAKG5GN4WVgifV19khavZAe9DuuFSMH6gDuzR1fKXEFZAY7sWhZB2vgb12xyi7ihx1jcshnJkxG7gEazvuuN6HWRc7f7j5nZC6AJZC4SdqKA7PUqZBZBr4qgo1X"
   end
 
+  def linkedin_updater(info)
+    # take in hash "info", on per-person basis, like info[:first_name] = "Bob"
+    # for each thing in there for a person test:
+    # if it's in info, and not in current data (blank or "" or nil), add that
+    change_flag = false
+    info.keys.each do |key|
+      if self[key].blank?
+        change_flag = true
+        self[key] = info[key]
+      end
+    end
+    self.save if change_flag
+  end
+
 # OLD MIGRATORS
 
 # def migrate_met_to_notes

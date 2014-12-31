@@ -4,6 +4,11 @@
        <%= link_to "#{person.first_name}", "#{person.link_string}" %>
     <% end %>
   </td>  
+  <td>
+    <% if event.happening_date.present? %>
+      <%= event.happening_date.strftime("%b %d") %>
+    <% end %>
+  </td>
   <td><strong><%= event.content %></strong></td>
   <td><%= event.notes %></td>
   <td>

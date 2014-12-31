@@ -5,7 +5,7 @@
 
 <h2>Upcoming time-based events</h2>
 <table>
-  <% @birthdays.sort_by{|b| b.happening_date}.each do |event| %>
+  <% @time_based_events.sort_by{|b| b.happening_date}.each do |event| %>
     <%= render partial: "/displays/individual_event", locals: {event: event} %>
   <% end %>
 </table>
