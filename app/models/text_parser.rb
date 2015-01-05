@@ -4,8 +4,8 @@ class TextParser
   require 'shellwords'
 
   FIRST_NAME = 0
-  LAST_NAME = 0
-  EMAIL_ADDRESS = 0
+  LAST_NAME = 1
+  EMAIL_ADDRESS = 2
 
   #keep getting invalid byte sequence, maybe import this file, clean it, and export - eliminate commas, do normal CSV?
   #step 1: get a linkedin export, find/replace "," with ""
@@ -13,14 +13,17 @@ class TextParser
   #step 3: f/r """ with " so don't have to get rid of quotes around every string
   def self.get_linkedin_profiles
     location = "/Users/matt/rails_projects/mnemonic/app/assets/li_contacts-141004_pull/connections_v2.csv"
+    count = 0
     CSV.new(open(location)).each do |row|
-      #this currently returns each row, as it should!
+      person = TextParser.decide_if_update_or_new(row) unless count == 0
+      count += 1
     end
   end
 
   #input a row from the CSV
   #give back either a new Person or the existing Person 
-  def decide_if_update_or_new(row)
+  #sadly, don't have LI profile names to check on
+  def self.decide_if_update_or_new(row)
 
     # repeated logic of if this returns something, return that, with last bit being a new person when tests aren't satisfied
 
@@ -28,10 +31,8 @@ class TextParser
     p = Person.where("email = ?",row[EMAIL_ADDRESS]).take(1)
     return p if p.present?
 
-    # DONT HAVE PROFILE NAME else if linkedin profile url same, ideally domainatrixed to standardize
-
     # else if the firstname lastname are unique in the db, is this same lowercase without spaces
-    p = Person.where("first_name = ? and last_name",row[FIRST_NAME],row[LAST_NAME]).take(1)
+    p = Person.where("first_name = ? and last_name = ?",row[FIRST_NAME],row[LAST_NAME]).take(1)
     return p if p.present?
 
     # else if the full name is unique in the db, is this same lowercase without spaces
