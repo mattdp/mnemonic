@@ -12,8 +12,7 @@ START USING DAY TO DAY
       beware of "None" in the export file, don't import a lot of those
     [test] have something update the Person with the hash output 
       want to make sure to keep stuff already in db, rather than overwrite it
-  [] autoadd a linkedin connected tag and their linkedin profile address
-  [] figure out how highlighting potential duplicates
+  [] autoadd a linkedin connected tag
   [] test on a small fraction of the data set
   [] run on whole thing
   need internet
