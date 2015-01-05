@@ -1,23 +1,5 @@
 START USING DAY TO DAY
 
-[] figure out linkedin importing
-  [need internet] reader for the import - print line by line, get same number of lines
-  [test] how make update vs new choice? 
-    if email address same
-    else if linkedin profile url same, ideally domainatrixed to standardize
-    else if the firstname lastname are unique in the db, is this same lowercase without spaces
-    else if the full name is unique in the db, is this same lowercase without spaces
-  [] figure out how generally merging two identities 
-    [] have something write only the changes wanted to a hash
-      beware of "None" in the export file, don't import a lot of those
-    [test] have something update the Person with the hash output 
-      want to make sure to keep stuff already in db, rather than overwrite it
-  [] autoadd a linkedin connected tag
-  [] test on a small fraction of the data set
-  [] run on whole thing
-  need internet
-    [] can do this after rest done: double check exporter - does it really not give any info on profile name? 
-
 ----
 
 consider adding the 1-3 goals/day to this app, would strongly drive usage i think

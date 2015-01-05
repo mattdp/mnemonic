@@ -3,9 +3,13 @@ class TextParser
   require 'csv'
   require 'shellwords'
 
-  FIRST_NAME = 0
-  LAST_NAME = 1
-  EMAIL_ADDRESS = 2
+  def self.constant_hash
+    return {
+      first_name: 0,
+      last_name: 1,
+      email: 2
+    }
+  end
 
   #keep getting invalid byte sequence, maybe import this file, clean it, and export - eliminate commas, do normal CSV?
   #step 1: get a linkedin export, find/replace "," with ""
@@ -14,8 +18,19 @@ class TextParser
   def self.get_linkedin_profiles
     location = "/Users/matt/rails_projects/mnemonic/app/assets/li_contacts-141004_pull/connections_v2.csv"
     count = 0
+    tag_id = Tag.find_by_name("LinkedIn connection").id
+    verb_id = Verb.find_by_name("is my").id
     CSV.new(open(location)).each do |row|
-      person = TextParser.decide_if_update_or_new(row) unless count == 0
+      if count > 0 #skip title row
+        person = TextParser.decide_if_update_or_new(row)
+        [:first_name,:last_name,:email].each do |property|
+          # nothing in the field, row has content, row isn't "None"
+          if person.send(property).blank? and row[TextParser.constant_hash[property]].present? and row[TextParser.constant_hash[property]] != "None"
+            person.update_attribute(property, row[TextParser.constant_hash[property]])
+          end
+        end
+        Tagging.create_without_duplicates(person.id,verb_id,tag_id)
+      end
       count += 1
     end
   end
@@ -28,16 +43,16 @@ class TextParser
     # repeated logic of if this returns something, return that, with last bit being a new person when tests aren't satisfied
 
     # if email address same
-    p = Person.where("email = ?",row[EMAIL_ADDRESS]).take(1)
-    return p if p.present?
+    p = Person.where("email = ?",row[TextParser.constant_hash[:email]]).take(1)
+    return p[0] if p.present?
 
     # else if the firstname lastname are unique in the db, is this same lowercase without spaces
-    p = Person.where("first_name = ? and last_name = ?",row[FIRST_NAME],row[LAST_NAME]).take(1)
-    return p if p.present?
+    p = Person.where("first_name = ? and last_name = ?",row[TextParser.constant_hash[:first_name]],row[TextParser.constant_hash[:last_name]]).take(1)
+    return p[0] if p.present?
 
     # else if the full name is unique in the db, is this same lowercase without spaces
-    p = Person.where("name = ?","#{row[FIRST_NAME]} #{row[LAST_NAME]}").take(1)
-    return p if p.present?
+    p = Person.where("name = ?","#{row[TextParser.constant_hash[:first_name]]} #{row[TextParser.constant_hash[:last_name]]}").take(1)
+    return p[0] if p.present?
 
     # if all tests fail and it's a new person
     return Person.create
