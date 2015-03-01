@@ -1,39 +1,56 @@
-START USING DAY TO DAY
+https://trello.com/b/Ek773dQs/mnemonic
+--
+ILP method, from kei, about how they do clinic self-examination
 
-----
+how do you expect to feel while doing this task?
+what good at, expected?
+what bad at, expected?
+how prep for things bad at?
 
-consider adding the 1-3 goals/day to this app, would strongly drive usage i think
+DO THE TASK
 
-[] main issue - not using due to
-  [] spin up - it's not always just there
-    run on a small computer at home all the time, connect to it from laptop?
-    vpn - set one up for just this perhaps? is that hard?
-    http password?
-    regular password?
-  [] annoying to add information
-    maybe - trying this in a text file
-      batch file - one line of each instruction, execute afterwards
-      ability to add multiple tags to a person easily, with suggested verb
+<essay for self-assessment>
+  how did you feel?
+  what hurdles did you encounter?
+  how did you deal with them?
+  how could you have dealt with them better?
+  what's one thing you learned?
+--
 
-[] taggings new flow - do with search boxes, not with checkboxes. goal is to learn how to use these, since they make other flows feasible. could half-ass with hidden javascript, but i'd love to duplicate what rails_admin has
-  https://shellycloud.com/blog/2013/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch - need elasticsearch running
-  https://github.com/crowdint/rails3-jquery-autocomplete - less clear example, don't need a full search engine through
-  http://flaviodesousa.com/blog/autocomplete-over-associations-in-rails-4/ - useful secondary example
-  http://graffzon.tumblr.com/post/31730804641/lightweight-handmade-solution-for-jquery-autocomplete - useful example
+survey - one time doing one session of question answers
+question - one question, survey has_many of them
+answer - answer, question has_one of them
 
+make survey each time, questions persistant
+answer has_one survey has_one question and then answer attributes
 
-[] can ifttt tie directly into this - like on new friend/LI connection, send http request or email?
+survey
+  timestamps
+  notes
+  *have a basic method to print the questions and answers from a survey
 
+question
+  text of question (string)
+  answer_type text|integer
+  ordering (1 first, 10 last, tie arbitrary)
 
+answer
+  content_text (text)
+  content_integer (integer)
+  answer_type [:one_to_ten, :freeform]
+  *have a get_answer method that does any necessary selecting/casting
 
-backup data - where does it live? note in README; time machine should take care of it for now
-implement email for fade_action
+--
 
-map relationships to each other
-enough security to not just run it local - should this be a server only accessible from certain machines or something?
-social network connections for harvesting (FB, LI, email?)
-offshore worker connections for harvesting
+interesting brainstorm for what to try with game i created that fizzled out
+  instead of playing to make the rules
+  rate what productivity/activity is like
+    have hundreds of possible things to do, match the what to do with the productivity or difficulty rating for what looking to do
+    have a wheel for selection to make it feel more fun
+    be able to see what effect it had on mood - show how felt before and felt after
 
-MUCH BROADER
-have a roster of personal to-dos and the date to do them (better asana or something?)
-  ^ this feels like a different project
+thinking of life as a game, when i play a game that'll be around for a while i focus on the metaskills - how do you increase your ability to increase your ability. thinking over the partner's diverse lives at HAX, being a renaissance man really appealing, being able to attack virtually any problem and find answers. thinking about what some of those metaskills are, big one 
+  is being able for form relationship across class and culture - find and care about someone's story and create a spark
+  discipline - apply oneself to a task consistantly
+  outlook - how do you take the right spin on things
+  community - how do you get people involved in and excited about what you care about
