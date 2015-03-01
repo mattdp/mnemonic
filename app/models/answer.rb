@@ -16,4 +16,16 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :survey
 
+  def get_answer
+    answer_type = self.question.answer_type
+    case answer_type
+    when "integer"
+      content_integer
+    when "text"
+      content_text
+    else 
+      "Type unspecified. Fix the code!"
+    end
+  end
+
 end

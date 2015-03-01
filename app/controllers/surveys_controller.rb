@@ -9,6 +9,7 @@ class SurveysController < ActionController::Base
   end
 
   def show
+    @survey = Survey.find(params[:id])
   end
 
 end

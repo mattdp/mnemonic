@@ -1,1 +1,17 @@
-show survey stub
+
+<h1>
+  <% if @survey.name.present? %>
+    <%= "#{@survey.name}" %>
+  <% else %>
+    <%= "Survey ID: #{@survey.id}" %>
+  <% end %>
+</h1>
+
+<p>Taken: <%= "#{@survey.created_at.strftime("%B %d, %Y")}" %></p>
+
+<% @survey.questions.each do |question| %>
+  <div>
+    <p><strong><%= "#{question.ask}" %></strong></p>
+    <p><%= question.answer.get_answer %></p>
+  </div>
+<% end %>
