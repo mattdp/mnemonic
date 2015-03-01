@@ -11,7 +11,18 @@
 
 class Survey < ActiveRecord::Base
   has_many :questions, through: :answers
-  has_one :answer
+  has_many :answers
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}, allow_nil: true
+
+  #set should be changed in the future
+  #requires that the questions already exist
+  def equip_with_questions(set=nil)
+    set = ["now_how_happy","now_how_alert","now_how_purposeful"]
+    set.each do |name|
+      q = Question.find_by_name(name)
+      a = Answer.create({survey_id: self.id, question_id: q.id})
+    end
+  end
+
 end

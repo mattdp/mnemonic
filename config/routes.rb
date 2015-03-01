@@ -10,6 +10,8 @@ Mnemonic::Application.routes.draw do
   resources :people, only: [:edit, :update]
   get '/people/:id', to: 'people#edit'
 
+  resources :surveys, only: [:new, :create, :show]
+
   resources :taggings, only: [:new, :create]
   match '/taggings/new_submission', to: 'taggings#new_submission', via: :post, as: 'taggings_new_submission'
   get '/taggings/intermediate_new/:verb_id/:tag_id', to: 'taggings#intermediate_new', as: "taggings_intermediate_new"

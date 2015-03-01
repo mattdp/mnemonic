@@ -12,7 +12,7 @@
 #
 
 class Question < ActiveRecord::Base
-  has_many :surveys, through: :answers
+  has_many :surveys, through: :answer
   has_one :answer
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
