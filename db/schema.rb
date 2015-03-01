@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216223010) do
+ActiveRecord::Schema.define(version: 20150301203312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: true do |t|
+    t.integer  "survey_id"
+    t.integer  "question_id"
+    t.text     "content_text"
+    t.integer  "content_integer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.date     "start_date"
@@ -43,6 +52,20 @@ ActiveRecord::Schema.define(version: 20141216223010) do
     t.string   "url_facebook"
     t.string   "name"
     t.string   "phone"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "ask"
+    t.string   "answer_type"
+    t.integer  "ordering",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", force: true do |t|
+    t.text     "self_assessment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "taggings", force: true do |t|

@@ -7,8 +7,10 @@ class TagsController < ActionController::Base
   def show
     nfl = params[:name_for_link]
     @tag = Tag.find_by_name_for_link(nfl)
-    @taggings = @tag.taggings
-    @email_list = Person.email_list(@taggings.map{|tagging| tagging.person})
+    if @tag
+      @taggings = @tag.taggings
+      @email_list = Person.email_list(@taggings.map{|tagging| tagging.person})
+    end
   end
 
 end
