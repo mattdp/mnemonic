@@ -1,1 +1,20 @@
-new survey stub
+<h1>New survey</h1>
+
+<%= form_tag :action => "create", :controller => "surveys" do %>
+
+  <% @survey.questions.each do |question| %>
+    <div>
+      <p><strong><%= "#{question.ask}" %></strong></p>
+      <p>
+        <% if question.answer_type == "text" %>
+          <%= text_area_tag question.name, "" %>
+        <% else %>
+          <%= text_field_tag question.name, "" %>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+
+  <p><%= submit_tag "Submit survey" %></p>
+
+<% end %>
