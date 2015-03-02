@@ -18,7 +18,7 @@ class Survey < ActiveRecord::Base
   #set should be changed in the future
   #requires that the questions already exist
   def equip_with_questions(set=nil)
-    set = ["now_how_happy","now_how_alert","now_how_purposeful"]
+    set = ["now_how_happy","now_how_alert","now_how_purposeful","self_reflection"]
     set.each do |name|
       q = Question.find_by_name(name)
       a = Answer.create({survey_id: self.id, question_id: q.id})
