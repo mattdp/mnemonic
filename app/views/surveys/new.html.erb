@@ -2,14 +2,16 @@
 
 <%= form_tag :action => "create", :controller => "surveys" do %>
 
+  <%= hidden_field_tag :id, @survey.id %>
+
   <% @survey.questions.each do |question| %>
     <div>
       <p><strong><%= "#{question.ask}" %></strong></p>
       <p>
         <% if question.answer_type == "text" %>
-          <%= text_area_tag question.name, "" %>
+          <%= text_area_tag "questions[#{question.name}]", "" %>
         <% else %>
-          <%= text_field_tag question.name, "" %>
+          <%= text_field_tag "questions[#{question.name}]", "" %>
         <% end %>
       </p>
     </div>

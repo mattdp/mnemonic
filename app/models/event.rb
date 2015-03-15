@@ -2,23 +2,26 @@
 #
 # Table name: events
 #
-#  id             :integer          not null, primary key
-#  start_date     :date
-#  fade_date      :date
-#  fade_action    :string(255)
-#  dismissed      :boolean          default(FALSE)
-#  content        :string(255)
-#  notes          :text
-#  event_type     :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  person_id      :integer
-#  year           :integer
-#  happening_date :date
+#  id               :integer          not null, primary key
+#  start_date       :date
+#  fade_date        :date
+#  fade_action      :string(255)
+#  dismissed        :boolean          default(FALSE)
+#  content          :string(255)
+#  notes            :text
+#  event_type       :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  person_id        :integer
+#  year             :integer
+#  happening_date   :date
+#  dismissed_reason :string(255)
 #
 
 class Event < ActiveRecord::Base
   belongs_to :person
+
+  # dismiss reasons -> :success, :tried_openly, :pass, :pass_and_estrange
 
   def self.birthday_generator(verbose=false)
     Person.find_each do |person|
@@ -38,8 +41,14 @@ class Event < ActiveRecord::Base
     Date.today
   end
 
-  def dismiss
+  def dismiss(reason=nil)
     self.dismissed = true
+    self.dismissed_reason = reason
+    if reason == "pass_and_estrange"
+      if person = self.person
+        person.estrange
+      end
+    end
     self.save
   end
 

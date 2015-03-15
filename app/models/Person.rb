@@ -79,6 +79,12 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def estrange
+    tag = Tag.find_by_name("estranged")
+    verb = Verb.find_by_name("is")
+    Tagging.create_without_duplicates(self.id,verb.id,tag.id)
+  end
+
   def add_tag(tag_id, verb_id = nil)
     tag = Tag.find_by_id(tag_id)
     return false if self.tags.include?(tag)

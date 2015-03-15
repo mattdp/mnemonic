@@ -16,32 +16,6 @@ DO THE TASK
   how could you have dealt with them better?
   what's one thing you learned?
 --
-
-survey - one time doing one session of question answers
-question - one question, survey has_many of them
-answer - answer, question has_one of them
-
-make survey each time, questions persistant
-answer has_one survey has_one question and then answer attributes
-
-survey
-  timestamps
-  notes
-  *have a basic method to print the questions and answers from a survey
-
-question
-  text of question (string)
-  answer_type text|integer
-  ordering (1 first, 10 last, tie arbitrary)
-
-answer
-  content_text (text)
-  content_integer (integer)
-  answer_type [:one_to_ten, :freeform]
-  *have a get_answer method that does any necessary selecting/casting
-
---
-
 interesting brainstorm for what to try with game i created that fizzled out
   instead of playing to make the rules
   rate what productivity/activity is like
