@@ -8,9 +8,9 @@
 
 <p>Taken: <%= "#{@survey.created_at.strftime("%B %d, %Y")}" %></p>
 
-<% @survey.questions.each do |question| %>
+<% @survey.answers.each do |answer| %>
   <div>
-    <p><strong><%= "#{question.ask}" %></strong></p>
-    <p><%= question.answer.get_answer %></p>
+    <p><strong><%= "#{answer.question.ask}" %></strong></p>
+    <p><%= answer.get_answer %></p>
   </div>
 <% end %>

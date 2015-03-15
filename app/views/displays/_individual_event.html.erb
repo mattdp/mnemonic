@@ -16,5 +16,8 @@
        <%= mail_to "#{event.person.email}" %>
     <% end %>
   </td>  
-  <td><%= link_to "Dismiss", events_dismiss_path(event.id) %></td>
+  <td><%= link_to "Success", events_dismiss_path(event.id,:success) %></td>
+  <td><%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly) %></td>
+  <td><%= link_to "Pass", events_dismiss_path(event.id,:pass) %></td>
+  <td><%= link_to "Pass and estrange", events_dismiss_path(event.id,:pass_and_estrange) %></td>
 </tr>

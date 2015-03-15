@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301212947) do
+ActiveRecord::Schema.define(version: 20150315073335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,20 @@ ActiveRecord::Schema.define(version: 20150301212947) do
     t.datetime "updated_at"
   end
 
+  create_table "deeds", force: true do |t|
+    t.boolean  "accomplished"
+    t.integer  "minutes"
+    t.integer  "before_survey_id"
+    t.integer  "after_survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", force: true do |t|
     t.date     "start_date"
     t.date     "fade_date"
     t.string   "fade_action"
-    t.boolean  "dismissed",      default: false
+    t.boolean  "dismissed",        default: false
     t.string   "content"
     t.text     "notes"
     t.string   "event_type"
@@ -38,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150301212947) do
     t.integer  "person_id"
     t.integer  "year"
     t.date     "happening_date"
+    t.string   "dismissed_reason"
   end
 
   create_table "people", force: true do |t|
@@ -52,6 +62,19 @@ ActiveRecord::Schema.define(version: 20150301212947) do
     t.string   "url_facebook"
     t.string   "name"
     t.string   "phone"
+  end
+
+  create_table "plans", force: true do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.integer  "minimum_minutes"
+    t.boolean  "seems_purposeful"
+    t.boolean  "requires_alertness"
+    t.boolean  "seems_fun"
+    t.boolean  "repeater"
+    t.boolean  "dismissed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
