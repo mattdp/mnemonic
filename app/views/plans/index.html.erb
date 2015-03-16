@@ -1,0 +1,24 @@
+<h1>Index of plans</h1>
+
+<table>
+  <tr>
+    <th>name</th>
+    <th>notes</th>
+    <th>minimum_minutes</th>
+    <th>seems_purposeful</th>
+    <th>requires_alertness</th>
+    <th>seems_fun</th>
+    <th>repeater</th>
+  </tr>
+  <% @plans.each do |plan| %>
+    <tr>
+      <td><%= plan.name %></td>
+      <td><%= plan.notes %></td>
+      <td><%= plan.minimum_minutes %></td>
+      <td><%= plan.seems_purposeful %></td>
+      <td><%= plan.requires_alertness %></td>
+      <td><%= plan.seems_fun %></td>
+      <td><%= plan.repeater %></td>
+    </tr>
+  <% end %>
+</table>

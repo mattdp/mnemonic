@@ -9,9 +9,14 @@
 #  after_survey_id  :integer
 #  created_at       :datetime
 #  updated_at       :datetime
+#  plan_id          :integer
 #
 
 class Deed < ActiveRecord::Base
+
+  belongs_to :plan
+  belongs_to :before_survey, class_name: "Survey"
+  belongs_to :after_survey, class_name: "Survey"
 
 #      t.boolean :accomplished #if so, and not repeater, set dismissed true
 #      t.integer :minutes #how long did you do this

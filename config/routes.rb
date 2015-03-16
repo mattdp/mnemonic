@@ -1,6 +1,8 @@
 Mnemonic::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  get '/deeds/precommit', to: 'deeds#precommit', as: 'deeds_precommit'
+
   root 'displays#index'
 
   get '/events/birthday_generator', to: 'events#birthday_generator', as: 'events_birthday_generator'
@@ -9,6 +11,8 @@ Mnemonic::Application.routes.draw do
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
   resources :people, only: [:edit, :update]
   get '/people/:id', to: 'people#edit'
+
+  resources :plans, only: [:index]
 
   resources :surveys, only: [:new, :create, :show]
 

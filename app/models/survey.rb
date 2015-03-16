@@ -12,6 +12,7 @@
 class Survey < ActiveRecord::Base
   has_many :questions, through: :answers
   has_many :answers
+  has_one :deed
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}, allow_nil: true
 
