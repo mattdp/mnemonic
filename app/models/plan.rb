@@ -17,6 +17,12 @@
 
 class Plan < ActiveRecord::Base
 
-# t.boolean :repeater #if accomplished, dismiss
+  has_many :deeds
+  
+  # t.boolean :repeater #if accomplished, dismiss
+
+  def self.undismissed
+    Plan.all.select{|p| !p.dismissed}
+  end
 
 end
