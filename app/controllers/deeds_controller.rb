@@ -7,12 +7,16 @@ class DeedsController < ActionController::Base
   def create
     @deed = Deed.create
 
-    @deed.before_survey = Survey.create
-    @deed.before_survey.equip_with_questions
+    s = Survey.create
+    s.equip_with_questions
+    @deed.before_survey_id = s.id
     @survey = @deed.before_survey #for rendering with survey#new
 
-    @deed.after_survey = Survey.create
-    @deed.after_survey.equip_with_questions
+    s = Survey.create
+    s.equip_with_questions
+    @deed.after_survey_id = s.id
+
+    @deed.save
 
     render template: "surveys/new"
   end
