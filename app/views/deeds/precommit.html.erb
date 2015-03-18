@@ -2,4 +2,8 @@
 
 <p>I intend to select an activity, and be bound to both undertake the activity for the minimum time and also fill out a survey afterwards.</p> 
 
-<%= link_to "Yes, that's what I want to do", root_path %>
+<%= form_tag action: "create", controller: "deeds" do %>
+
+  <%= submit_tag "Yes, that's what I want to do" %>
+
+<% end %>
