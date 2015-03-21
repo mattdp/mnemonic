@@ -4,4 +4,7 @@ class PlansController < ActionController::Base
     @plans = Plan.undismissed.sort
   end
 
+  def wip
+  end
+
 end

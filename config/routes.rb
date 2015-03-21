@@ -14,6 +14,7 @@ Mnemonic::Application.routes.draw do
   get '/people/:id', to: 'people#edit'
 
   resources :plans, only: [:index]
+  get '/plans/wip', to: 'plans#wip', as: 'wip'
 
   resources :surveys, only: [:new, :create, :show]
 
