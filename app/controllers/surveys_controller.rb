@@ -24,6 +24,8 @@ class SurveysController < ActionController::Base
 
   def show
     @survey = Survey.find(params[:id])
+
+    @survey_purpose, @deed_id = @survey.purpose
   end
 
 end

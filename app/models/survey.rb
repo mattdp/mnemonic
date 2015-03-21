@@ -26,4 +26,17 @@ class Survey < ActiveRecord::Base
     end
   end
 
+  def purpose
+    before = Deed.where("before_survey_id = ?",self.id)
+    after = Deed.where("after_survey_id = ?",self.id)
+
+    if before.present?
+      return "before_survey", before[0].id
+    elsif after.present?
+      return "after_survey", after[0].id
+    else
+      return "standalone", nil
+    end
+  end
+
 end

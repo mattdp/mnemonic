@@ -6,6 +6,16 @@
   <% end %>
 </h1>
 
+<p>
+  <% if @survey_purpose == "before_survey" %>
+    This is a before survey. <%= link_to "Pick a plan!", plans_path %>
+  <% elsif @survey_purpose == "after_survey" %>
+    This is an after survey. <%= link_to "See what plan was attached.", wip_path %>
+  <% else %>
+    This is a standalone survey
+  <% end %>
+</p>
+
 <p>Taken: <%= "#{@survey.created_at.strftime("%B %d, %Y")}" %></p>
 
 <% @survey.answers.each do |answer| %>
