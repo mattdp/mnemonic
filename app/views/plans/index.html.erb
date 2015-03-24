@@ -9,6 +9,9 @@
     <th>requires_alertness</th>
     <th>seems_fun</th>
     <th>repeater</th>
+    <% if @deed_id.present? %>
+      <th>Do it!</th>
+    <% end %>
   </tr>
   <% @plans.each do |plan| %>
     <tr>
@@ -19,6 +22,9 @@
       <td><%= plan.requires_alertness %></td>
       <td><%= plan.seems_fun %></td>
       <td><%= plan.repeater %></td>
+      <% if @deed_id.present? %>
+        <td><%= link_to "Yeah!", wip_path %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

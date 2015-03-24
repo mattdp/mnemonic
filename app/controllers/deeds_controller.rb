@@ -21,4 +21,11 @@ class DeedsController < ActionController::Base
     render template: "surveys/new"
   end
 
+  def doing
+    @deed = Deed.find(params[:deed_id])
+    @survey = @deed.after_survey
+
+    render template: "surveys/new"
+  end
+
 end
