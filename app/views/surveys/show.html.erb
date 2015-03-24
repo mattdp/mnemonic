@@ -8,7 +8,7 @@
 
 <p>
   <% if @survey_purpose == "before_survey" %>
-    This is a before survey. <%= link_to "Pick a plan!", plans_path %>
+    This is a before survey. <%= link_to "Pick a plan!", plans_with_deed_path(@deed_id) %>
   <% elsif @survey_purpose == "after_survey" %>
     This is an after survey. <%= link_to "See what plan was attached.", wip_path %>
   <% else %>

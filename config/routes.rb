@@ -3,6 +3,7 @@ Mnemonic::Application.routes.draw do
 
   resources :deeds, only: [:create]
   get '/deeds/precommit', to: 'deeds#precommit', as: 'deeds_precommit'
+  get '/deeds/doing', to: "deeds#doing", as: 'deeds_doing'
 
   root 'displays#index'
 
@@ -14,6 +15,7 @@ Mnemonic::Application.routes.draw do
   get '/people/:id', to: 'people#edit'
 
   resources :plans, only: [:index]
+  get '/plans/:deed_id', to: 'plans#index', as: "plans_with_deed"
   get '/plans/wip', to: 'plans#wip', as: 'wip'
 
   resources :surveys, only: [:new, :create, :show]
