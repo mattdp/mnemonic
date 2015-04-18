@@ -6,8 +6,8 @@ gem 'bcrypt-ruby'
 gem 'jquery-rails'
 gem 'pg', '0.17.1' #http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
 gem 'rails_admin'
-gem 'koala', '~> 1.10.0rc' #facebook scraping, not sure if in use
-gem 'nokogiri'
+gem 'koala', '~> 1.10.0rc'
+gem 'nokogiri', '1.6.0' #version bumping this causes an error, dunno why
 gem 'activerecord-session_store'
 
 group :development, :test do
