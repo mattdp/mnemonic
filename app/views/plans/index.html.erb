@@ -23,7 +23,7 @@
       <td><%= plan.seems_fun %></td>
       <td><%= plan.repeater %></td>
       <% if @deed_id.present? %>
-        <td><%= link_to "Yeah!", wip_path %></td>
+        <td><%= link_to "Yeah!", deeds_doing_path(@deed_id,plan.id) %></td>
       <% end %>
     </tr>
   <% end %>

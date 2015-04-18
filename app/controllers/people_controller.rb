@@ -1,4 +1,5 @@
 class PeopleController < ActionController::Base
+  
   def edit
     @person = Person.find(params[:id])
     @tags = Tag.all
