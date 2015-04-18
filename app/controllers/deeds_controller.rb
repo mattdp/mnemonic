@@ -23,9 +23,22 @@ class DeedsController < ActionController::Base
 
   def doing
     @deed = Deed.find(params[:deed_id])
+    @plan = Plan.find(params[:plan_id])
     @survey = @deed.after_survey
 
+    @deed.plan = @plan
+    @deed.save
+
     render template: "surveys/new"
+  end
+
+  def show
+    @deed = Deed.find(params[:id])
+    @plan = @deed.plan
+    @before_survey = @deed.before_survey
+    @after_survey = @deed.after_survey
+
+    @same_questions = @before_survey.questions & @after_survey.questions
   end
 
 end

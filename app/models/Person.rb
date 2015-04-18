@@ -25,7 +25,7 @@ class Person < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
-  before_save {|person| person.name = person.display_name if !person.name.present?}
+  before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
   def self.select_group(symbol)
     estranged_tag = Tag.find_by_name("estranged")
