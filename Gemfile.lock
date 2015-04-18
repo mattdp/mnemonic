@@ -19,6 +19,10 @@ GEM
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-session_store (0.1.1)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -177,20 +181,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate (= 2.5.0)
-  bcrypt-ruby (~> 3.0.0)
-  capybara (= 2.1.0)
-  database_cleaner (= 1.2.0)
-  factory_girl_rails (= 4.2.1)
-  jquery-rails (= 3.0.4)
+  activerecord-session_store
+  annotate
+  bcrypt-ruby
+  capybara
+  database_cleaner
+  factory_girl_rails
+  jquery-rails
   koala (~> 1.10.0rc)
-  launchy (= 2.4.0)
-  nokogiri (= 1.6.0)
+  launchy
+  nokogiri
   pg (= 0.17.1)
-  pry (= 0.9.12.2)
-  pry-nav (= 0.2.3)
-  pry-rails (= 0.3.2)
-  rails (= 4.0.0)
+  pry
+  pry-nav
+  pry-rails
+  rails (~> 4.0.0)
   rails_admin
-  rspec-rails (= 2.14.0)
-  shoulda-matchers (= 2.3.0)
+  rspec-rails
+  shoulda-matchers
