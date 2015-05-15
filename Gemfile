@@ -9,6 +9,8 @@ gem 'rails_admin'
 gem 'koala', '~> 1.10.0rc'
 gem 'nokogiri', '1.6.0' #version bumping this causes an error, dunno why
 gem 'activerecord-session_store'
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 
 group :development, :test do
   gem 'rspec-rails'
