@@ -1,5 +1,5 @@
-class TaggingsController < ActionController::Base
-
+class TaggingsController < ApplicationController
+  
   def new #first new page, choose a verb and a tag
     @verbs = Verb.all
     @tags = Tag.all

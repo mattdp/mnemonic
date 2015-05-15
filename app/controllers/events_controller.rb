@@ -1,4 +1,4 @@
-class EventsController < ActionController::Base
+class EventsController < ApplicationController
 
   def dismiss
     @event = Event.find(params[:id])

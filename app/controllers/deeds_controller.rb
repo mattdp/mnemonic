@@ -1,4 +1,4 @@
-class DeedsController < ActionController::Base
+class DeedsController < ApplicationController
 
   def precommit
   end

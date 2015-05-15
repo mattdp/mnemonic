@@ -1,4 +1,4 @@
-class PeopleController < ActionController::Base
+class PeopleController < ApplicationController
   
   def edit
     @person = Person.find(params[:id])
