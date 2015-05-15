@@ -23,6 +23,7 @@ class PeopleController < ApplicationController
 
   def table
     @people = Person.table_order
+    @grey_out = [[4,1],[4,2],[4,3],[3,1],[3,2],[2,1]]
   end
 
 end

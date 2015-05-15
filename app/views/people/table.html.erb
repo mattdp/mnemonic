@@ -1,25 +1,53 @@
-<table class="people-table">
-  <tr>
-    <td></td>
-    <% (1..4).each do |n| %>
-      <td><%= "#{n}" %></td>
-    <% end %>
-  </tr>
-  <% 4.downto(1).each do |r| %>
-    <tr>
-      <td><%= "#{r}" %></td>
-      <% (1..4).each do |c| %>
-        <% this_box = Person.table_order.select{|p| p.relationship_possible == c and p.relationship_current == r} %>
-        <td>
-          <ul>
-            <% this_box.each do |person| %>
-              <li><%= "#{person.name}" %></li>
-            <% end %>
-          </ul>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+<div class="container">
+  <div class="row">
+    <p class="text-center">Potential level of friendship</p>
+  </div>
 
-<p>Horizontal: potential; Vertical: now</p>
+  <div class="row">
+    <div class="col-md-1">
+      <p class="text-center">Current level of friendship</p>
+    </div>
+    <div class="col-md-11">
+      <table class="table table-bordered">
+        <tr>
+          <td></td>
+          <% (1..4).each do |n| %>
+            <td><%= "#{n}" %></td>
+          <% end %>
+        </tr>
+        <% 4.downto(1).each do |r| %>
+          <tr>
+            <td><%= "#{r}" %></td>
+            <% (1..4).each do |c| %>
+              <% this_box = Person.table_order.select{|p| p.relationship_possible == c and p.relationship_current == r} %>
+              <% if @grey_out.include?([r,c]) %>
+                <td class="active">
+              <% else %>
+                <td>
+              <% end %>  
+                <ul>
+                  <% this_box.each do |person| %>
+                    <li><%= "#{person.name}" %></li>
+                  <% end %>
+                </ul>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <p>Horizontal: potential; Vertical: now</p>
+
+    <ul>
+      <li>0 Acquaintance</li>
+      <li>1 Friend, but not especially close.</li>
+      <li>2 Good friend, not inner circle.</li>
+      <li>3 Edge of inner circle</li>
+      <li>4 Lifelong friend</li>
+    </ul>
+  </div>
+
+</div>
