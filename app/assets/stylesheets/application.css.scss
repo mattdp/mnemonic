@@ -12,9 +12,15 @@
  *= require_tree .
  */
 
+@import 'custom/custom.css';
+
 .picture {
   color: blue;
   height: 100px;
   width: 100px;
   position: absolute;
+}
+
+.people-table {
+  border: 1px solid black;
 }
