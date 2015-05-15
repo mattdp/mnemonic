@@ -11,6 +11,7 @@ gem 'nokogiri', '1.6.0' #version bumping this causes an error, dunno why
 gem 'activerecord-session_store'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'turbolinks'
 
 group :development, :test do
   gem 'rspec-rails'
