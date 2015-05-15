@@ -9,7 +9,7 @@
     <tr>
       <td><%= "#{r}" %></td>
       <% (1..4).each do |c| %>
-        <% this_box = Person.table_order.select{|p| p.relationship_possible == r and p.relationship_current == c} %>
+        <% this_box = Person.table_order.select{|p| p.relationship_possible == c and p.relationship_current == r} %>
         <td>
           <ul>
             <% this_box.each do |person| %>
@@ -21,3 +21,5 @@
     </tr>
   <% end %>
 </table>
+
+<p>Horizontal: potential; Vertical: now</p>

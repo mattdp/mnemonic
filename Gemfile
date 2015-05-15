@@ -28,3 +28,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
+
+group :assets do 
+  gem 'twitter-bootstrap-rails'
+end
