@@ -21,4 +21,8 @@ class PeopleController < ActionController::Base
     redirect_to root_path, notice: 'Name generation attempted.'
   end
 
+  def table
+    @people = Person.table_order
+  end
+
 end

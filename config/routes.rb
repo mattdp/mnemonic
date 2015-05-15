@@ -10,6 +10,7 @@ Mnemonic::Application.routes.draw do
   get '/events/birthday_generator', to: 'events#birthday_generator', as: 'events_birthday_generator'
   get '/events/dismiss/:id/:dismissed_reason', to: 'events#dismiss', as: 'events_dismiss'
 
+  get '/people/table', to: 'people#table'
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
   resources :people, only: [:edit, :update]
   get '/people/:id', to: 'people#edit'

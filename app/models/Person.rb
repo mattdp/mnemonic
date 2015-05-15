@@ -2,18 +2,20 @@
 #
 # Table name: people
 #
-#  id           :integer          not null, primary key
-#  birthday     :date
-#  first_name   :string(255)
-#  last_name    :string(255)
-#  email        :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  notes        :text
-#  url_linkedin :string(255)
-#  url_facebook :string(255)
-#  name         :string(255)
-#  phone        :string(255)
+#  id                    :integer          not null, primary key
+#  birthday              :date
+#  first_name            :string(255)
+#  last_name             :string(255)
+#  email                 :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#  notes                 :text
+#  url_linkedin          :string(255)
+#  url_facebook          :string(255)
+#  name                  :string(255)
+#  phone                 :string(255)
+#  relationship_current  :integer
+#  relationship_possible :integer
 #
 
 require 'action_view'
@@ -26,6 +28,11 @@ class Person < ActiveRecord::Base
   has_many :verbs, :through => :taggings
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
+
+  def self.table_order
+    Person.where("relationship_current IS NOT NULL AND relationship_possible IS NOT NULL") \
+      .order(:relationship_possible, :relationship_current)
+  end
 
   def self.select_group(symbol)
     estranged_tag = Tag.find_by_name("estranged")

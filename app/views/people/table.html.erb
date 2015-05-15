@@ -1,0 +1,23 @@
+<table class="people-table">
+  <tr>
+    <td></td>
+    <% (1..4).each do |n| %>
+      <td><%= "#{n}" %></td>
+    <% end %>
+  </tr>
+  <% 4.downto(1).each do |r| %>
+    <tr>
+      <td><%= "#{r}" %></td>
+      <% (1..4).each do |c| %>
+        <% this_box = Person.table_order.select{|p| p.relationship_possible == r and p.relationship_current == c} %>
+        <td>
+          <ul>
+            <% this_box.each do |person| %>
+              <li><%= "#{person.name}" %></li>
+            <% end %>
+          </ul>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
