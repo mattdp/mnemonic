@@ -12,6 +12,7 @@ gem 'activerecord-session_store'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'turbolinks'
+gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails'

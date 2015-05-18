@@ -1,6 +1,12 @@
 Mnemonic::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #will be needed for devise in production 
+  # 
+  # => @FIXME
+  #
+  #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
