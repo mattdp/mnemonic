@@ -21,6 +21,10 @@ group :development, :test do
   gem 'pry-nav'
 end
 
+group :production do
+  gem 'uglifier'
+end
+
 group :development do
   gem 'annotate'
 end
