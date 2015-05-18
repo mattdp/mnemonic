@@ -81,6 +81,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
+    json (1.8.1)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -205,6 +206,9 @@ GEM
       rails (>= 3.1)
       railties (>= 3.1)
     tzinfo (0.3.43)
+    uglifier (2.5.3)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -237,3 +241,4 @@ DEPENDENCIES
   therubyracer
   turbolinks
   twitter-bootstrap-rails
+  uglifier
