@@ -23,6 +23,10 @@ class Event < ActiveRecord::Base
 
   # dismiss reasons -> :success, :tried_openly, :pass, :pass_and_estrange
 
+  # all events that aren't dismissed
+  #   event is in top list if has a happening date
+  #   event is in bottom list if has a start date and no happening date
+
   def self.birthday_generator(verbose=false)
     Person.find_each do |person|
       if person.birthday && !person.estranged?
@@ -60,14 +64,11 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.get_displayable(event_type)
-    events = Event.get(event_type,true).select{|e| e.start_date && e.start_date <= Event.current_date}
-    return events.select{|e| e.fade_date.nil? || Event.current_date < e.fade_date}
-  end
-
-  def self.get_current_happening
-    events = Event.where("happening_date IS NOT NULL and dismissed = false").select{|e| e.start_date && e.start_date <= Event.current_date}
-    return events.select{|e| e.fade_date.nil? || Event.current_date < e.fade_date}
+  def self.events_by_display_category
+    answer = {}
+    answer[:specific_dates] = Event.where("happening_date IS NOT NULL and dismissed = FALSE and start_date <= ?",Event.current_date).order(:happening_date)
+    answer[:ranges] = Event.where("happening_date IS NULL and dismissed = FALSE and start_date <= ? and fade_date >= ?",Event.current_date,Event.current_date).order(:start_date)
+    return answer
   end
 
 end
