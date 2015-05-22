@@ -1,3 +1,7 @@
-The links in this aren't live, for now. <%= link_to "Go to the mnemonic site", root_url %> to make changes
+<p>The links in this aren't useful. <%= link_to "Go to the mnemonic site", root_url %> to make changes.</p>
 
+<hr>
 <%= render partial: "/displays/event_display", locals: {events: @events} %>
+<hr>
+
+<p>Sending environment: <%= Rails.env %></p>
