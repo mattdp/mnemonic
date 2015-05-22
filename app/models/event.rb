@@ -64,10 +64,10 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.events_by_display_category
+  def self.events_by_display_category(date = Event.current_date)
     answer = {}
-    answer[:specific_dates] = Event.where("happening_date IS NOT NULL and dismissed = FALSE and start_date <= ?",Event.current_date).order(:happening_date)
-    answer[:ranges] = Event.where("happening_date IS NULL and dismissed = FALSE and start_date <= ? and fade_date >= ?",Event.current_date,Event.current_date).order(:start_date)
+    answer[:specific_dates] = Event.where("happening_date IS NOT NULL and dismissed = FALSE and start_date <= ?",date).order(:happening_date)
+    answer[:ranges] = Event.where("happening_date IS NULL and dismissed = FALSE and start_date <= ? and fade_date >= ?",date,date).order(:start_date)
     return answer
   end
 
