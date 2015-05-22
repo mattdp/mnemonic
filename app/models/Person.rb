@@ -22,7 +22,7 @@ require 'action_view'
 include ActionView::Helpers::DateHelper
 
 class Person < ActiveRecord::Base
-  has_many :events
+  has_many :events, :dependent => :destroy
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
