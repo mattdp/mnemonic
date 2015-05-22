@@ -1,0 +1,12 @@
+<h2>Events with specific times</h2>
+<table>
+  <% events[:specific_dates].each do |event| %>
+    <%= render partial: "/displays/individual_event", locals: {event: event} %>
+  <% end %>
+</table>
+<h2>Events with time ranges</h2>
+<table>
+  <% events[:ranges].each do |event| %>
+    <%= render partial: "/displays/individual_event", locals: {event: event} %>
+  <% end %>
+</table>
