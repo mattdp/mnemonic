@@ -1,10 +1,17 @@
 Mnemonic::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { host: 'http://physicalglossytoeroots.herokuapp.com' }
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
+  host = 'http://physicalglossytoeroots.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               host,
+    user_name:            ENV[GMAIL_EMAIL],
+    password:             ENV[GMAIL_PASSWORD],
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
