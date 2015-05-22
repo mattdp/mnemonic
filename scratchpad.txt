@@ -1,0 +1,3 @@
+all events that aren't dismissed
+  event is in top list if has a happening date
+  event is in bottom list if has a start date and no happening date
