@@ -3,16 +3,5 @@
 <%= link_to "Generate all blank names", people_generate_names_path %><br />
 <%= link_to "Generate all birthdays", events_birthday_generator_path %><br />
 <%= link_to "Tag listing", tags_path %><br />
-  
-<h2>Upcoming time-based events</h2>
-<table>
-  <% @time_based_events.sort_by{|b| b.happening_date}.each do |event| %>
-    <%= render partial: "/displays/individual_event", locals: {event: event} %>
-  <% end %>
-</table>
-<h2>Outstanding wants and haves</h2>
-<table>
-  <% @wants_and_has.each do |event| %>
-    <%= render partial: "/displays/individual_event", locals: {event: event} %>
-  <% end %>
-</table>
+
+<%= render partial: "/displays/event_display", locals: {events: @events} %>
