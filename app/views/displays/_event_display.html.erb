@@ -1,12 +1,17 @@
-<h2>Events with specific times</h2>
-<table>
-  <% events[:specific_dates].each do |event| %>
-    <%= render partial: "/displays/individual_event", locals: {event: event} %>
-  <% end %>
-</table>
-<h2>Events with time ranges</h2>
-<table>
-  <% events[:ranges].each do |event| %>
-    <%= render partial: "/displays/individual_event", locals: {event: event} %>
-  <% end %>
-</table>
+<% titles_and_events = [ 
+  ["Events with specific times",events[:specific_dates]], 
+  ["Events with time ranges",events[:ranges]] 
+] %>
+
+<% titles_and_events.each do |te| %>
+  <h2><%= te[0] %></h2>
+  <table>
+    <% if te[1].present? %>
+      <% te[1].each do |event| %>
+        <%= render partial: "/displays/individual_event", locals: {event: event} %>
+      <% end %>
+    <% else %>
+      <p>No events fit these criteria currently.</p>
+    <% end %>
+  </table>
+<% end %>
