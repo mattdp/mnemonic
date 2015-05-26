@@ -15,4 +15,9 @@ class Communication < ActiveRecord::Base
 
   belongs_to :person
 
+  #stub so can use for event setting
+  def canonical_date
+    self.created_at
+  end
+
 end
