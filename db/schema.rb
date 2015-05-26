@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526202418) do
+ActiveRecord::Schema.define(version: 20150526202756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150526202418) do
     t.integer  "relationship_current"
     t.integer  "relationship_possible"
     t.integer  "reminder_days"
-    t.boolean  "reminder_manual_override"
+    t.boolean  "reminder_manual_override", default: false
   end
 
   create_table "plans", force: true do |t|

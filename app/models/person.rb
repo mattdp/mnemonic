@@ -17,7 +17,7 @@
 #  relationship_current     :integer
 #  relationship_possible    :integer
 #  reminder_days            :integer
-#  reminder_manual_override :boolean
+#  reminder_manual_override :boolean          default(FALSE)
 #
 
 require 'action_view'
@@ -31,6 +31,70 @@ class Person < ActiveRecord::Base
   has_many :verbs, :through => :taggings
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
+
+  #logic for which relationship_current and relationship_possible get reminders...
+  #...is in both this method and set_reminder_days
+  def self.generate_all_reminder_days!
+    people = Person.where("(relationship_possible = 3 OR relationship_possible = 4) 
+      AND reminder_manual_override = FALSE
+      AND relationship_current IS NOT NULL"
+      )
+    people.each do |person|
+      person.set_reminder_days!
+    end      
+  end
+
+  def set_reminder_days!(ignore_override=false)
+
+    if self.reminder_manual_override 
+      return nil unless ignore_override
+    end
+    rd = nil
+
+    if self.relationship_possible == 4
+      rd = 90 #4,2 and 4,1
+      rd = 30 if relationship_current == 4 #already at great state
+      rd = 15 if relationship_current == 3 #actively developing
+    elsif self.relationship_possible == 3
+      rd = 90 if relationship_current == 3 # not pushing dev in this area now
+    end
+
+    self.reminder_days = rd
+    return self.save
+  end
+
+  def self.generate_all_reminder_events!
+    remind_x_days_before = 3
+    event_type = "auto_generated_communication_reminder"
+
+    happening_date = nil
+    people = Person.where("reminder_days IS NOT NULL")
+
+    people.each do |person|
+      next if person.has_undismissed_event?(event_type)
+      lcd = person.last_communication_date
+      if lcd.nil?
+        happening_date = Date.today
+      elsif (lcd <= Date.today + remind_x_days_before)
+        happening_date = Date.today + remind_x_days_before
+      end
+      
+      Event.create(person_id: person.id, event_type: event_type, 
+        happening_date: happening_date, content: "#{person.display_name}: >= #{person.reminder_days} days since you reached out!"
+        ) if happening_date.present?
+    end
+  end
+
+  def has_undismissed_event?(event_type)
+    events = Event.where("person_id = ? AND event_type = ? AND dismissed = FALSE", self.id, event_type)
+    return events.present?
+  end
+
+  def last_communication_date
+    comms = Communication.where("person_id = ?", self.id)
+    return nil unless comms.present?
+    return comms.map{|c| c.canonical_date}.max
+  end
 
   def feed
     combined = []
