@@ -31,9 +31,9 @@ class Person < ActiveRecord::Base
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
   def feed
-    combined = self.events
-    communications = self.communications
-    combined = combined.concat(communications) if communications.present?
+    combined = []
+    combined = combined.concat(self.events) if self.events.present?
+    combined = combined.concat(self.communications) if self.communications.present?
     combined = combined.sort_by{|c| c.created_at}.reverse if combined.present?
     return combined
   end

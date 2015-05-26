@@ -28,7 +28,7 @@
               date = nil
             %>
             <% if class_name == "Communication" %>
-              <%= item.when.present? ? date = item.when : date = item.created_at %>
+              <% item.when.present? ? date = item.when : date = item.created_at %>
               <strong><%= "#{date.strftime('%m/%d/%y')}:" %></strong>
               <%= "#{item.contents}" %>
             <% elsif class_name == "Event" %>
