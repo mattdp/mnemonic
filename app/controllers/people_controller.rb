@@ -1,8 +1,9 @@
 class PeopleController < ApplicationController
-  
+
   def edit
     @person = Person.find(params[:id])
     @tags = Tag.all
+    @feed = @person.feed
   end
 
   def update

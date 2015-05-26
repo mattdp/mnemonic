@@ -22,12 +22,21 @@ require 'action_view'
 include ActionView::Helpers::DateHelper
 
 class Person < ActiveRecord::Base
+  has_many :communications, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
+
+  def feed
+    combined = self.events
+    communications = self.communications
+    combined = combined.concat(communications) if communications.present?
+    combined = combined.sort_by{|c| c.created_at}.reverse if combined.present?
+    return combined
+  end
 
   def self.table_order
     Person.where("relationship_current IS NOT NULL AND relationship_possible IS NOT NULL") \
