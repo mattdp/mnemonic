@@ -1,36 +1,71 @@
 <title><%= @person.display_name %> - edit page</title>
 
-<div class="biography">
-  <div class="basics">
-    <p><strong><%= @person.display_name %></strong></p>
-    <p><%= @person.display_birthday %></p>
-    <p><%= @person.display_age %></p>
-    <p><%= mail_to @person.email %></p>
-    <p><%= @person.phone %></p>
-    <%= render partial: "people/social_links", locals: {person: @person} %>
-  </div>
-  <div class="detailing">
-    <div class="current_tags">
-      <% @person.taggings.each do |tagging| %>
-        <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 biography">
+      <div class="basics">
+        <p><strong><%= @person.display_name %></strong></p>
+        <p><%= @person.display_birthday %></p>
+        <p><%= @person.display_age %></p>
+        <p><%= mail_to @person.email %></p>
+        <p><%= @person.phone %></p>
+        <%= render partial: "people/social_links", locals: {person: @person} %>
+      </div>
+    </div>
+    <div class="col-md-3 detailing">
+      <div class="current_tags">
+        <% @person.taggings.each do |tagging| %>
+          <%= render partial: "/people/tagging", locals: {tagging: tagging} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <% if @feed.present? %>
+        <% @feed.each do |item| %>
+          <p>
+            <% 
+              class_name = item.class.name 
+              date = nil
+            %>
+            <% if class_name == "Communication" %>
+              <% item.when.present? ? date = item.when : date = item.created_at %>
+              <strong><%= "#{date.strftime('%m/%d/%y')}:" %></strong>
+              <%= "#{item.contents}" %>
+            <% elsif class_name == "Event" %>
+              <strong>
+                <% if item.happening_date.present? %>
+                  <%= "#{item.happening_date.strftime('%m/%d/%y')}: " %>
+                <% elsif item.start_date.present? %>
+                  <%= "#{item.start_date}.strftime('%m/%d/%y') to #{item.fade_date}.strftime('%m/%d/%y'): " %>
+                <% else %>
+                  <%= "#{item.created_at.strftime('%m/%d/%y')}: " %>
+                <% end %>
+              </strong>
+              <%= "#{item.content} | #{item.notes}" %>
+            <% end %>
+          </p>
+        <% end %>
       <% end %>
     </div>
   </div>
-</div>
 
-<p><strong>Add tag:</strong></p>
-<%= form_tag person_path(@person), method: :patch do %>
+  <hr>
 
-  <table>
-    <% @tags.each do |tag| %>
-      <tr>
-        <td><%= check_box_tag "tag_ids[]", tag.id, false%></td>
-        <td><%= tag.name %></td>
-      </tr>
+  <div class="row">
+    <p><strong>Add tag:</strong></p>
+    <%= form_tag person_path(@person), method: :patch do %>
+
+      <table>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td><%= check_box_tag "tag_ids[]", tag.id, false%></td>
+            <td><%= tag.name %></td>
+          </tr>
+        <% end %>
+      </table> 
+
+      <%= submit_tag "Submit changes" %>
+
     <% end %>
-  </table> 
-
-  <%= submit_tag "Submit changes" %>
-
-<% end %>
-
+  </div>
+</div>
