@@ -16,8 +16,10 @@
        <%= mail_to "#{event.person.email}" %>
     <% end %>
   </td>  
-  <td><%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-default" %></td>
-  <td><%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly), class: "btn btn-default" %></td>
-  <td><%= link_to "Pass", events_dismiss_path(event.id,:pass), class: "btn btn-default" %></td>
-  <td><%= link_to "Pass & estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-default" %></td>
+  <td><%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %></td>
+  <td><%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly), class: "btn btn-success btn-sm" %></td>
+  <td><%= link_to "Pass", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %></td>
+  <td><%= link_to "Pass & estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-danger btn-sm" %></td>
+  <td><%= link_to "Defer 1 wk", "#", class: "btn btn-info btn-sm" %></td>
+  <td><%= link_to "Defer day-1", "#", class: "btn btn-info btn-sm" %></td>
 </tr>
