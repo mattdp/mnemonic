@@ -79,7 +79,7 @@ class Person < ActiveRecord::Base
         happening_date = Date.today + remind_x_days_before
       end
       
-      Event.create(person_id: person.id, event_type: event_type, 
+      Event.create(person_id: person.id, event_type: event_type, start_date: Date.today,
         happening_date: happening_date, content: "#{person.display_name}: >= #{person.reminder_days} days since you reached out!"
         ) if happening_date.present?
     end
