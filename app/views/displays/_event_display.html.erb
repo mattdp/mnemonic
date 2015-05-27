@@ -5,7 +5,7 @@
 
 <% titles_and_events.each do |te| %>
   <h2><%= te[0] %></h2>
-  <table>
+  <table class="table">
     <% if te[1].present? %>
       <% te[1].each do |event| %>
         <%= render partial: "/displays/individual_event", locals: {event: event} %>
