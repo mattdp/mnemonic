@@ -22,12 +22,18 @@
               <% this_box = Person.table_order.select{|p| p.relationship_possible == c and p.relationship_current == r} %>
               <% if @grey_out.include?([r,c]) %>
                 <td class="active">
+              <% elsif @most_often.include?([r,c]) %>
+                <td class="success">
+              <% elsif @second_most_often.include?([r,c]) %>
+                <td class="info">
+              <% elsif @third_most_often.include?([r,c]) %>
+                <td class="warning">
               <% else %>
                 <td>
               <% end %>  
                 <ul>
                   <% this_box.each do |person| %>
-                    <li><%= "#{person.name}" %></li>
+                    <li><%= link_to "#{person.name}", person_path(person) %></li>
                   <% end %>
                 </ul>
               </td>
@@ -39,15 +45,27 @@
   </div>
 
   <div class="row">
-    <p>Horizontal: potential; Vertical: now</p>
+    <div class="col-md-6">
+      <h3>The numbers</h3>
+      <p>Horizontal: potential; Vertical: now</p>
 
-    <ul>
-      <li>0 Acquaintance</li>
-      <li>1 Friend, but not especially close.</li>
-      <li>2 Good friend, not inner circle.</li>
-      <li>3 Edge of inner circle</li>
-      <li>4 Lifelong friend</li>
-    </ul>
+      <ul>
+        <li>0 Acquaintance</li>
+        <li>1 Friend, but not especially close.</li>
+        <li>2 Good friend, not inner circle.</li>
+        <li>3 Edge of inner circle</li>
+        <li>4 Lifelong friend</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h3>The colors</h3>
+      <table class="table">
+        <tr><td class="success">Talk with at least every 15 days</td></tr>
+        <tr><td class="info">Talk with at least every 30 days</td></tr>
+        <tr><td class="warning">Talk with at least every 90 days</td></tr>
+        <tr><td class="active">Improbable and undesirable</td></tr>
+      </table>
+    </div>
   </div>
 
 </div>
