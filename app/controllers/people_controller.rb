@@ -25,6 +25,9 @@ class PeopleController < ApplicationController
   def table
     @people = Person.table_order
     @grey_out = [[4,1],[4,2],[4,3],[3,1],[3,2],[2,1]]
+    @most_often = [[3,4]]
+    @second_most_often = [[4,4]]
+    @third_most_often = [[2,4],[1,4],[3,3]]
   end
 
 end
