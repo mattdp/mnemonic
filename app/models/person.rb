@@ -67,7 +67,6 @@ class Person < ActiveRecord::Base
     remind_x_days_before = 3
     event_type = "auto_generated_communication_reminder"
 
-
     people = Person.where("reminder_days IS NOT NULL")
 
     people.each do |person|
@@ -86,6 +85,8 @@ class Person < ActiveRecord::Base
           )
       end 
     end
+
+    return true
   end
 
   def has_undismissed_event?(event_type)
