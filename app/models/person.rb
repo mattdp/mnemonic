@@ -67,10 +67,11 @@ class Person < ActiveRecord::Base
     remind_x_days_before = 3
     event_type = "auto_generated_communication_reminder"
 
-    happening_date = nil
+
     people = Person.where("reminder_days IS NOT NULL")
 
     people.each do |person|
+      happening_date = nil
       next if person.has_undismissed_event?(event_type)
       lcd = person.last_communication_date
       if lcd.nil?
@@ -79,9 +80,11 @@ class Person < ActiveRecord::Base
         happening_date = Date.today + remind_x_days_before
       end
       
-      Event.create(person_id: person.id, event_type: event_type, start_date: Date.today,
-        happening_date: happening_date, content: "#{person.display_name}: >= #{person.reminder_days} days since you reached out!"
-        ) if happening_date.present?
+      if happening_date.present?
+        Event.create(person_id: person.id, event_type: event_type, start_date: Date.today,
+          happening_date: happening_date, content: "#{person.display_name}: >= #{person.reminder_days} days since you reached out!"
+          )
+      end 
     end
   end
 
