@@ -45,6 +45,23 @@ class Event < ActiveRecord::Base
     Date.today
   end
 
+  #serves 2 purposes. easier: take a #, delay the date displayed by that long
+  #harder: go to happening_date - 1 of an event, for example a birthday
+  def snooze(days)
+    days = days.to_i if (days.class.name == "String" and days != "day-1")
+
+    if days == "day-1" and self.happening_date.present?
+      self.start_date = self.happening_date - 1
+      self.fade_date = self.start_date + 30 if self.fade_date.present?
+    else
+      #move back start_date and fade_date; happening stays same
+      days = 7 if days == "day-1"
+      self.start_date = Date.today + days
+      self.fade_date = self.fade_date + days if self.fade_date.present?
+    end
+    return self.save
+  end
+
   def dismiss(reason=nil)
     self.dismissed = true
     self.dismissed_reason = reason
