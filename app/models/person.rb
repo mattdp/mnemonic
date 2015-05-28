@@ -75,7 +75,7 @@ class Person < ActiveRecord::Base
       lcd = person.last_communication_date
       if lcd.nil?
         happening_date = Date.today
-      elsif (lcd + person.reminder_days + remind_x_days_before <= Date.today)
+      elsif (lcd + person.reminder_days.days + remind_x_days_before.days <= Date.today)
         happening_date = Date.today + remind_x_days_before
       end
       
