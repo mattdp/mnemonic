@@ -1,30 +1,36 @@
-<h1>Index of plans</h1>
+<div class="container">
+  <div class="row">
 
-<table>
-  <tr>
-    <th>name</th>
-    <th>notes</th>
-    <th>minimum_minutes</th>
-    <th>seems_purposeful</th>
-    <th>requires_alertness</th>
-    <th>seems_fun</th>
-    <th>repeater</th>
-    <% if @deed_id.present? %>
-      <th>Do it!</th>
-    <% end %>
-  </tr>
-  <% @plans.each do |plan| %>
-    <tr>
-      <td><%= plan.name %></td>
-      <td><%= plan.notes %></td>
-      <td><%= plan.minimum_minutes %></td>
-      <td><%= plan.seems_purposeful %></td>
-      <td><%= plan.requires_alertness %></td>
-      <td><%= plan.seems_fun %></td>
-      <td><%= plan.repeater %></td>
-      <% if @deed_id.present? %>
-        <td><%= link_to "Yeah!", deeds_doing_path(@deed_id,plan.id) %></td>
+    <h1>Index of plans</h1>
+
+    <table class="table">
+      <tr>
+        <th>name</th>
+        <th>notes</th>
+        <th>minimum_minutes</th>
+        <th>seems_purposeful</th>
+        <th>requires_alertness</th>
+        <th>seems_fun</th>
+        <th>repeater</th>
+        <% if @deed_id.present? %>
+          <th>Do it!</th>
+        <% end %>
+      </tr>
+      <% @plans.each do |plan| %>
+        <tr>
+          <td><%= plan.name %></td>
+          <td><%= plan.notes %></td>
+          <td><%= plan.minimum_minutes %></td>
+          <td><%= plan.seems_purposeful %></td>
+          <td><%= plan.requires_alertness %></td>
+          <td><%= plan.seems_fun %></td>
+          <td><%= plan.repeater %></td>
+          <% if @deed_id.present? %>
+            <td><%= link_to "Yeah!", deeds_doing_path(@deed_id,plan.id) %></td>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
-  <% end %>
-</table>
+    </table>
+
+  </div>
+</div>
