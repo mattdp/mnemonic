@@ -1,9 +1,21 @@
-<h3>Read and acknowledge before proceeding</h3>
+<div class="container">
+  <div class="row">
 
-<p>I intend to select an activity, and be bound to both undertake the activity for the minimum time and also fill out a survey afterwards.</p> 
+    <h3>Read and acknowledge before proceeding</h3>
 
-<%= form_tag action: "create", controller: "deeds" do %>
+    <p>I intend to:</p> 
 
-  <%= submit_tag "Yes, that's what I want to do" %>
+    <ul>
+      <li>select an activity</li>
+      <li>be bound to both undertake the activity for the minimum time</li>
+      <li>fill out a survey afterwards.</li>
+    </ul>
 
-<% end %>
+    <%= form_tag action: "create", controller: "deeds" do %>
+
+      <%= submit_tag "Yes, that's what I want to do" %>
+
+    <% end %>
+
+  </div>
+</div>
