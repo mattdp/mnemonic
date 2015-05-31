@@ -2,14 +2,18 @@
 <html>
   <head>
     <title>Mnemonic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <div>STUB: You should make a nav bar here! And make flashes take less space!</div>
-    <p class="notice bg-success"><%= notice %></p>
-    <p class="alert bg-alert"><%= alert %></p>
+      <% if notice.present? %>
+        <p class="notice bg-success"><%= notice %></p>
+      <% elsif alert.present? %>
+        <p class="alert bg-alert"><%= alert %></p>
+      <% end %>
     <%= yield %>
   </body>
 </html>
