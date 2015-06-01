@@ -1,28 +1,30 @@
-<h1><%= "Deed ##{@deed.id}" %></h1>
+<div class="container">
+  <div class="row">
 
-<h3>Plan</h3>
-<p><%= @plan.name %></p>
+    <h1><%= "Deed ##{@deed.id}" %></h1>
 
-<h3>Surveys</h3>
-<table>
-  <tr>
-    <th>Survey</th>
-    <% @same_questions.each do |question| %>
-      <th><%= "#{question.ask}" %></th>
-    <% end %>
-  </tr>
-  <tr>
-    <td>Before</td>
-    <% @same_questions.each do |question| %>
-      <td><%= @before_survey.answers.select{|a| a.question_id == question.id}[0].get_answer %></td>
-    <% end %>
-  </tr>
-  <tr>
-    <td>After</td>
-    <% @same_questions.each do |question| %>
-      <td><%= @after_survey.answers.select{|a| a.question_id == question.id}[0].get_answer %></td>
-    <% end %>    
-  </tr>
-</table>
+    <h3>Plan</h3>
+    <p><%= @plan.name %></p>
 
-<%= link_to "Back to home", root_path %>
+    <h3>Surveys</h3>
+    <table class="table">
+      <tr>
+        <th></th>
+        <% @same_questions.each do |question| %>
+          <th><%= "#{question.ask}" %></th>
+        <% end %>
+      </tr>
+      <% [{title: "Before", var: @before_survey},{title: "After", var: @after_survey}].each do |line| %>
+        <tr>
+          <td><%= "#{line[:title]}" %></td>
+          <% @same_questions.each do |question| %>
+            <td><%= line[:var].answers.select{|a| a.question_id == question.id}[0].get_answer %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= link_to "Back to home", root_path %>
+
+  </div>
+</div>

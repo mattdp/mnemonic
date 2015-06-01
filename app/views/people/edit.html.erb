@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-3 biography">
       <div class="basics">
-        <p><strong><%= @person.display_name %></strong></p>
+        <p><strong><%= @person.display_name %> (<%= link_to "RA edit", "#{@person.link_string}" %>)</strong></p>
         <p><%= @person.display_birthday %></p>
         <p><%= @person.display_age %></p>
         <p><%= mail_to @person.email %></p>

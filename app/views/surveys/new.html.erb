@@ -1,22 +1,28 @@
-<h1>New survey</h1>
+<div class="container">
+  <div class="row">
 
-<%= form_tag :action => "create", :controller => "surveys" do %>
+    <h1>New survey</h1>
 
-  <%= hidden_field_tag :id, @survey.id %>
+    <%= form_tag :action => "create", :controller => "surveys" do %>
 
-  <% @survey.questions.each do |question| %>
-    <div>
-      <p><strong><%= "#{question.ask}" %></strong></p>
-      <p>
-        <% if question.answer_type == "text" %>
-          <%= text_area_tag "questions[#{question.name}]", "" %>
-        <% else %>
-          <%= text_field_tag "questions[#{question.name}]", "" %>
-        <% end %>
-      </p>
-    </div>
-  <% end %>
+      <%= hidden_field_tag :id, @survey.id %>
 
-  <p><%= submit_tag "Submit survey" %></p>
+      <% @survey.questions.each do |question| %>
+        <div>
+          <p><strong><%= "#{question.ask}" %></strong></p>
+          <p>
+            <% if question.answer_type == "text" %>
+              <%= text_area_tag "questions[#{question.name}]", "" %>
+            <% else %>
+              <%= text_field_tag "questions[#{question.name}]", "" %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
 
-<% end %>
+      <p><%= submit_tag "Submit survey" %></p>
+
+    <% end %>
+
+  </div>
+</div>
