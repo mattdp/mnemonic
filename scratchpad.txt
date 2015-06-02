@@ -1,3 +1,7 @@
-all events that aren't dismissed
-  event is in top list if has a happening date
-  event is in bottom list if has a start date and no happening date
+to pick a plan for a deed, within constraints:
+  have a form with a submit button that picks randomly (probably using a new deed as form_for)
+  have a button to that form from the precommit page - one for choose self, one for random
+  have the form with selectors for boolean constraints, with proper defaults, wired to nothing
+  wire up boolean constraints
+  have a slider for minimum times no more than 15 30 60 unlimited
+  wire up slider
