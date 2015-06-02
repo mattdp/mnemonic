@@ -3,6 +3,10 @@ class DeedsController < ApplicationController
   def precommit
   end
 
+  def index
+    @deeds = Deed.all
+  end
+
   #meant for updating as surveys filled out & plan selected
   def create
     @deed = Deed.create
@@ -38,7 +42,7 @@ class DeedsController < ApplicationController
     @before_survey = @deed.before_survey
     @after_survey = @deed.after_survey
 
-    @same_questions = @before_survey.questions & @after_survey.questions
+    @same_questions = @before_survey.questions & @after_survey.questions if (@before_survey.present? and @after_survey.present?)
   end
 
 end

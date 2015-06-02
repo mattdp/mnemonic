@@ -3,7 +3,7 @@ Mnemonic::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/deeds/precommit', to: 'deeds#precommit', as: 'deeds_precommit'
-  resources :deeds, only: [:create, :show]
+  resources :deeds, only: [:create, :show, :index]
   get '/deeds/doing/:deed_id/:plan_id', to: "deeds#doing", as: 'deeds_doing'
 
   root 'displays#index'
@@ -12,7 +12,7 @@ Mnemonic::Application.routes.draw do
   get '/events/dismiss/:id/:dismissed_reason', to: 'events#dismiss', as: 'events_dismiss'
   get '/events/snooze/:id/:snooze_days', to: 'events#snooze', as: 'events_snooze'
 
-  get '/people/table', to: 'people#table'
+  get '/people/table', to: 'people#table', as: "people_table"
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
   resources :people, only: [:edit, :update]
   get '/people/:id', to: 'people#edit'
