@@ -33,7 +33,10 @@
               <% end %>  
                 <ul>
                   <% this_box.each do |person| %>
-                    <li><%= link_to "#{person.name}", person_path(person) %></li>
+                    <li>
+                      <%= link_to "#{person.name}", person_path(person) %>
+                      <%= "(#{person.reminder_days})" if person.reminder_days %>
+                    </li>
                   <% end %>
                 </ul>
               </td>
@@ -57,7 +60,7 @@
       </dl>
     </div>
     <div class="col-md-6">
-      <h3>The colors</h3>
+      <h3>The colors, by default</h3>
       <table class="table table-bordered">
         <tr><td class="success">Talk with at least every 15 days</td></tr>
         <tr><td class="info">Talk with at least every 30 days</td></tr>
