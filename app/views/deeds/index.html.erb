@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+
+    <h1>Deeds index</h1>
+
+    <table class="table">
+      <tr>
+        <th>When</th>
+        <th>Plan</th>
+        <th>More details</th>
+      </tr>
+      <% @deeds.each do |deed| %>
+        <tr>
+          <td><%= "#{deed.created_at.strftime('%m/%d/%y')}" %></td>
+          <td><%= "#{deed.plan.name}" if deed.plan.present? %></td>
+          <td><%= link_to "Details", deed_path(deed.id) %> </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= link_to "Back to home", root_path %>
+
+  </div>
+</div>
