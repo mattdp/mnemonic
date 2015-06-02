@@ -8,12 +8,22 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div>STUB: You should make a nav bar here! And make flashes take less space!</div>
-      <% if notice.present? %>
-        <p class="notice bg-success"><%= notice %></p>
-      <% elsif alert.present? %>
-        <p class="alert bg-alert"><%= alert %></p>
-      <% end %>
+    <% if current_user.present? %>
+      <div>
+        <%= link_to "Home page", root_path %> |
+        <%= link_to "RailsAdmin", "/admin" %> |
+        <%= link_to "New deed", deeds_precommit_path %> | 
+        <%= link_to "People table", people_table_path  %>
+      </div>
+    <% end %>
+
+    <% if notice.present? %>
+      <p class="notice bg-success"><%= notice %></p>
+    <% elsif alert.present? %>
+      <p class="alert bg-alert"><%= alert %></p>
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>
