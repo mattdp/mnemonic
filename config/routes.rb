@@ -3,7 +3,7 @@ Mnemonic::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/deeds/precommit', to: 'deeds#precommit', as: 'deeds_precommit'
-  resources :deeds, only: [:create, :show]
+  resources :deeds, only: [:create, :show, :index]
   get '/deeds/doing/:deed_id/:plan_id', to: "deeds#doing", as: 'deeds_doing'
 
   root 'displays#index'
