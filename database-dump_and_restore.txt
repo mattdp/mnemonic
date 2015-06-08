@@ -1,0 +1,30 @@
+GENERAL
+  See /Users/matt/Desktop/partreach-docs/tech/150107-get_production_db_on_local.txt
+  for how do it in partreach
+
+HEROKU -> LOCAL
+
+  > heroku pg:backups public-url b022
+
+  Filetype will be: PostgreSQL custom database dump - v1.12-0. Then download the resulting URL
+
+  > pg_restore --verbose --clean --no-acl --no-owner -Urailsapp -dmnemonic_development <FILENAME>
+
+LOCAL -> HEROKU
+  
+  
+
+UNPROVEN
+---
+
+create backup
+
+pg_dump -i -h localhost -p 5432 -U postgres -F c -b -v -f 
+"/usr/local/backup/10.70.0.61.backup" old_db
+
+restore from backup
+
+pg_restore -i -h localhost -p 5432 -U postgres -d old_db -v 
+"/usr/local/backup/10.70.0.61.backup"
+
+important to set -h localhost - option
