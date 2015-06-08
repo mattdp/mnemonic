@@ -5,3 +5,7 @@ to pick a plan for a deed, within constraints:
   wire up boolean constraints
   have a slider for minimum times no more than 15 30 60 unlimited
   wire up slider
+
+think about how events/tags should work - when attending an occasion with multiple people, should be able to be attached to one SOMETHING, rather than having many communications with solely one owner. this SOMETHING should then have the option of a date, and if dated should appear on people's feeds.
+
+think about adding select, close relationships between people, like child/husband/mother/gf. dunno how to handle ages. reason: seems like for yen i should be keeping track of her family's names
