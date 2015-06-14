@@ -12,7 +12,15 @@ HEROKU -> LOCAL
 
 LOCAL -> HEROKU
   
-  
+  > pg_dump -Fc --no-acl --no-owner -U railsapp mnemonic_development > <SOME NAME>.dump
+
+  Upload to https://console.aws.amazon.com/s3/home?region=us-east-1#&bucket=mdp-personal, setting access to public
+
+  Note that DATABASE_URL is the correct string - I think it's getting an env variable
+
+  > heroku pg:backups restore '<S3-URL>' DATABASE_URL
+
+  Delete the Amazon file
 
 UNPROVEN
 ---
