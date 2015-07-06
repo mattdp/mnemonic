@@ -12,6 +12,7 @@ gem 'activerecord-session_store'
 gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'turbolinks'
 gem 'devise'
+gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 gem 'chosen-rails'
 
 group :development, :test do
