@@ -36,7 +36,7 @@
                 <% if item.happening_date.present? %>
                   <%= "#{item.happening_date.strftime('%m/%d/%y')}: " %>
                 <% elsif item.start_date.present? %>
-                  <%= "#{item.start_date}.strftime('%m/%d/%y') to #{item.fade_date}.strftime('%m/%d/%y'): " %>
+                  <%= "#{item.start_date.strftime('%m/%d/%y')} to #{item.fade_date.strftime('%m/%d/%y')}: " %>
                 <% else %>
                   <%= "#{item.created_at.strftime('%m/%d/%y')}: " %>
                 <% end %>

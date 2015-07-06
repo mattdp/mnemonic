@@ -1,11 +1,10 @@
 event
 
-tag
+tag 
+  event_id: 1
 
 communication
   event_id: 1
-
-
 
 --
 
