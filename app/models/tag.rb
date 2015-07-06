@@ -8,11 +8,13 @@
 #  notes         :text
 #  created_at    :datetime
 #  updated_at    :datetime
+#  event_id      :integer
 #
 
 class Tag < ActiveRecord::Base
 
   has_many :taggings
+  belongs_to :event
 
   def most_common_verb_id
     connection = ActiveRecord::Base.connection

@@ -20,6 +20,8 @@
 
 class Event < ActiveRecord::Base
   belongs_to :person
+  has_many :communications, dependent: :destroy
+  has_one :tag, dependent: :destroy
 
   # dismiss reasons -> :success, :tried_openly, :pass, :pass_and_estrange
 
