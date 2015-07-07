@@ -1,8 +1,9 @@
 <tr>
   <td>
     <% if event.person.present? and event.person.first_name.present? %>
-       <%= link_to "#{event.person.first_name}", edit_person_path(event.person.id) %>
+       <%= link_to "#{event.person.first_name} | ", edit_person_path(event.person.id) %>
     <% end %>
+    <%= link_to "RA Event", "/admin/event/#{event.id}/edit" %>
   </td>  
   <td>
     <% if event.happening_date.present? %>
