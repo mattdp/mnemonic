@@ -8,7 +8,7 @@
       <%= label_tag :content, "Event name" %>
       <%= text_field_tag :content %>
 
-      <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true) %>
+      <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true, class: "chosen-select") %>
 
       <%= submit_tag "Create tagged event" %>
 
