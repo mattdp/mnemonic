@@ -22,9 +22,12 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @people = Person.all
   end
 
   def create
+    binding.pry
+
     @event = Event.new
     @event.content = params[:content]
     @event.save
@@ -41,6 +44,13 @@ class EventsController < ApplicationController
         name_for_link: nfl,
         event_id: @event.id
         })
+    end
+
+    if params[:people].present?
+      verb = Verb.find_by_name("saw at")
+      params[:people].each do |person_id|
+        Tagging.create_without_duplicates(person_id,verb.id,tag.id)
+      end
     end
 
     redirect_to edit_event_path(@event), notice: "Event created."
