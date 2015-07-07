@@ -26,8 +26,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    binding.pry
-
     @event = Event.new
     @event.content = params[:content]
     @event.save
