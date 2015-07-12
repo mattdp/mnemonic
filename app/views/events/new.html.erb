@@ -5,11 +5,27 @@
 
     <%= form_tag action: "create", controller: "events" do %>
 
-      <%= label_tag :content, "Event name" %>
-      <%= text_field_tag :content %>
-
-      <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true, class: "chosen-select") %>
-
+      <div>
+        <%= label_tag :content, "Event name" %>
+        <%= text_field_tag :content %>
+      </div>
+      <div>
+        <p>Existing people</p>
+        <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true, class: "chosen-select") %>
+      </div>
+      <div>
+        <p>New people</p>
+        <% count = 0 %>
+        <% while count < 5 %>
+          <div>
+            <%= label_tag "new_people[#{count}][first_name]", "First name" %>
+            <%= text_field_tag "new_people[#{count}][first_name]" %> 
+            <%= label_tag "new_people[#{count}][last_name]", "Last name" %>
+            <%= text_field_tag "new_people[#{count}][last_name]" %> 
+          </div>
+          <% count += 1 %>
+        <% end %>
+      </div>
       <%= submit_tag "Create tagged event" %>
 
     <% end %>

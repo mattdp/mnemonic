@@ -3,7 +3,38 @@
 <div class="container">
   <div class="row">
 
-    <p>Edit event <%= "#{@event.id}" %></p>
+    <h2>Edit event <%= "'#{@event.content}' (ID: #{@event.id})" %></h2>
+
+    <%= form_tag event_path(@event.id), method: :patch do %>
+
+      <h3>Event variables</h3>
+
+      <div>
+        <%= label_tag "event[content]" %>
+        <%= text_field_tag "event[content]", @event.content %>
+        <%= label_tag "event[notes]" %>
+        <%= text_area_tag "event[notes]", @event.notes %>
+        <%= label_tag "event[happening_date]" %>
+        <%= date_select "event","happening_date", default: (@event.happening_date.present? ? @event.happening_date : Date.today)  %>
+      </div>
+
+      <h3>People</h3>
+
+      <% if @tag.present? %>
+        <% @people.each do |person| %>
+          <% prefix = "people[#{person.id}]" %>
+          <% person_attributes = @person_attributes %>
+          <div class="person-attributes">
+            <% person_attributes.each do |attribute| %>
+              <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
+              <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= submit_tag "Update event and people" %>
+    <% end %>
 
   </div>
 </div>
