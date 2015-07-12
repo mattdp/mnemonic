@@ -44,8 +44,16 @@ class EventsController < ApplicationController
         })
     end
 
+    verb = Verb.find_by_name("saw at")
+
+    params["new_people"].values.each do |hash|
+      if (hash["first_name"].present? or hash["last_name"].present?)
+        person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
+        Tagging.create_without_duplicates(person.id,verb.id,tag.id)
+      end
+    end
+
     if params[:people].present?
-      verb = Verb.find_by_name("saw at")
       params[:people].each do |person_id|
         Tagging.create_without_duplicates(person_id,verb.id,tag.id)
       end
@@ -55,10 +63,35 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @person_attributes = person_attributes
     @event = Event.find(params[:id])
+    @tag = @event.tag
+    if @tag.present?
+      @people = Person.joins(:taggings).where(taggings: {tag_id: @tag.id})
+    end
   end
 
   def update
+    person_attributes = person_attributes
+    event = Event.find(params[:id])
+    event.content = params["event"]["content"]
+    event.notes = params["event"]["notes"]
+    event.happening_date = Date.new(params["event"]["happening_date(1i)"].to_i,params["event"]["happening_date(2i)"].to_i,params["event"]["happening_date(3i)"].to_i)
+    event.save
+
+    params["people"].each do |id, hash|
+      person = Person.find(id)
+      person.assign_attributes(hash)
+      person.save
+    end
+
+    redirect_to edit_event_path(event), notice: "Save attempted."
   end
+
+  private
+
+    def person_attributes
+      [:first_name, :last_name, :email, :phone, :relationship_current, :relationship_possible] 
+    end
 
 end
