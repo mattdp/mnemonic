@@ -44,8 +44,16 @@ class EventsController < ApplicationController
         })
     end
 
+    verb = Verb.find_by_name("saw at")
+
+    params["new_people"].values.each do |hash|
+      if (hash["first_name"].present? or hash["last_name"].present?)
+        person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
+        Tagging.create_without_duplicates(person.id,verb.id,tag.id)
+      end
+    end
+
     if params[:people].present?
-      verb = Verb.find_by_name("saw at")
       params[:people].each do |person_id|
         Tagging.create_without_duplicates(person_id,verb.id,tag.id)
       end
@@ -56,6 +64,10 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    @tag = @event.tag
+    if @tag.present?
+      @people = Person.joins(:taggings).where(taggings: {tag_id: @tag.id})
+    end
   end
 
   def update
