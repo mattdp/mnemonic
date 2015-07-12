@@ -74,6 +74,11 @@ class EventsController < ApplicationController
   def update
     person_attributes = person_attributes
     event = Event.find(params[:id])
+    event.content = params["event"]["content"]
+    event.notes = params["event"]["notes"]
+    event.happening_date = Date.new(params["event"]["happening_date(1i)"].to_i,params["event"]["happening_date(2i)"].to_i,params["event"]["happening_date(3i)"].to_i)
+    event.save
+
     params["people"].each do |id, hash|
       person = Person.find(id)
       person.assign_attributes(hash)
