@@ -5,17 +5,22 @@
 
     <h2>Edit event <%= "'#{@event.content}' (ID: #{@event.id})" %></h2>
 
-    <% if @tag.present? %>
-      <% @people.each do |person| %>
-        <% prefix = "person[#{person.id}]" %>
-        <% person_attributes = [:first_name,:last_name] %>
-        <div class="person-attributes">
-          <% person_attributes.each do |attribute| %>
-            <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
-            <%= text_field_tag "#{prefix}[#{attribute}]" %>
-          <% end %>
-        </div>
+    <%= form_tag event_path(@event.id), method: :patch do %>
+
+      <% if @tag.present? %>
+        <% @people.each do |person| %>
+          <% prefix = "people[#{person.id}]" %>
+          <% person_attributes = @person_attributes %>
+          <div class="person-attributes">
+            <% person_attributes.each do |attribute| %>
+              <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
+              <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
+
+      <%= submit_tag "Update event and people" %>
     <% end %>
 
   </div>
