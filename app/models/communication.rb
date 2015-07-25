@@ -22,4 +22,13 @@ class Communication < ActiveRecord::Base
     self.created_at
   end
 
+  def self.create_event_related_communication!(event,person_id)
+    communication = Communication.new(medium: "live", 
+      event_id: event.id,
+      person_id: person_id,
+      contents: "Saw at event '#{event.content}'")
+    communication.when = event.happening_date if event.happening_date.present?
+    communication.save
+  end
+
 end
