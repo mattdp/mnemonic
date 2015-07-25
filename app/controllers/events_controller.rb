@@ -47,14 +47,10 @@ class EventsController < ApplicationController
         })
     end
 
-    verb = Verb.find_by_name("saw at")
+    verb_id = Verb.find_by_name("saw at").id
 
     params["new_people"].values.each do |hash|
-      if (hash["first_name"].present? or hash["last_name"].present?)
-        person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
-        Tagging.create_without_duplicates(person.id,verb.id,tag.id)
-        Communication.create_event_related_communication!(@event,person.id,"Saw at event '#{@event.content}'")
-      end
+      Person.create_event_related_person!(hash,@event,verb_id,tag.id)
     end
 
     if params[:people].present?

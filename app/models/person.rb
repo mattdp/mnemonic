@@ -32,6 +32,14 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  def self.create_event_related_person!(hash,event,verb_id,tag_id)
+    if (hash["first_name"].present? or hash["last_name"].present?)
+      person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
+      Tagging.create_without_duplicates(person.id,verb_id,tag_id)
+      Communication.create_event_related_communication!(event,person.id,"Saw at event '#{event.content}'")
+    end
+  end
+
   #logic for which relationship_current and relationship_possible get reminders...
   #...is in both this method and set_reminder_days
   def self.generate_all_reminder_days!
