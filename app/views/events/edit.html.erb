@@ -18,11 +18,11 @@
         <%= date_select "event","happening_date", default: (@event.happening_date.present? ? @event.happening_date : Date.today)  %>
       </div>
 
-      <h3>People</h3>
+      <h3>Previously attached people</h3>
 
       <% if @tag.present? %>
         <% @people.each do |person| %>
-          <% prefix = "people[#{person.id}]" %>
+          <% prefix = "previously_attached_people[#{person.id}]" %>
           <% person_attributes = @person_attributes %>
           <div class="person-attributes">
             <% person_attributes.each do |attribute| %>
@@ -39,6 +39,11 @@
           </div>
         <% end %>
       <% end %>
+
+      <h3>Add additional people</h3>
+
+      <%= render partial: "events/existing_people_within_form", locals: {people: @addable_people} %>
+      <%= render partial:"events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
 
       <%= submit_tag "Update event and people" %>
     <% end %>

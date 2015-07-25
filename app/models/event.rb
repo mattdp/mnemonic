@@ -29,6 +29,25 @@ class Event < ActiveRecord::Base
   #   event is in top list if has a happening date
   #   event is in bottom list if has a start date and no happening date
 
+  def make_event_tag
+    nfl = Tag.proper_name_for_link(self.content)
+
+    tag = Tag.find_by_name(self.content)
+    tag = Tag.find_by_name_for_link(nfl) if tag.nil?
+
+    if tag.present?
+      tag.event_id = self.id
+      tag.save
+    else
+      tag = Tag.create({name: event.content, 
+        name_for_link: nfl,
+        event_id: self.id
+        })
+    end
+
+    return tag
+  end
+
   def self.birthday_generator(verbose=false)
     Person.find_each do |person|
       if person.birthday && !person.estranged?
