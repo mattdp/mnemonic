@@ -3,6 +3,9 @@ class EventsController < ApplicationController
   def dismiss
     @event = Event.find(params[:id])
     @event.dismiss(params[:dismissed_reason])
+    if (params[:dismissed_reason] == "success" or params[:dismissed_reason] == "tried_openly")
+      Communication.create_event_related_communication!(@event,@event.person_id,"#{params[:dismissed_reason]} for '#{@event.content}'")
+    end
 
     redirect_to root_path, notice: "Event dismissed."
   end
@@ -50,14 +53,14 @@ class EventsController < ApplicationController
       if (hash["first_name"].present? or hash["last_name"].present?)
         person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
         Tagging.create_without_duplicates(person.id,verb.id,tag.id)
-        Communication.create_event_related_communication!(@event,person.id)
+        Communication.create_event_related_communication!(@event,person.id,"Saw at event '#{@event.content}'")
       end
     end
 
     if params[:people].present?
       params[:people].each do |person_id|
         Tagging.create_without_duplicates(person_id,verb.id,tag.id)
-        Communication.create_event_related_communication!(@event,person_id)
+        Communication.create_event_related_communication!(@event,person_id,"Saw at event '#{@event.content}'")
       end
     end
 
