@@ -29,6 +29,13 @@
               <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
               <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
             <% end %>
+            <% comms = Communication.where(event_id: @event.id, person_id: person.id) %>
+            <% if comms.present? %>
+              <% communication = comms[0] %>
+              <%= hidden_field_tag "#{prefix}[communication_id]", communication.id %>
+              <%= label_tag "Personal communication" %>
+              <%= text_area_tag "#{prefix}[communication_contents]", communication.contents %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
