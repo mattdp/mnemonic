@@ -33,19 +33,7 @@ class EventsController < ApplicationController
     @event.content = params[:content]
     @event.save
 
-    nfl = Tag.proper_name_for_link(params[:content])
-
-    tag = Tag.find_by_name(params[:content])
-    tag = Tag.find_by_name_for_link(nfl) if tag.nil?
-    if tag.present?
-      tag.event_id = @event.id
-      tag.save
-    else
-      tag = Tag.create({name: params[:content], 
-        name_for_link: nfl,
-        event_id: @event.id
-        })
-    end
+    tag = @event.make_event_tag
 
     verb_id = Verb.find_by_name("saw at").id
 
@@ -53,6 +41,7 @@ class EventsController < ApplicationController
       Person.create_event_related_person!(hash,@event,verb_id,tag.id)
     end
 
+    #NOT DRY - very similar logic in update
     if params[:people].present?
       params[:people].each do |person_id|
         Tagging.create_without_duplicates(person_id,verb_id,tag.id)
@@ -67,6 +56,7 @@ class EventsController < ApplicationController
     @person_attributes = person_attributes
     @event = Event.find(params[:id])
     @tag = @event.tag
+    @addable_people = Person.all
     if @tag.present?
       @people = Person.joins(:taggings).where(taggings: {tag_id: @tag.id})
     end
@@ -80,7 +70,7 @@ class EventsController < ApplicationController
     event.happening_date = Date.new(params["event"]["happening_date(1i)"].to_i,params["event"]["happening_date(2i)"].to_i,params["event"]["happening_date(3i)"].to_i)
     event.save
 
-    params["people"].each do |id, hash|
+    params["previously_attached_people"].each do |id, hash|
       if hash["communication_id"].present?
         communication = Communication.find(hash["communication_id"])
         communication.contents = hash["communication_contents"]
@@ -90,6 +80,21 @@ class EventsController < ApplicationController
       person = Person.find(id)
       person.assign_attributes(hash)
       person.save
+    end
+
+    verb_id = Verb.find_by_name("saw at").id
+    tag = Tag.find_by_event_id(event.id)
+
+    #NOT DRY - very similar logic in create
+    if params[:people].present?
+      params[:people].each do |person_id|
+        Tagging.create_without_duplicates(person_id,verb_id,tag.id)
+        Communication.create_event_related_communication!(event,person_id,"Saw at event '#{event.content}'")
+      end
+    end
+
+    params["unexisting_people"].values.each do |hash|
+      Person.create_event_related_person!(hash,event,verb_id,tag.id)
     end
 
     redirect_to edit_event_path(event), notice: "Save attempted."

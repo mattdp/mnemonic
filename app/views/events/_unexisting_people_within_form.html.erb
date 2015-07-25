@@ -1,0 +1,13 @@
+<div>
+  <p>Unexisting people</p>
+  <% count = 0 %>
+  <% while count < how_many_rows %>
+    <div>
+      <%= label_tag "unexisting_people[#{count}][first_name]", "First name" %>
+      <%= text_field_tag "unexisting_people[#{count}][first_name]" %> 
+      <%= label_tag "unexisting_people[#{count}][last_name]", "Last name" %>
+      <%= text_field_tag "unexisting_people[#{count}][last_name]" %> 
+    </div>
+    <% count += 1 %>
+  <% end %>
+</div>
