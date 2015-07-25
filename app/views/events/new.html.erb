@@ -14,14 +14,14 @@
         <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true, class: "chosen-select") %>
       </div>
       <div>
-        <p>New people</p>
+        <p>Unexisting people</p>
         <% count = 0 %>
         <% while count < 5 %>
           <div>
-            <%= label_tag "new_people[#{count}][first_name]", "First name" %>
-            <%= text_field_tag "new_people[#{count}][first_name]" %> 
-            <%= label_tag "new_people[#{count}][last_name]", "Last name" %>
-            <%= text_field_tag "new_people[#{count}][last_name]" %> 
+            <%= label_tag "unexisting_people[#{count}][first_name]", "First name" %>
+            <%= text_field_tag "unexisting_people[#{count}][first_name]" %> 
+            <%= label_tag "unexisting_people[#{count}][last_name]", "Last name" %>
+            <%= text_field_tag "unexisting_people[#{count}][last_name]" %> 
           </div>
           <% count += 1 %>
         <% end %>
