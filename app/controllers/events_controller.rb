@@ -50,12 +50,14 @@ class EventsController < ApplicationController
       if (hash["first_name"].present? or hash["last_name"].present?)
         person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
         Tagging.create_without_duplicates(person.id,verb.id,tag.id)
+        Communication.create_event_related_communication!(@event,person.id)
       end
     end
 
     if params[:people].present?
       params[:people].each do |person_id|
         Tagging.create_without_duplicates(person_id,verb.id,tag.id)
+        Communication.create_event_related_communication!(@event,person_id)
       end
     end
 
@@ -80,6 +82,12 @@ class EventsController < ApplicationController
     event.save
 
     params["people"].each do |id, hash|
+      if hash["communication_id"].present?
+        communication = Communication.find(hash["communication_id"])
+        communication.contents = hash["communication_contents"]
+        communication.save
+      end
+      hash.except!("communication_id","communication_contents")
       person = Person.find(id)
       person.assign_attributes(hash)
       person.save
