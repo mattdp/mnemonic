@@ -9,23 +9,8 @@
         <%= label_tag :content, "Event name" %>
         <%= text_field_tag :content %>
       </div>
-      <div>
-        <p>Existing people</p>
-        <%= select_tag(:people, options_from_collection_for_select(@people,"id","name"), multiple: true, class: "chosen-select") %>
-      </div>
-      <div>
-        <p>Unexisting people</p>
-        <% count = 0 %>
-        <% while count < 5 %>
-          <div>
-            <%= label_tag "unexisting_people[#{count}][first_name]", "First name" %>
-            <%= text_field_tag "unexisting_people[#{count}][first_name]" %> 
-            <%= label_tag "unexisting_people[#{count}][last_name]", "Last name" %>
-            <%= text_field_tag "unexisting_people[#{count}][last_name]" %> 
-          </div>
-          <% count += 1 %>
-        <% end %>
-      </div>
+      <%= render partial: "events/existing_people_within_form", locals: {people: @people} %>
+      <%= render partial: "events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
       <%= submit_tag "Create tagged event" %>
 
     <% end %>

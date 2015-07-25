@@ -1,0 +1,4 @@
+<div>
+  <p>Existing people</p>
+  <%= select_tag(:people, options_from_collection_for_select(people,"id","name"), multiple: true, class: "chosen-select") %>
+</div>
