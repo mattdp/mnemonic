@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
       tag.event_id = self.id
       tag.save
     else
-      tag = Tag.create({name: event.content, 
+      tag = Tag.create({name: self.content, 
         name_for_link: nfl,
         event_id: self.id
         })
