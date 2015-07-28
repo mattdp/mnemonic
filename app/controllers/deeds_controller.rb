@@ -42,7 +42,10 @@ class DeedsController < ApplicationController
     @before_survey = @deed.before_survey
     @after_survey = @deed.after_survey
 
-    @same_questions = @before_survey.questions & @after_survey.questions if (@before_survey.present? and @after_survey.present?)
+    if (@before_survey.present? and @after_survey.present?)
+      @time_elapsed = (@after_survey.updated_at - @before_survey.updated_at).minutes.round(1) 
+      @same_questions = @before_survey.questions & @after_survey.questions 
+    end
   end
 
 end
