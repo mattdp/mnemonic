@@ -43,7 +43,8 @@ class DeedsController < ApplicationController
     @after_survey = @deed.after_survey
 
     if (@before_survey.present? and @after_survey.present?)
-      @time_elapsed = (@after_survey.updated_at - @before_survey.updated_at).minutes.round(1) 
+      diff_in_seconds = @after_survey.answers.map{|a| a.updated_at}.compact.max - @before_survey.created_at
+      @minutes_elapsed = (diff_in_seconds/60).round(1) 
       @same_questions = @before_survey.questions & @after_survey.questions 
     end
   end
