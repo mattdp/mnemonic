@@ -7,6 +7,10 @@
       <h3>Plan</h3>
       <p><%= "#{@plan.name}" %></p>
 
+      <% if @time_elapsed.present? %>
+        <strong><%= @time_elapsed %></strong> minutes taken during deed completion.
+      <% end %>
+
       <h3>Surveys</h3>
       <table class="table">
         <tr>
