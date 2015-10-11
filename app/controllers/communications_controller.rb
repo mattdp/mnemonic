@@ -10,10 +10,13 @@ class CommunicationsController < ApplicationController
       params["new_people"].each do |index_number,information|
         if (information["medium"].present? and information["contents"].present?)
           id = information["name_info"].match(/\[(\d*)\]/)[1].to_i
-          Communication.create(person_id: id,
+          communication = Communication.new(person_id: id,
             medium: information["medium"],
-            contents: information["contents"]
+            contents: information["contents"],
           )
+          #when is a really dumb variable name
+          communication.when = Date.new(information["when"]["when(1i)"].to_i,information["when"]["when(2i)"].to_i,information["when"]["when(3i)"].to_i)
+          communication.save
         end
       end
     end
