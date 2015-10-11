@@ -1,7 +1,7 @@
 class CommunicationsController < ApplicationController
 
   def new
-    @people = Person.all
+    @people = Person.names_for_search
   end
 
   def create

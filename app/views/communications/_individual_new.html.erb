@@ -2,7 +2,7 @@
 <hr>
 <div>
   <%= label_tag "#{prefix}[id]", "Person" %>
-  <%= render partial: "communications/simple_search_box", locals: {search_terms_list: people, return_variable: "#{prefix}[id]"}  %>
+  <%= render partial: "communications/simple_search_box", locals: {search_terms_list: people, return_variable: "#{prefix}[id]"} %>
 </div>
 <% [:medium,:contents,].each do |string_field| %>
   <div>
