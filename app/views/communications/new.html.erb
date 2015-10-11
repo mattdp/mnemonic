@@ -3,7 +3,7 @@
 <h1>New communications</h1>
 
 <%= form_tag :action => "create", :controller => "communications" do %>
-  <% (1..10).each do |n| %>
+  <% (1..5).each do |n| %>
     <%= render partial: "communications/individual_new", locals: {index_number: n, people: @people} %>
   <% end %>
 
