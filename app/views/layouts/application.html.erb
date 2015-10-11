@@ -12,11 +12,14 @@
       <div>
         <%= link_to "Home page", root_path %> |
         <%= link_to "RailsAdmin", "/admin" %> |
-        <%= link_to "New deed", deeds_precommit_path %> | 
-        <%= link_to "New event", new_event_path %> | 
-        <%= link_to "People table", people_table_path  %> |
-        <%= link_to "Take a survey", new_survey_path %>
+        <%= link_to "People table", people_table_path  %>
       </div>
+      <div>
+        New: 
+        <%= link_to "Communications", new_communication_path %> | 
+        <%= link_to "Deed", deeds_precommit_path %> | 
+        <%= link_to "Event", new_event_path %> |
+        <%= link_to "Survey", new_survey_path %>
     <% end %>
 
     <% if notice.present? %>
