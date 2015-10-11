@@ -32,6 +32,10 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  def self.names_for_search
+    Person.all.map{|p| "#{p.display_name} [#{p.id}]"}
+  end
+
   def self.create_event_related_person!(hash,event,verb_id,tag_id)
     if (hash["first_name"].present? or hash["last_name"].present?)
       person = Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
