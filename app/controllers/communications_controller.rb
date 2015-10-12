@@ -21,6 +21,12 @@ class CommunicationsController < ApplicationController
       end
     end
 
+    #not working/adapted yet
+
+    params["unexisting_people"].values.each do |hash|
+      Person.create_event_related_person!(hash,@event,verb_id,tag.id)
+    end
+
     redirect_to new_communication_path, notice: "Save attempted."
   end
 
