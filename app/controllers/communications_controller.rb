@@ -24,7 +24,9 @@ class CommunicationsController < ApplicationController
     #not working/adapted yet
 
     params["unexisting_people"].values.each do |hash|
-      Person.create_event_related_person!(hash,@event,verb_id,tag.id)
+      if (hash["first_name"].present? or hash["last_name"].present?)
+        Person.create({first_name: hash["first_name"], last_name: hash["last_name"]})
+      end
     end
 
     redirect_to new_communication_path, notice: "Save attempted."
