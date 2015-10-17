@@ -38,6 +38,12 @@
               <%= label_tag "Personal communication" %>
               <%= text_area_tag "#{prefix}[communication_contents]", communication.contents %>
             <% end %>
+            <%= label_tag "#{prefix}[tags]", "Tags" %>
+            <%= select_tag("#{prefix}[tags]", options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
+            <%= label_tag "Existing tags" %>
+            <% person.taggings.each do |tagging| %>
+              <%= render partial: "people/tagging", locals: {tagging: tagging} %>
+            <% end %>
           </div>
         <% end %>
       <% end %>

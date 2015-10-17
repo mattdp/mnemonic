@@ -25,4 +25,12 @@ class Tagging < ActiveRecord::Base
     end
   end
 
+  def readable
+    "#{self.person.display_name} #{verb.name} #{tag.name}"
+  end
+
+  def link_string
+    "/admin/tagging/#{self.id}/edit"
+  end
+
 end
