@@ -56,6 +56,7 @@ class EventsController < ApplicationController
     @person_attributes = person_attributes
     @event = Event.find(params[:id])
     @tag = @event.tag
+    @tags = Tag.all
     @addable_people = Person.all
     if @tag.present?
       @people = Person.joins(:taggings).where(taggings: {tag_id: @tag.id})
@@ -71,13 +72,18 @@ class EventsController < ApplicationController
     event.save
 
     params["previously_attached_people"].each do |id, hash|
+      person = Person.find(id)
       if hash["communication_id"].present?
         communication = Communication.find(hash["communication_id"])
         communication.contents = hash["communication_contents"]
         communication.save
       end
-      hash.except!("communication_id","communication_contents")
-      person = Person.find(id)
+      if hash["tags"].present?
+        hash["tags"].each do |tag_id|
+          person.add_tag(tag_id.to_i)
+        end
+      end
+      hash.except!("communication_id","communication_contents","tags")
       person.assign_attributes(hash)
       person.save
     end
