@@ -54,17 +54,10 @@
   <hr>
 
   <div class="row">
-    <p><strong>Add tag:</strong></p>
+    <p><strong>Add tag (no delete supported):</strong></p>
     <%= form_tag person_path(@person), method: :patch do %>
 
-      <table>
-        <% @tags.each do |tag| %>
-          <tr>
-            <td><%= check_box_tag "tag_ids[]", tag.id, false%></td>
-            <td><%= tag.name %></td>
-          </tr>
-        <% end %>
-      </table> 
+      <%= select_tag(:tags, options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
 
       <%= submit_tag "Submit changes" %>
 

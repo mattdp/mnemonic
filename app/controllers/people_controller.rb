@@ -9,8 +9,8 @@ class PeopleController < ApplicationController
   def update
     @person = Person.find(params[:id])
 
-    params[:tag_ids].each do |tag_id|
-      @person.add_tag(tag_id)
+    params[:tags].each do |tag_id|
+      @person.add_tag(tag_id.to_i)
     end
 
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
