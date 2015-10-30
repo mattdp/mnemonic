@@ -4,7 +4,7 @@ class SurveysController < ApplicationController
     @survey = Survey.create
     @survey.equip_with_questions(["now_how_happy","now_how_alert","now_how_purposeful",
       "yesterday_drinks","yesterday_sleep","yesterday_eating","yesterday_exercise",
-      "yesterday_health","self_reflection"])
+      "yesterday_health","today_weight","self_reflection"])
   end
 
   def create
