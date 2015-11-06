@@ -1,6 +1,8 @@
-<% if person.url_facebook.present? %>
-  <%= link_to "Facebook", person.url_facebook %>
-<% end %>
-<% if person.url_linkedin.present? %>
-  <%= link_to "LinkedIn", person.url_linkedin %>
-<% end %>
+<p>
+  <% if person.url_facebook.present? %>
+    <%= link_to "Facebook", person.url_facebook %>
+  <% end %>
+  <% if person.url_linkedin.present? %>
+    <%= link_to "LinkedIn", person.url_linkedin %>
+  <% end %>
+</p>

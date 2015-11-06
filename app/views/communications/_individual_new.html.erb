@@ -1,8 +1,14 @@
 <% prefix = "new_people[#{index_number}]" %>
+<% name_variable = "#{prefix}[name_info]" %>
 <hr>
 <div>
-  <%= label_tag "#{prefix}[name_info]", "Person" %>
-  <%= render partial: "communications/simple_search_box", locals: {search_terms_list: people, return_variable: "#{prefix}[name_info]"} %>
+  <% if who.class.to_s == "Array" %>
+    <%= label_tag "#{prefix}[name_info]", "Person" %>
+    <%= render partial: "communications/simple_search_box", locals: {search_terms_list: who, return_variable: "#{prefix}[name_info]"} %>
+  <% else %>
+    <%#= bracketing because this format is used in chosen for mass adding of communications %>
+    <%= hidden_field_tag name_variable, "[#{who.id}]" %>
+  <% end %>
 </div>
 <div>
   <%= date_select "#{prefix}[when]","when", default: Date.today %>

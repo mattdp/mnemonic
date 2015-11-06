@@ -4,10 +4,9 @@
 
 <%= form_tag :action => "create", :controller => "communications" do %>
   <% (1..5).each do |n| %>
-    <%= render partial: "communications/individual_new", locals: {index_number: n, people: @people} %>
+    <%= render partial: "communications/individual_new", locals: {index_number: n, who: @people} %>
   <% end %>
 
-  <p>NOT WIRED UP</p>
   <%= render partial: "events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
 
   <%= submit_tag "Add communications", class: "save-button" %>
