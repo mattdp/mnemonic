@@ -64,4 +64,10 @@
 
     <% end %>
   </div>
+  <div class="col-md-6">
+    <%= form_tag :action => "create", :controller => "communications" do %>
+      <%= render partial: "communications/individual_new", locals: {index_number: 0, who: @person} %>
+      <%= submit_tag "Add communications", class: "save-button" %>
+    <% end %>
+  </div>
 </div>
