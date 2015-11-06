@@ -8,27 +8,38 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <% if current_user.present? %>
-      <div>
-        <%= link_to "Home page", root_path %> |
-        <%= link_to "RailsAdmin", "/admin" %> |
-        <%= link_to "People table", people_table_path  %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <% if current_user.present? %>
+            <div>
+              <%= link_to "Home page", root_path %> |
+              <%= link_to "RailsAdmin", "/admin" %> |
+              <%= link_to "People table", people_table_path  %>
+            </div>
+            <div>
+              New: 
+              <%= link_to "Communications", new_communication_path %> | 
+              <%= link_to "Deed", deeds_precommit_path %> | 
+              <%= link_to "Event", new_event_path %> |
+              <%= link_to "Survey", new_survey_path %>
+            </div>
+          <% end %>
+        </div>
       </div>
+
       <div>
-        New: 
-        <%= link_to "Communications", new_communication_path %> | 
-        <%= link_to "Deed", deeds_precommit_path %> | 
-        <%= link_to "Event", new_event_path %> |
-        <%= link_to "Survey", new_survey_path %>
-    <% end %>
+        <% if notice.present? %>
+          <p class="notice bg-success"><%= notice %></p>
+        <% elsif alert.present? %>
+          <p class="alert bg-alert"><%= alert %></p>
+        <% end %>
+      </div>
 
-    <% if notice.present? %>
-      <p class="notice bg-success"><%= notice %></p>
-    <% elsif alert.present? %>
-      <p class="alert bg-alert"><%= alert %></p>
-    <% end %>
+      <br>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>
