@@ -5,6 +5,13 @@ class PlansController < ApplicationController
     @deed_id = params[:deed_id]
   end
 
+  def show
+    @plan = Plan.find(params[:id])
+
+    plans = Plan.undismissed
+    @random_plan_id = plans[Random.rand(0...plans.length)].id
+  end
+
   def wip
   end
 

@@ -20,7 +20,7 @@ Mnemonic::Application.routes.draw do
   resources :people, only: [:edit, :update]
   get '/people/:id', to: 'people#edit'
 
-  resources :plans, only: [:index]
+  resources :plans, only: [:index, :show]
   get '/plans/:deed_id', to: 'plans#index', as: "plans_with_deed"
   get '/plans/wip', to: 'plans#wip', as: 'wip'
 
