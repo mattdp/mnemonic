@@ -7,6 +7,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @display_flags = Plan.display_flags
 
     plans = Plan.undismissed
     @random_plan_id = plans[Random.rand(0...plans.length)].id

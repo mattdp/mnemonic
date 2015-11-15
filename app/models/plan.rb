@@ -25,4 +25,8 @@ class Plan < ActiveRecord::Base
     Plan.all.select{|p| !p.dismissed}
   end
 
+  def self.display_flags
+    [:seems_purposeful, :requires_alertness, :seems_fun, :repeater]
+  end
+  
 end
