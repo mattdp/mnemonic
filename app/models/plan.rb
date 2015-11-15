@@ -13,6 +13,7 @@
 #  dismissed          :boolean
 #  created_at         :datetime
 #  updated_at         :datetime
+#  why_care           :text
 #
 
 class Plan < ActiveRecord::Base
