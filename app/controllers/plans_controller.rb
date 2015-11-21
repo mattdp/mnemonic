@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
 
   def index
-    @plans = Plan.undismissed.sort
+    @plans = Plan.undismissed.sort{|p| -p.deeds.count}
     @deed_id = params[:deed_id]
   end
 
