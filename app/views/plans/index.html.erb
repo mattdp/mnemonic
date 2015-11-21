@@ -5,13 +5,11 @@
 
     <table class="table">
       <tr>
-        <th>name</th>
-        <th>notes</th>
-        <th>minimum_minutes</th>
-        <th>seems_purposeful</th>
-        <th>requires_alertness</th>
-        <th>seems_fun</th>
-        <th>repeater</th>
+        <th>What?</th>
+        <th>How many times?</th>
+        <th>Why care?</th>
+        <th>Notes</th>
+        <th>Min. time</th>
         <% if @deed_id.present? %>
           <th>Do it!</th>
         <% end %>
@@ -19,12 +17,10 @@
       <% @plans.each do |plan| %>
         <tr>
           <td><%= link_to plan.name, plan_path(plan.id) %></td>
+          <td><%= plan.deeds.count %></td>
+          <td><%= raw("#{plan.why_care}") %></td>
           <td><%= plan.notes %></td>
           <td><%= plan.minimum_minutes %></td>
-          <td><%= plan.seems_purposeful %></td>
-          <td><%= plan.requires_alertness %></td>
-          <td><%= plan.seems_fun %></td>
-          <td><%= plan.repeater %></td>
           <% if @deed_id.present? %>
             <td><%= link_to "Yeah!", deeds_doing_path(@deed_id,plan.id) %></td>
           <% end %>
