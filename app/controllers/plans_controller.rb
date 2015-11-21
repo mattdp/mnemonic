@@ -7,6 +7,8 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @deeds = @plan.deeds.sort.reverse
+    @self_reflection_id = Question.find_by_name("self_reflection")
     @display_flags = Plan.display_flags
 
     plans = Plan.undismissed
