@@ -1,10 +1,12 @@
 class SurveysController < ApplicationController
 
   def new
-    @survey = Survey.create
-    @survey.equip_with_questions(["now_how_happy","now_how_alert","now_how_purposeful",
-      "yesterday_drinks","yesterday_sleep","yesterday_eating","yesterday_exercise",
-      "yesterday_health","today_weight","self_reflection"])
+    if @survey.blank? #may be passed in from deeds
+      @survey = Survey.create
+      @survey.equip_with_questions(["now_how_happy","now_how_alert","now_how_purposeful",
+        "yesterday_drinks","yesterday_sleep","yesterday_eating","yesterday_exercise",
+        "yesterday_health","today_weight","self_reflection"])
+    end
   end
 
   def create

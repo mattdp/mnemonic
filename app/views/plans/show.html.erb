@@ -35,7 +35,8 @@
       <% after = deed.after_survey %>
       <% if after.present? and after.answers.present? %>
         <% reflection_answer = after.answers.select{|a| a.question_id == @self_reflection_id} %>
-        <p><%= "#{deed.created_at.to_s}: #{reflection_answer}" %></p>
+        <% reflection_answer.present? ? ra = reflection_answer[0].content_text : ra = "" %>
+        <p><%= "#{deed.created_at.strftime("%m/%d/%Y")}: #{ra}" %></p>
       <% end %>
     <% end %>
   </div>
