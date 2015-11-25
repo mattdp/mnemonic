@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'devise'
 gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 gem 'chosen-rails'
+gem 'griddler-mailgun'
 
 group :development, :test do
   gem 'rspec-rails'

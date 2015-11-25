@@ -1,6 +1,7 @@
 Mnemonic::Application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount_griddler
 
   resources :communications, only: [:new, :create]
 
