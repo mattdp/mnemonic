@@ -102,9 +102,15 @@ GEM
     ffi (1.9.10)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    griddler (1.2.1)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-mailgun (1.0.2)
+      griddler
     haml (4.0.6)
       tilt
     hike (1.2.3)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     jquery-rails (3.1.3)
       railties (>= 3.0, < 5.0)
@@ -132,7 +138,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.99)
     mini_portile (0.5.3)
     minitest (4.7.5)
     multi_json (1.11.2)
@@ -229,7 +235,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.3.2)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -246,7 +252,7 @@ GEM
       execjs
       rails (>= 3.1)
       railties (>= 3.1)
-    tzinfo (0.3.44)
+    tzinfo (0.3.45)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -268,6 +274,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
+  griddler-mailgun
   jquery-rails
   koala (~> 1.10.0rc)
   launchy
