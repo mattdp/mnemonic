@@ -11,8 +11,13 @@ class EmailProcessor
     #[:to] is an array of hashes, since possible multiple to's
     parsed[:to] = "#{@email.to[0][:email]}"
 
-    puts "*\n*\n*\nEMAIL RECEIVED*\n*\n*\n"
-    puts parsed 
+    person = Person.find_by_email(parsed[:to])
+    if person.present?
+      Communication.create(person_id: person.id,
+        contents: parsed[:contents],
+        medium: "email",
+        when: Date.today)
+    end
   end
 
 end
