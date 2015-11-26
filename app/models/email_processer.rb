@@ -3,15 +3,16 @@ class EmailProcessor
     @email = email
   end
 
+  # Working as expected. Doesn't currently capture multiple to's
   def process
+    parsed = {}
+    parsed[:contents] = "#{@email.subject} ::: #{@email.body}"
+    parsed[:from] = "#{@email.from[:email]}"
+    #[:to] is an array of hashes, since possible multiple to's
+    parsed[:to] = "#{@email.to[0][:email]}"
+
     puts "*\n*\n*\nEMAIL RECEIVED*\n*\n*\n"
-    puts "@email class: #{@email.class}"
-    puts "@email to class: #{@email.to.class}"
-    puts "Contents: #{@email.subject} ::: #{@email.body}"
-    puts "From: #{@email.from[:email]}"
-    #https://github.com/thoughtbot/griddler
-    #is an array of hashes, since possible multiple to's
-    puts "To: #{@email.to[0][:email]}" 
+    puts parsed 
   end
 
 end
