@@ -36,10 +36,10 @@ class Person < ActiveRecord::Base
   #gives back an ignore, a new person, or an existing person
   def self.react_to_email(email_of_interest)
     return false if email_of_interest.blank?
-    ignore = Ignore.find_by_email(email_of_interest)
+    ignore = Ignore.find_by_info(email_of_interest)
     return ignore if ignore.present?
 
-    person = Person.find_by_email(parsed[:to])
+    person = Person.find_by_email(email_of_interest)
     return person if person.present?
     return Person.create(email: email_of_interest, prospective: true)
   end
