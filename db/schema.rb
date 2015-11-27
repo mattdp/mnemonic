@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115042154) do
+ActiveRecord::Schema.define(version: 20151127181332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 20151115042154) do
     t.string   "dismissed_reason"
   end
 
+  create_table "ignores", force: true do |t|
+    t.string   "filter"
+    t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", force: true do |t|
     t.date     "birthday"
     t.string   "first_name"
@@ -77,6 +84,7 @@ ActiveRecord::Schema.define(version: 20151115042154) do
     t.integer  "relationship_possible"
     t.integer  "reminder_days"
     t.boolean  "reminder_manual_override", default: false
+    t.boolean  "prospective"
   end
 
   create_table "plans", force: true do |t|
