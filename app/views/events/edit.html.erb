@@ -23,41 +23,10 @@
       </div>
 
       <h3>Previously attached people</h3>
-
       <% if @tag.present? %>
         <% @people.each do |person| %>
-          <% prefix = "previously_attached_people[#{person.id}]" %>
-          <% person_attributes = @person_attributes %>
-          <div class="row person-attributes">
-            <div class="col-md-4">
-              <p>
-                <%= link_to "Edit person", edit_person_path(person) %> | 
-                <%= link_to "RA person", "/admin/person/#{person.id}/edit" %>
-              </p>
-              <% person_attributes.each do |attribute| %>
-                <p>
-                  <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
-                  <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
-                </p>
-              <% end %>
-            </div>
-            <div class="col-md-4">
-              <% comms = Communication.where(event_id: @event.id, person_id: person.id) %>
-              <% if comms.present? %>
-                <% communication = comms[0] %>
-                <%= hidden_field_tag "#{prefix}[communication_id]", communication.id %>
-                <p><%= label_tag "Personal communication" %></p>
-                <%= text_area_tag "#{prefix}[communication_contents]", communication.contents, rows: 8 %>
-              <% end %>
-            </div>
-            <div class="col-md-4">
-              <%= label_tag "#{prefix}[tags]", "Add tags" %>
-              <%= select_tag("#{prefix}[tags]", options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %> 
-              <% person.taggings.each do |tagging| %>
-                <%= render partial: "people/tagging", locals: {tagging: tagging} %>
-              <% end %>                
-            </div>
-          </div>
+          <% communications = Communication.where(event_id: @event.id, person_id: person.id) %>
+          <%= render partial: "people/person_overview", locals: { person_attributes: @person_attributes, person: person, communications: communications, all_tags: @tags } %>
         <% end %>
       <% end %>
 

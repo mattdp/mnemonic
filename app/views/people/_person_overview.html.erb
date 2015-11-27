@@ -1,0 +1,30 @@
+<% prefix = "previously_attached_people[#{person.id}]" %>
+<div class="row person-attributes">
+  <div class="col-md-4">
+    <p>
+      <%= link_to "Edit person", edit_person_path(person) %> | 
+      <%= link_to "RA person", "/admin/person/#{person.id}/edit" %>
+    </p>
+    <% person_attributes.each do |attribute| %>
+      <p>
+        <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
+        <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
+      </p>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <% if communications.present? %>
+      <% communication = communications[0] %>
+      <%= hidden_field_tag "#{prefix}[communication_id]", communication.id %>
+      <p><%= label_tag "Personal communication" %></p>
+      <%= text_area_tag "#{prefix}[communication_contents]", communication.contents, rows: 8 %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <%= label_tag "#{prefix}[tags]", "Add tags" %>
+    <%= select_tag("#{prefix}[tags]", options_from_collection_for_select(all_tags,"id","name"), multiple: true, class: "chosen-select") %> 
+    <% person.taggings.each do |tagging| %>
+      <%= render partial: "people/tagging", locals: {tagging: tagging} %>
+    <% end %>                
+  </div>
+</div>
