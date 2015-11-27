@@ -11,9 +11,11 @@ class EmailProcessor
     #[:to] is an array of hashes, since possible multiple to's
     parsed[:to] = "#{@email.to[0][:email]}"
 
-    person = Person.find_by_email(parsed[:to])
-    if person.present?
-      Communication.create(person_id: person.id,
+    email_of_interest = parsed[:to]
+
+    object = Person.react_to_email(email_of_interest)
+    if object.class.to_s == "Person"
+      Communication.create(person_id: object.id,
         contents: parsed[:contents],
         medium: "email",
         when: Date.today)

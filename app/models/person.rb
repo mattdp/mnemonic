@@ -18,6 +18,7 @@
 #  relationship_possible    :integer
 #  reminder_days            :integer
 #  reminder_manual_override :boolean          default(FALSE)
+#  prospective              :boolean
 #
 
 require 'action_view'
@@ -31,6 +32,17 @@ class Person < ActiveRecord::Base
   has_many :verbs, :through => :taggings
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
+
+  #gives back an ignore, a new person, or an existing person
+  def self.react_to_email(email_of_interest)
+    return false if email_of_interest.blank?
+    ignore = Ignore.find_by_email(email_of_interest)
+    return ignore if ignore.present?
+
+    person = Person.find_by_email(parsed[:to])
+    return person if person.present?
+    return Person.create(email: email_of_interest, prospective: true)
+  end
 
   def self.names_for_search
     Person.all.map{|p| "#{p.display_name} [#{p.id}]"}
