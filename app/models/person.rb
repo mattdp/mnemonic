@@ -57,8 +57,8 @@ class Person < ActiveRecord::Base
   #gives back an ignore, a new person, or an existing person
   def self.react_to_email(email_of_interest)
     return false if email_of_interest.blank?
-    ignore = Ignore.find_by_info(email_of_interest)
-    return ignore if ignore.present?
+    cm = ContactMethod.find_by_info(email_of_interest)
+    return cm if (cm.present? and cm.ignore)
 
     person = Person.find_by_email(email_of_interest)
     return person if person.present?
