@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @person_attributes = person_attributes
+    @person_attributes = Person.overview_attributes
     @event = Event.find(params[:id])
     @tag = @event.tag
     @tags = Tag.all
@@ -64,28 +64,18 @@ class EventsController < ApplicationController
   end
 
   def update
-    person_attributes = person_attributes
+    person_attributes = Person.overview_attributes
     event = Event.find(params[:id])
     event.content = params["event"]["content"]
     event.notes = params["event"]["notes"]
     event.happening_date = Date.new(params["event"]["happening_date(1i)"].to_i,params["event"]["happening_date(2i)"].to_i,params["event"]["happening_date(3i)"].to_i)
     event.save
 
-    params["previously_attached_people"].each do |id, hash|
-      person = Person.find(id)
-      if hash["communication_id"].present?
-        communication = Communication.find(hash["communication_id"])
-        communication.contents = hash["communication_contents"]
-        communication.save
+    if params["previously_attached_people"].present?
+      params["previously_attached_people"].each do |id, hash|
+        person = Person.find(id)
+        person.controller_save(hash)
       end
-      if hash["tags"].present?
-        hash["tags"].each do |tag_id|
-          person.add_tag(tag_id.to_i)
-        end
-      end
-      hash.except!("communication_id","communication_contents","tags")
-      person.assign_attributes(hash)
-      person.save
     end
 
     verb_id = Verb.find_by_name("saw at").id
@@ -105,11 +95,5 @@ class EventsController < ApplicationController
 
     redirect_to edit_event_path(event), notice: "Save attempted."
   end
-
-  private
-
-    def person_attributes
-      [:first_name, :last_name, :email, :phone, :relationship_current, :relationship_possible] 
-    end
 
 end
