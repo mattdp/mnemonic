@@ -30,6 +30,7 @@ class Person < ActiveRecord::Base
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
+  has_many :contact_methods, :dependent => :destroy
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
@@ -339,16 +340,5 @@ class Person < ActiveRecord::Base
     end
     self.save if change_flag
   end
-
-# OLD MIGRATORS
-
-# def migrate_met_to_notes
-#   Person.find_each do |person|
-#     if person.how_met.present?
-#       person.notes = "#{person.notes} /// #{person.how_met}"
-#       person.save
-#     end
-#   end
-# end
 
 end
