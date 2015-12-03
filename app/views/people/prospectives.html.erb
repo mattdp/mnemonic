@@ -1,0 +1,3 @@
+<% @people.each do |person| %>
+  <%= render partial: "people/person_overview", locals: { person_attributes: @overview_attributes, person: person, communications: nil, all_tags: @all_tags } %>
+<% end %>

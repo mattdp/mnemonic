@@ -16,9 +16,10 @@ Mnemonic::Application.routes.draw do
   get '/events/dismiss/:id/:dismissed_reason', to: 'events#dismiss', as: 'events_dismiss'
   get '/events/snooze/:id/:snooze_days', to: 'events#snooze', as: 'events_snooze'
 
+  resources :people, only: [:edit, :update]
   get '/people/table', to: 'people#table', as: "people_table"
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
-  resources :people, only: [:edit, :update]
+  get '/people/prospectives', to: 'people#prospectives', as: 'people_prospectives'
   get '/people/:id', to: 'people#edit'
 
   resources :plans, only: [:index, :show]

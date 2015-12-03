@@ -33,6 +33,10 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  def self.overview_attributes
+    [:first_name, :last_name, :email, :phone, :relationship_current, :relationship_possible] 
+  end
+
   #gives back an ignore, a new person, or an existing person
   def self.react_to_email(email_of_interest)
     return false if email_of_interest.blank?
