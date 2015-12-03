@@ -16,6 +16,12 @@ class PeopleController < ApplicationController
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
 
+  def prospectives
+    @people = Person.where(prospective: true).take(5)
+    @all_tags = Tag.all
+    @overview_attributes = Person.overview_attributes
+  end
+
   def generate_names
     Person.generate_all_blank_names
 
