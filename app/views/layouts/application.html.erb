@@ -16,7 +16,9 @@
               <%= link_to "Home page", root_path %> |
               <%= link_to "RailsAdmin", "/admin" %> |
               <%= link_to "People table", people_table_path  %> |
-              <%= link_to "Plans", plans_path %>
+              <%= link_to "Plans", plans_path %> |
+              <% prospective_count = Person.where(prospective: true).count %>
+              <%= link_to "Prospectives (#{prospective_count})", people_prospectives_path %>
             </div>
             <div>
               New: 

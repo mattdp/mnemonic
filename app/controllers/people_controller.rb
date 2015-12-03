@@ -16,6 +16,26 @@ class PeopleController < ApplicationController
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
 
+  def prospectives
+    @people = Person.where(prospective: true).take(5)
+    @all_tags = Tag.all
+    @overview_attributes = Person.overview_attributes
+  end
+
+  def prospectives_submission
+
+    if params["previously_attached_people"].present?
+      params["previously_attached_people"].each do |id, hash|
+        if hash["select_action"] == "no_longer_prospective"
+          person = Person.find(id)
+          person.controller_save(hash)
+        end
+      end
+    end
+
+    redirect_to people_prospectives_path, notice: 'Saving attempted.'
+  end
+
   def generate_names
     Person.generate_all_blank_names
 
