@@ -33,6 +33,22 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  def controller_save(hash)
+    if hash["communication_id"].present?
+      communication = Communication.find(hash["communication_id"])
+      communication.contents = hash["communication_contents"]
+      communication.save
+    end
+    if hash["tags"].present?
+      hash["tags"].each do |tag_id|
+        person.add_tag(tag_id.to_i)
+      end
+    end
+    hash.except!("communication_id","communication_contents","tags")
+    self.assign_attributes(hash)
+    self.save
+  end
+
   def self.overview_attributes
     [:first_name, :last_name, :email, :phone, :relationship_current, :relationship_possible] 
   end
