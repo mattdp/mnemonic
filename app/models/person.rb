@@ -44,7 +44,8 @@ class Person < ActiveRecord::Base
         person.add_tag(tag_id.to_i)
       end
     end
-    hash.except!("communication_id","communication_contents","tags")
+    self.prospective = false
+    hash.except!("communication_id","communication_contents","tags","select_action")
     self.assign_attributes(hash)
     self.save
   end

@@ -26,7 +26,7 @@
       <% if @tag.present? %>
         <% @people.each do |person| %>
           <% communications = Communication.where(event_id: @event.id, person_id: person.id) %>
-          <%= render partial: "people/person_overview", locals: { person_attributes: @person_attributes, person: person, communications: communications, all_tags: @tags } %>
+          <%= render partial: "people/person_overview", locals: { person_attributes: @person_attributes, person: person, communications: communications, all_tags: @tags, select_action_radios: false } %>
         <% end %>
       <% end %>
 
