@@ -23,12 +23,13 @@ class PeopleController < ApplicationController
   end
 
   def prospectives_submission
-    binding.pry
 
     if params["previously_attached_people"].present?
       params["previously_attached_people"].each do |id, hash|
-        person = Person.find(id)
-        person.controller_save(hash)
+        if hash["select_action"] == "no_longer_prospective"
+          person = Person.find(id)
+          person.controller_save(hash)
+        end
       end
     end
 

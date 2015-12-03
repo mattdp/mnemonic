@@ -11,6 +11,20 @@
         <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
       </p>
     <% end %>
+    <% if select_action_radios %>
+      <div>
+        <%= radio_button_tag "#{prefix}[select_action]", "no_longer_prospective", true %>
+        <%= label_tag "No longer prospective" %>
+      </div>
+      <div>
+        <%= radio_button_tag "#{prefix}[select_action]", "attach_to_existing_person", false %>
+        <%= label_tag "Attach to existing person [NOT IMPLEMENTED]" %>
+      </div>
+      <div>
+        <%= radio_button_tag "#{prefix}[select_action]", "block_future_email", false %>
+        <%= label_tag "Block future email [NOT IMPLEMENTED]" %>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
     <% if communications.present? %>
