@@ -9,8 +9,10 @@
 #  updated_at              :datetime
 #  ignore                  :boolean          default(FALSE)
 #  preferred_within_filter :boolean          default(FALSE)
+#  person_id               :integer
 #
 
 class ContactMethod < ActiveRecord::Base
   #filter: what is the type of data in info. email? email_regex? phone?
+  belongs_to :person
 end
