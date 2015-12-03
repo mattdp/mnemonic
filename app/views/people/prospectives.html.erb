@@ -2,11 +2,15 @@
 
 <div class="container">
   <div class="row">
-    <%= form_tag action: "prospectives_submission", controller: "people" do %>
-      <% @people.each do |person| %>
-        <%= render partial: "people/person_overview", locals: { person_attributes: @overview_attributes, person: person, communications: nil, all_tags: @all_tags, select_action_radios: true } %>
+    <% if @people.present? %>
+      <%= form_tag action: "prospectives_submission", controller: "people" do %>
+        <% @people.each do |person| %>
+          <%= render partial: "people/person_overview", locals: { person_attributes: @overview_attributes, person: person, communications: nil, all_tags: @all_tags, select_action_radios: true } %>
+        <% end %>
+        <%= submit_tag "Update people" %>
       <% end %>
-      <%= submit_tag "Update people" %>
+    <% else %>
+      <p>There are currently no prospective people.</p>
     <% end %>
   </div>
 </div>
