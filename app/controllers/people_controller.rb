@@ -22,6 +22,10 @@ class PeopleController < ApplicationController
     @overview_attributes = Person.overview_attributes
   end
 
+  def prospectives_submission
+    redirect_to people_prospectives_path, notice: 'Saving attempted.'
+  end
+
   def generate_names
     Person.generate_all_blank_names
 
