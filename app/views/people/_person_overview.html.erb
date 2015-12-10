@@ -11,6 +11,18 @@
         <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
       </p>
     <% end %>
+    <div class="contact-methods">
+      <% person.contact_methods.each do |cm| %>
+        <%= select_tag "#{prefix}[existing_contact_methods][#{cm.id}][filter]",
+          options_for_select(ContactMethod.filter_options,cm.filter.to_s) %> 
+        <%= text_field_tag "#{prefix}[existing_contact_methods][#{cm.id}][info]", cm.info %>
+      <% end %>
+      <% (1..2).each do |n| %>
+        <%= select_tag "#{prefix}[new_contact_methods][#{n}][filter]",
+          options_for_select(ContactMethod.filter_options) %>
+        <%= text_field_tag "#{prefix}[new_contact_methods][#{n}][info]" %>
+      <% end %>
+    </div>
     <% if select_action_radios %>
       <div>
         <%= radio_button_tag "#{prefix}[select_action]", "no_longer_prospective", true %>

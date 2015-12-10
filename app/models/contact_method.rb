@@ -15,4 +15,16 @@
 class ContactMethod < ActiveRecord::Base
   #filter: what is the type of data in info. email? email_regex? phone?
   belongs_to :person
+
+  #so can test vs. this string throughout code
+  def self.no_filter_selected
+    "None selected"
+  end
+
+  def self.filter_options
+    none = [ContactMethod.no_filter_selected]
+    ways = [:email, :phone, :facebook, :linkedin]
+    return none + ways.map{|w| w.to_s}
+  end
+
 end

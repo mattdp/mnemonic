@@ -6,9 +6,12 @@
       <p><strong><%= @person.display_name %> (<%= link_to "RA edit", "#{@person.link_string}" %>)</strong></p>
       <p><%= @person.display_birthday %></p>
       <p><%= @person.display_age %></p>
-      <p><%= mail_to @person.email %></p>
-      <p><%= @person.phone %></p>
-      <%= render partial: "people/social_links", locals: {person: @person} %>
+      <% @person.contact_methods.each do |cm| %>
+        <p>
+          <strong><%= "#{cm.filter}: " %></strong>
+          <%= "#{cm.info}" %>
+        </p>
+      <% end %>
       <p>Notes: <%= @person.notes %></p>
     </div>
   </div>

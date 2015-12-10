@@ -11,7 +11,7 @@
     <tr>
       <td><%= link_to "#{person.name}", "#{person.link_string}" %></td>
       <td><%= "#{tagging.verb.name}" %></td>
-      <td><%= mail_to "#{person.email}" %></td>
+      <td><%= mail_to "#{person.contact_info(:email)}" %></td>
     </tr>
   <% end %>
 </table>

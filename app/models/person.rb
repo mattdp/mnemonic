@@ -6,14 +6,10 @@
 #  birthday                 :date
 #  first_name               :string(255)
 #  last_name                :string(255)
-#  email                    :string(255)
 #  created_at               :datetime
 #  updated_at               :datetime
 #  notes                    :text
-#  url_linkedin             :string(255)
-#  url_facebook             :string(255)
 #  name                     :string(255)
-#  phone                    :string(255)
 #  relationship_current     :integer
 #  relationship_possible    :integer
 #  reminder_days            :integer
@@ -34,6 +30,24 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  #currently accepts "email", "linkedin", "facebook", "phone"
+  #in order of priority, gives:
+  # => the preferred contact info for this filter/person combo
+  # => the alphabetically first contact info for this f/p
+  # => nil
+  def contact_info(filter)
+    cm = self.contact(filter)
+    cm.present? ? cm.info : nil
+  end
+
+  def contact(filter)
+    cms = ContactMethod.where(filter: filter.to_s, person_id: self.id)
+      .order(:info)
+    return nil if cms.blank?
+    preferred = cms.select{|cm| cm.preferred_within_filter}
+    preferred.present? ? (return preferred[0]) : (return cms[0])
+  end
+
   def controller_save(hash)
     if hash["communication_id"].present?
       communication = Communication.find(hash["communication_id"])
@@ -45,14 +59,31 @@ class Person < ActiveRecord::Base
         person.add_tag(tag_id.to_i)
       end
     end
+    if hash["existing_contact_methods"].present?
+      hash["existing_contact_methods"].each do |id,data|
+        cm = ContactMethod.find(id)
+        cm.filter = data["filter"] unless data["filter"] == ContactMethod.no_filter_selected
+        cm.info = data["info"]
+        cm.save
+      end
+    end
+    if hash["new_contact_methods"].present?
+      hash["new_contact_methods"].each do |n,data|
+        next unless data["filter"] != ContactMethod.no_filter_selected
+        next unless data["info"].present?
+        ContactMethod.create(person_id: self.id,
+          filter: data["filter"],
+          info: data["info"])
+      end
+    end
     self.prospective = false
-    hash.except!("communication_id","communication_contents","tags","select_action")
-    self.assign_attributes(hash)
+    person_attributes = hash.select{|k,v| Person.overview_attributes.include?(k.to_sym)}
+    self.assign_attributes(person_attributes)
     self.save
   end
 
   def self.overview_attributes
-    [:first_name, :last_name, :email, :phone, :relationship_current, :relationship_possible] 
+    [:first_name, :last_name, :relationship_current, :relationship_possible] 
   end
 
   #gives back an ignore, a new person, or an existing person
@@ -190,7 +221,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.email_list(people)
-    emails = people.select{|person| person.email.present?}.map{|person| person.email}
+    emails = people.map{|person| person.contact_info(:email)}.reject{|x| x.nil?}
     emails.join ", "
   end
 
@@ -320,11 +351,6 @@ class Person < ActiveRecord::Base
     event.content = "#{self.first_name} #{self.last_name}: Turns #{self.age(self.next_birthday)} on #{self.next_birthday.to_s}"
     event.dismissed = false
     event.save
-  end
-
-  def self.facebook_mass_importer
-    v2_fb_access_token = "CAACEdEose0cBAIrAZAzqxQS71hWQVhj95OVDrUhpPgUfkdLO6AWq4iAT2tgcj8jdL1ZC6U69ZBrvgZAvgS8F6SfnsiNN1w60Se8LxkfU0j5SoFXUwB7vEbIRtlNDCUOae9XsQPwcr7ZCOHSPhBXvAvF66tPb6nNAkusbCmGE5YWLi2PurjKZAZAzIAuZC1AO58HACUvcYbKoxoFQx5LTEnPg"
-    v1_fb_access_token = "CAACEdEose0cBAEV4BGSMD4TBD5qCxZBX0QYsboqGThQqAplfk8BN4ZCDrfmhtpRiZBZCbaW2XY6LHPG7DaHiK1UDGFSyfxMkGZAKG5GN4WVgifV19khavZAe9DuuFSMH6gDuzR1fKXEFZAY7sWhZB2vgb12xyi7ihx1jcshnJkxG7gEazvuuN6HWRc7f7j5nZC6AJZC4SdqKA7PUqZBZBr4qgo1X"
   end
 
   def linkedin_updater(info)
