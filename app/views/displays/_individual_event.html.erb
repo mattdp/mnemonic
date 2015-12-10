@@ -13,8 +13,8 @@
   <td><strong><%= event.content %></strong></td>
   <td><%= event.notes %></td>
   <td>
-    <% if event.person.present? and event.person.contact_info("email").present? %>
-       <%= mail_to "#{event.person.contact_info('email')}" %>
+    <% if event.person.present? and event.person.contact_info(:email).present? %>
+       <%= mail_to "#{event.person.contact_info(:email)}" %>
     <% end %>
   </td>  
   <td><%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %></td>

@@ -41,7 +41,7 @@ class Person < ActiveRecord::Base
   end
 
   def contact(filter)
-    cms = ContactMethod.where(filter: filter, person_id: self.id)
+    cms = ContactMethod.where(filter: filter.to_s, person_id: self.id)
       .order(:info)
     return nil if cms.blank?
     preferred = cms.select{|cm| cm.preferred_within_filter}
@@ -204,7 +204,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.email_list(people)
-    emails = people.map{|person| person.contact_info("email")}.reject{|x| x.nil?}
+    emails = people.map{|person| person.contact_info(:email)}.reject{|x| x.nil?}
     emails.join ", "
   end
 
