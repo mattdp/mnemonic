@@ -6,14 +6,10 @@
 #  birthday                 :date
 #  first_name               :string(255)
 #  last_name                :string(255)
-#  email                    :string(255)
 #  created_at               :datetime
 #  updated_at               :datetime
 #  notes                    :text
-#  url_linkedin             :string(255)
-#  url_facebook             :string(255)
 #  name                     :string(255)
-#  phone                    :string(255)
 #  relationship_current     :integer
 #  relationship_possible    :integer
 #  reminder_days            :integer
