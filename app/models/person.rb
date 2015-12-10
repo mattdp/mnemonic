@@ -49,6 +49,7 @@ class Person < ActiveRecord::Base
   end
 
   def controller_save(hash)
+    binding.pry
     if hash["communication_id"].present?
       communication = Communication.find(hash["communication_id"])
       communication.contents = hash["communication_contents"]
@@ -59,8 +60,12 @@ class Person < ActiveRecord::Base
         person.add_tag(tag_id.to_i)
       end
     end
+    if hash["existing_contact_methods"].present?
+    end
+    if hash["new_contact_methods"].present?
+    end
     self.prospective = false
-    hash.except!("communication_id","communication_contents","tags","select_action")
+    person_attributes = hash.select{|k,v| Person.overview_attributes.include?(k.to_sym)}
     self.assign_attributes(hash)
     self.save
   end
