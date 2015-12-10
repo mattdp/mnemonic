@@ -13,7 +13,7 @@
   <td><strong><%= event.content %></strong></td>
   <td><%= event.notes %></td>
   <td>
-    <% if event.person.present? and event.person.contact_info(:email).present? %>
+    <% if event.person.present? %>
        <%= mail_to "#{event.person.contact_info(:email)}" %>
     <% end %>
   </td>  
