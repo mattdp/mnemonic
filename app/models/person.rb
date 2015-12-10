@@ -89,12 +89,17 @@ class Person < ActiveRecord::Base
   #gives back an ignore, a new person, or an existing person
   def self.react_to_email(email_of_interest)
     return false if email_of_interest.blank?
-    cm = ContactMethod.find_by_info(email_of_interest)
-    return cm if (cm.present? and cm.ignore)
-
-    person = Person.find_by_email(email_of_interest)
-    return person if person.present?
-    return Person.create(email: email_of_interest, prospective: true)
+    cms = ContactMethod.where(filter: "email", info: email_of_interest)
+    if cms.present?
+      cm = cms[0]
+      return cm if cm.ignore #email ignored
+      return cm.person if cm.person.present? #person exists
+      return nil #should not happen
+    else
+      p = Person.create(prospective: true)
+      cm = ContactMethod.create(filter: "email", info: email_of_interest)
+      return p
+    end
   end
 
   def self.names_for_search
