@@ -30,6 +30,24 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  #currently accepts "email", "linkedin", "facebook", "phone"
+  #in order of priority, gives:
+  # => the preferred contact info for this filter/person combo
+  # => the alphabetically first contact info for this f/p
+  # => nil
+  def contact_info(filter)
+    cm = self.contact(filter)
+    cm.present? ? cm.info : nil
+  end
+
+  def contact(filter)
+    cms = ContactMethod.where(filter: filter, person_id: self.id)
+      .order(:info)
+    return nil if cms.blank?
+    preferred = cms.select{|cm| cm.preferred_within_filter}
+    preferred.present? ? (return preferred[0]) : (return cms[0])
+  end
+
   def controller_save(hash)
     if hash["communication_id"].present?
       communication = Communication.find(hash["communication_id"])
