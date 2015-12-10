@@ -204,7 +204,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.email_list(people)
-    emails = people.select{|person| person.email.present?}.map{|person| person.email}
+    emails = people.map{|person| person.contact_info("email")}.reject{|x| x.nil?}
     emails.join ", "
   end
 
