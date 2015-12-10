@@ -26,9 +26,16 @@ class PeopleController < ApplicationController
 
     if params["previously_attached_people"].present?
       params["previously_attached_people"].each do |id, hash|
+        person = Person.find(id)
         if hash["select_action"] == "no_longer_prospective"
-          person = Person.find(id)
           person.controller_save(hash)
+        elsif hash["select_action"] == "attach_to_existing_person"
+          puts "not yet implemented"
+        elsif hash["select_action"] == "block_future_email"
+          ContactMethod.create(filter: "email", 
+            info: person.email,
+            ignore: true)
+          person.destroy
         end
       end
     end
