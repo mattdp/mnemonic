@@ -49,7 +49,6 @@ class Person < ActiveRecord::Base
   end
 
   def controller_save(hash)
-    binding.pry
     if hash["communication_id"].present?
       communication = Communication.find(hash["communication_id"])
       communication.contents = hash["communication_contents"]
@@ -61,12 +60,25 @@ class Person < ActiveRecord::Base
       end
     end
     if hash["existing_contact_methods"].present?
+      hash["existing_contact_methods"].each do |id,data|
+        cm = ContactMethod.find(id)
+        cm.filter = data["filter"] unless data["filter"] == ContactMethod.no_filter_selected
+        cm.info = data["info"]
+        cm.save
+      end
     end
     if hash["new_contact_methods"].present?
+      hash["new_contact_methods"].each do |n,data|
+        next unless data["filter"] != ContactMethod.no_filter_selected
+        next unless data["info"].present?
+        ContactMethod.create(person_id: self.id,
+          filter: data["filter"],
+          info: data["info"])
+      end
     end
     self.prospective = false
     person_attributes = hash.select{|k,v| Person.overview_attributes.include?(k.to_sym)}
-    self.assign_attributes(hash)
+    self.assign_attributes(person_attributes)
     self.save
   end
 
