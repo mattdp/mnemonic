@@ -11,6 +11,7 @@ class TextParser
     }
   end
 
+  #THIS IS NOT ADAPTED TO ContactMethod - there is now no Person.email
   #keep getting invalid byte sequence, maybe import this file, clean it, and export - eliminate commas, do normal CSV?
   #step 1: get a linkedin export, find/replace "," with ""
   #step 2: upload to google sheets and back, to fix a utf-8 encoding problem

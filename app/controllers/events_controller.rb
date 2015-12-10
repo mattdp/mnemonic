@@ -64,7 +64,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    person_attributes = Person.overview_attributes
     event = Event.find(params[:id])
     event.content = params["event"]["content"]
     event.notes = params["event"]["notes"]

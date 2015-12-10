@@ -1,6 +1,10 @@
 Mnemonic started as a way to remember friends birthdays without using Facebook, and expanded beyond that to a personal CRM. Currently, it has no tests/way of deploying from scratch easily, but I aspire to make it usable & trustworthy.
 
-Conventions
+*To do before sharing*
+
+- make sure FB and LI dump files removed from the history, not just the current state
+
+*Conventions*
 
 - Used 1900 for the birthdays of anyone I don't know the birthday of.
 
