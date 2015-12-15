@@ -69,7 +69,7 @@ class Person < ActiveRecord::Base
     end
     if hash["tags"].present?
       hash["tags"].each do |tag_id|
-        person.add_tag(tag_id.to_i)
+        self.add_tag(tag_id.to_i)
       end
     end
     if hash["existing_contact_methods"].present?
