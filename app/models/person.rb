@@ -32,14 +32,14 @@ class Person < ActiveRecord::Base
 
   #takes the ContactMethods and Communcations of other Person, destroys them
   def devour(dying_person)
-    return false unless dying_person.class == "Person"
+    return false unless dying_person.class.to_s == "Person"
     [:contact_methods,:communications].each do |subordinates|
-      dying_person.subordinates.each do |subordinate|
+      dying_person.send(subordinates).each do |subordinate|
         subordinate.person_id = self.id
         subordinate.save
       end
     end
-    dying_person.destroy
+    Person.find(dying_person.id).destroy #reloads associations, so not destroyed
     return true
   end
 

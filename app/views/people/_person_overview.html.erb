@@ -37,7 +37,7 @@
         <%= label_tag "Block future email" %>
       </div>
       <div> 
-        <%= render partial: "events/existing_people_within_form", locals: {people: @people, return_variable: "#{prefix}[attach_to_id]"} %>
+        <%= render partial: "events/existing_people_within_form", locals: {people: all_people, return_variable: "#{prefix}[attach_to_id]"} %>
       </div>
     <% end %>
   </div>
