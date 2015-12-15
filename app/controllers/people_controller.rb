@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
           surviving_person.devour(person)
         elsif hash["select_action"] == "block_future_email"
           ContactMethod.create(filter: "email", 
-            info: person.email,
+            info: person.contact_methods[0].info,
             ignore: true)
           person.destroy
         end
