@@ -32,7 +32,7 @@
 
       <h3>Add additional people</h3>
 
-      <%= render partial: "events/existing_people_within_form", locals: {people: @addable_people} %>
+      <%= render partial: "events/existing_people_within_form", locals: {people: @addable_people, return_symbol: :people} %>
       <%= render partial:"events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
 
       <%= submit_tag "Update event and people" %>
