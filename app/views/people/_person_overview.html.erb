@@ -30,11 +30,14 @@
       </div>
       <div>
         <%= radio_button_tag "#{prefix}[select_action]", "attach_to_existing_person", false %>
-        <%= label_tag "Attach to existing person [NOT IMPLEMENTED]" %>
+        <%= label_tag "Attach to existing person" %>
       </div>
       <div>
         <%= radio_button_tag "#{prefix}[select_action]", "block_future_email", false %>
         <%= label_tag "Block future email" %>
+      </div>
+      <div> 
+        <%= render partial: "events/existing_people_within_form", locals: {people: all_people, return_variable: "#{prefix}[attach_to_id]"} %>
       </div>
     <% end %>
   </div>

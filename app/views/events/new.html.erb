@@ -9,7 +9,7 @@
         <%= label_tag :content, "Event name" %>
         <%= text_field_tag :content %>
       </div>
-      <%= render partial: "events/existing_people_within_form", locals: {people: @people} %>
+      <%= render partial: "events/existing_people_within_form", locals: {people: @people, return_variable: :people} %>
       <%= render partial: "events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
       <%= submit_tag "Create tagged event" %>
 

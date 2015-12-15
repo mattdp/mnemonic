@@ -26,13 +26,13 @@
       <% if @tag.present? %>
         <% @people.each do |person| %>
           <% communications = Communication.where(event_id: @event.id, person_id: person.id) %>
-          <%= render partial: "people/person_overview", locals: { person_attributes: @person_attributes, person: person, communications: communications, all_tags: @tags, select_action_radios: false } %>
+          <%= render partial: "people/person_overview", locals: { person_attributes: @person_attributes, person: person, communications: communications, all_tags: @tags, all_people: nil, select_action_radios: false } %>
         <% end %>
       <% end %>
 
       <h3>Add additional people</h3>
 
-      <%= render partial: "events/existing_people_within_form", locals: {people: @addable_people} %>
+      <%= render partial: "events/existing_people_within_form", locals: {people: @addable_people, return_variable: :people} %>
       <%= render partial:"events/unexisting_people_within_form", locals: {how_many_rows: 5} %>
 
       <%= submit_tag "Update event and people" %>

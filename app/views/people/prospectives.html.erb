@@ -5,7 +5,7 @@
     <% if @people.present? %>
       <%= form_tag action: "prospectives_submission", controller: "people" do %>
         <% @people.each do |person| %>
-          <%= render partial: "people/person_overview", locals: { person_attributes: @overview_attributes, person: person, communications: nil, all_tags: @all_tags, select_action_radios: true } %>
+          <%= render partial: "people/person_overview", locals: { person_attributes: @overview_attributes, person: person, communications: nil, all_tags: @all_tags, all_people: @all_people, select_action_radios: true } %>
         <% end %>
         <%= submit_tag "Update people" %>
       <% end %>
