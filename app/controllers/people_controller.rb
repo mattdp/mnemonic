@@ -30,7 +30,8 @@ class PeopleController < ApplicationController
         if hash["select_action"] == "no_longer_prospective"
           person.controller_save(hash)
         elsif hash["select_action"] == "attach_to_existing_person"
-          puts "not yet implemented"
+          surviving_person = Person.find(hash["attach_to_id"])
+          surviving_person.devour(person)
         elsif hash["select_action"] == "block_future_email"
           ContactMethod.create(filter: "email", 
             info: person.email,

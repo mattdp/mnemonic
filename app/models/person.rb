@@ -30,6 +30,19 @@ class Person < ActiveRecord::Base
 
   before_save {|person| person.name = person.display_name if (!person.name.present? or person.name == person.first_name)}
 
+  #takes the ContactMethods and Communcations of other Person, destroys them
+  def devour(dying_person)
+    return false unless dying_person.class == "Person"
+    [:contact_methods,:communications].each do |subordinates|
+      dying_person.subordinates.each do |subordinate|
+        subordinate.person_id = self.id
+        subordinate.save
+      end
+    end
+    dying_person.destroy
+    return true
+  end
+
   #currently accepts "email", "linkedin", "facebook", "phone"
   #in order of priority, gives:
   # => the preferred contact info for this filter/person combo
@@ -97,7 +110,7 @@ class Person < ActiveRecord::Base
       return nil #should not happen
     else
       p = Person.create(prospective: true)
-      cm = ContactMethod.create(filter: "email", info: email_of_interest)
+      cm = ContactMethod.create(filter: "email", info: email_of_interest, person_id: p.id)
       return p
     end
   end
