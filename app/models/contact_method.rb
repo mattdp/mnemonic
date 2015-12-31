@@ -23,7 +23,7 @@ class ContactMethod < ActiveRecord::Base
 
   def self.filter_options
     none = [ContactMethod.no_filter_selected]
-    ways = [:email, :phone, :facebook, :linkedin]
+    ways = [:email, :phone, :facebook, :linkedin, :physical_address]
     return none + ways.map{|w| w.to_s}
   end
 
