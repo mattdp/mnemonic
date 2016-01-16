@@ -35,8 +35,15 @@ class Person < ActiveRecord::Base
     return false unless dying_person.class.to_s == "Person"
     [:contact_methods,:communications].each do |subordinates|
       dying_person.send(subordinates).each do |subordinate|
-        subordinate.person_id = self.id
-        subordinate.save
+        if (subordinate.class.to_s == "ContactMethod" and 
+          ContactMethod.where(person_id: self, 
+            filter: subordinate.filter, 
+            info: subordinate.info).present?)
+          subordinate.destroy
+        else
+          subordinate.person_id = self.id
+          subordinate.save
+        end
       end
     end
     Person.find(dying_person.id).destroy #reloads associations, so not destroyed
