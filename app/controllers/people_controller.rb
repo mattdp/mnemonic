@@ -4,15 +4,13 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @tags = Tag.all
     @feed = @person.feed
+    @prefix = "modified"
   end
 
   def update
     @person = Person.find(params[:id])
-
-    params[:tags].each do |tag_id|
-      @person.add_tag(tag_id.to_i)
-    end
-
+    binding.pry
+    @person.controller_save(params["modified"])
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
 
