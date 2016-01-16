@@ -1,0 +1,16 @@
+<div class="contact-methods">
+  <% person.contact_methods.each do |cm| %>
+    <div>
+      <%= select_tag "#{prefix}[existing_contact_methods][#{cm.id}][filter]",
+        options_for_select(ContactMethod.filter_options,cm.filter.to_s) %> 
+      <%= text_field_tag "#{prefix}[existing_contact_methods][#{cm.id}][info]", cm.info %>
+    </div>
+  <% end %>
+  <% (1..2).each do |n| %>
+    <div>
+      <%= select_tag "#{prefix}[new_contact_methods][#{n}][filter]",
+      options_for_select(ContactMethod.filter_options) %>
+      <%= text_field_tag "#{prefix}[new_contact_methods][#{n}][info]" %>
+    </div>
+  <% end %>
+</div>

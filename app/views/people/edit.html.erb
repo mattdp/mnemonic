@@ -58,13 +58,18 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p><strong>Add tag (no delete supported):</strong></p>
     <%= form_tag person_path(@person), method: :patch do %>
-
-      <%= select_tag(:tags, options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
-
-      <%= submit_tag "Submit changes" %>
-
+      <div>
+        <p><strong>Add tags:</strong></p>
+        <%= select_tag("#{@prefix}[tags]", options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
+      </div>
+      <div>
+        <p class="top-margin"><strong>Add or edit contact methods:</strong></p>
+        <%= render partial: "people/contact_methods", locals: {person: @person, prefix: "#{@prefix}"} %>
+      </div>
+      <div>
+        <%= submit_tag "Save tags &| contact methods", class: "top-margin" %>
+      </div>
     <% end %>
   </div>
   <div class="col-md-6">
