@@ -9,7 +9,6 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-    binding.pry
     @person.controller_save(params["modified"])
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
