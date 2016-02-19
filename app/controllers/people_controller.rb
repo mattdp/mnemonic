@@ -28,6 +28,7 @@ class PeopleController < ApplicationController
         if hash["select_action"] == "no_longer_prospective"
           person.controller_save(hash)
         elsif hash["select_action"] == "attach_to_existing_person"
+          person.controller_save(hash)
           surviving_person = Person.find(hash["attach_to_id"][0])
           surviving_person.devour(person)
         elsif hash["select_action"] == "block_future_email"
