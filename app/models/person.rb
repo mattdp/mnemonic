@@ -106,7 +106,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.overview_attributes
-    [:first_name, :last_name, :relationship_current, :relationship_possible] 
+    [:first_name, :last_name, :relationship_current, :relationship_possible, :notes] 
   end
 
   #gives back an ignore, a new person, or an existing person
