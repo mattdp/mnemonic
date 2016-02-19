@@ -23,7 +23,7 @@ include ActionView::Helpers::DateHelper
 class Person < ActiveRecord::Base
   has_many :communications, :dependent => :destroy
   has_many :events, :dependent => :destroy
-  has_many :taggings
+  has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
   has_many :verbs, :through => :taggings
   has_many :contact_methods, :dependent => :destroy
@@ -33,9 +33,12 @@ class Person < ActiveRecord::Base
   #takes the ContactMethods and Communcations of other Person, destroys them
   def devour(dying_person)
     return false unless dying_person.class.to_s == "Person"
-    [:contact_methods,:communications].each do |subordinates|
+    [:contact_methods,:communications,:taggings].each do |subordinates|
       dying_person.send(subordinates).each do |subordinate|
-        if (subordinate.class.to_s == "ContactMethod" and 
+        if subordinate.class.to_s == "Tagging"
+          #there will be duplicates, but destroyed via association
+          self.add_tag(subordinate.tag_id, subordinate.verb_id)
+        elsif (subordinate.class.to_s == "ContactMethod" and 
           ContactMethod.where(person_id: self, 
             filter: subordinate.filter, 
             info: subordinate.info).present?)
