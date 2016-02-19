@@ -64,7 +64,7 @@
         <%= select_tag("#{@prefix}[tags]", options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
       </div>
       <div>
-        <p class="top-margin"><strong>Add or edit contact methods:</strong></p>
+        <p class="top-margin"><strong>Add / edit contact methods:</strong></p>
         <%= render partial: "people/contact_methods", locals: {person: @person, prefix: "#{@prefix}"} %>
       </div>
       <div>
