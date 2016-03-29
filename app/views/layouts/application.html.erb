@@ -27,6 +27,11 @@
               <%= link_to "Event", new_event_path %> |
               <%= link_to "Survey", new_survey_path %>
             </div>
+            <div>
+              <%= button_to "Go", root_path, class: "fleft" %>
+              <%= " to:" %>
+              <%= select_tag(:navigate_to_person, options_from_collection_for_select(Person.all,"id","name"), multiple: false, class: "chosen-select") %>
+            </div>
           <% end %>
         </div>
       </div>
