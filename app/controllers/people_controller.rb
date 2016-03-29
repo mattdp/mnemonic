@@ -1,7 +1,13 @@
 class PeopleController < ApplicationController
 
   def edit
-    @person = Person.find(params[:id])
+    nav_to_p = params[:navigate_to_person]
+    if nav_to_p.present?
+      @person = Person.find(nav_to_p)
+    else
+      @person = Person.find(params[:id])
+    end
+
     @tags = Tag.all
     @feed = @person.feed
     @prefix = "modified"
