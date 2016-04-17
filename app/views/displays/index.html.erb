@@ -1,7 +1,6 @@
-<br>
+<%= render partial: "/displays/event_display", locals: {events: @events} %>
+
 <ul>
   <li><%= link_to "Generate all blank names", people_generate_names_path %></li>
   <li><%= link_to "Tag listing", tags_path %></li>
 </ul>
-
-<%= render partial: "/displays/event_display", locals: {events: @events} %>
