@@ -177,10 +177,10 @@ class Person < ActiveRecord::Base
     people.each do |person|
       happening_date = nil
       next if person.has_undismissed_event?(event_type)
-      lcd = person.last_communication_date
-      if lcd.nil?
+      lmcd = person.last_meaningful_communication_date
+      if lmcd.nil?
         happening_date = Date.today
-      elsif (lcd + person.reminder_days.days + remind_x_days_before.days <= Date.today)
+      elsif (lmcd + person.reminder_days.days + remind_x_days_before.days <= Date.today)
         happening_date = Date.today + remind_x_days_before
       end
       
@@ -199,8 +199,8 @@ class Person < ActiveRecord::Base
     return events.present?
   end
 
-  def last_communication_date
-    comms = Communication.where("person_id = ?", self.id)
+  def last_meaningful_communication_date
+    comms = Communication.where("person_id = ? and medium <> ?", self.id,"email")
     return nil unless comms.present?
     return comms.map{|c| c.canonical_date}.max
   end
