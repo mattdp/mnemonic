@@ -1,14 +1,29 @@
-<div class="row">
+<div class="row border-bottom">
   <div class="col-md-6">
     <% if event.person.present? %>
-       <%= link_to "#{event.person.display_name}", edit_person_path(event.person.id) %>
+      <p>
+        <%= link_to "#{event.person.display_name}", edit_person_path(event.person.id) %> 
+        (<%= mail_to event.person.contact_info(:email) %>) 
+      </p>
+      <p>
+        <% if event.event_type == "birthday" and event.happening_date.present? %>
+          Turning <%= event.person.age(event.happening_date) %> 
+          on 
+          <%= event.happening_date.strftime("%b %d") %>
+        <% elsif event.event_type == "auto_generated_communication_reminder" %>
+          <% days_ago = event.person.last_meaningful_communication_date(true) %>
+          <% if days_ago.present? and days_ago >= 0 %>
+            Last talked to <%= days_ago %> days ago.
+          <% else %>
+            No previous interaction found!
+          <% end %>
+        <% else %>
+          <%= event.content %> ::: <%= event.notes %>
+        <% end %>
+      </p>
+    <% else %>
+      <%= link_to "Event not attached to person. Fix!", "/admin/event/#{event.id}/edit" %>
     <% end %>
-    <% if event.happening_date.present? %>
-      <%= event.happening_date.strftime("%b %d") %>
-    <% end %>   
-    <% if event.person.present? %>
-       <%= mail_to "#{event.person.contact_info(:email)}" %>
-    <% end %>     
   </div> 
   <div class="col-md-6">
     <% if event.event_type == "birthday" %>

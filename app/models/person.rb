@@ -199,10 +199,16 @@ class Person < ActiveRecord::Base
     return events.present?
   end
 
-  def last_meaningful_communication_date
+  def last_meaningful_communication_date(distance_from_today=false)
     comms = Communication.where("person_id = ? and medium <> ?", self.id,"email")
     return nil unless comms.present?
-    return comms.map{|c| c.canonical_date}.max
+    max_date = comms.map{|c| c.canonical_date}.max
+    if distance_from_today
+      return (Date.today - max_date.to_date).to_i if max_date.present? 
+      return -1
+    else
+      return max_date
+    end
   end
 
   def feed
