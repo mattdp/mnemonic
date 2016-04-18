@@ -11,11 +11,17 @@
     <% end %>     
   </div> 
   <div class="col-md-6">
-    <%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %>
-    <%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly), class: "btn btn-success btn-sm" %>
-    <%= link_to "Pass", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
-    <%= link_to "Pass & estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-danger btn-sm" %>
-    <%= link_to "Defer 1 wk", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
-    <%= link_to "Defer day-1", events_snooze_path(event.id,"day-1"), class: "btn btn-info btn-sm" %>
+    <% if event.event_type == "birthday" %>
+      <%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %>
+      <%= link_to "Dismiss", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
+      <%= link_to "Estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-danger btn-sm" %>
+      <%= link_to "Defer day-1", events_snooze_path(event.id,"day-1"), class: "btn btn-info btn-sm" %>
+    <% elsif event.event_type == "auto_generated_communication_reminder" %>
+      <%= link_to "Defer 7 days", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
+      <%= link_to "Defer 30 days", events_snooze_path(event.id,30), class: "btn btn-info btn-sm" %>
+    <% else %>
+      <%= link_to "Dismiss", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
+      <%= link_to "Defer 7 days", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
+    <% end %>
   </div>
 </div>

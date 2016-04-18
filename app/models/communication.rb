@@ -23,7 +23,7 @@ class Communication < ActiveRecord::Base
   end
 
   def self.create_event_related_communication!(event,person_id,contents)
-    communication = Communication.new(medium: "live", 
+    communication = Communication.new(medium: "email", 
       event_id: event.id,
       person_id: person_id,
       contents: contents)
