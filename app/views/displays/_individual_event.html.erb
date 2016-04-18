@@ -1,26 +1,21 @@
-<tr>
-  <td>
-    <% if event.person.present? and event.person.first_name.present? %>
-       <%= link_to "#{event.person.first_name} | ", edit_person_path(event.person.id) %>
+<div class="row">
+  <div class="col-md-6">
+    <% if event.person.present? %>
+       <%= link_to "#{event.person.display_name}", edit_person_path(event.person.id) %>
     <% end %>
-    <%= link_to "RA Event", "/admin/event/#{event.id}/edit" %>
-  </td>  
-  <td>
     <% if event.happening_date.present? %>
       <%= event.happening_date.strftime("%b %d") %>
-    <% end %>
-  </td>
-  <td><strong><%= event.content %></strong></td>
-  <td><%= event.notes %></td>
-  <td>
+    <% end %>   
     <% if event.person.present? %>
        <%= mail_to "#{event.person.contact_info(:email)}" %>
-    <% end %>
-  </td>  
-  <td><%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %></td>
-  <td><%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly), class: "btn btn-success btn-sm" %></td>
-  <td><%= link_to "Pass", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %></td>
-  <td><%= link_to "Pass & estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-danger btn-sm" %></td>
-  <td><%= link_to "Defer 1 wk", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %></td>
-  <td><%= link_to "Defer day-1", events_snooze_path(event.id,"day-1"), class: "btn btn-info btn-sm" %></td>
-</tr>
+    <% end %>     
+  </div> 
+  <div class="col-md-6">
+    <%= link_to "Success", events_dismiss_path(event.id,:success), class: "btn btn-success btn-sm" %>
+    <%= link_to "Tried Openly", events_dismiss_path(event.id,:tried_openly), class: "btn btn-success btn-sm" %>
+    <%= link_to "Pass", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
+    <%= link_to "Pass & estrange", events_dismiss_path(event.id,:pass_and_estrange), class: "btn btn-danger btn-sm" %>
+    <%= link_to "Defer 1 wk", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
+    <%= link_to "Defer day-1", events_snooze_path(event.id,"day-1"), class: "btn btn-info btn-sm" %>
+  </div>
+</div>
