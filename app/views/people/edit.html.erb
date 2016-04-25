@@ -1,9 +1,9 @@
 <title><%= @person.display_name %> - edit page</title>
 
 <div class="row">
+  <h2 class="center"><%= @person.display_name %> (<%= link_to "RA edit", "#{@person.link_string}" %>)</h2>
   <div class="col-md-3 biography">
     <div class="basics">
-      <p><strong><%= @person.display_name %> (<%= link_to "RA edit", "#{@person.link_string}" %>)</strong></p>
       <p><%= @person.display_birthday %></p>
       <p><%= @person.display_age %></p>
       <% @person.contact_methods.each do |cm| %>
