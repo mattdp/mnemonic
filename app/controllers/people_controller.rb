@@ -1,12 +1,7 @@
 class PeopleController < ApplicationController
 
   def edit
-    nav_to_p = params[:navigate_to_person]
-    if nav_to_p.present?
-      @person = Person.find(nav_to_p)
-    else
-      @person = Person.find(params[:id])
-    end
+    @person = Person.find(params[:id])
 
     @tags = Tag.all
     @feed = @person.feed
@@ -24,6 +19,10 @@ class PeopleController < ApplicationController
     @all_people = Person.all
     @all_tags = Tag.all
     @overview_attributes = Person.overview_attributes
+  end
+
+  def navigate_to_person
+    redirect_to edit_person_path(params[:navigate_to_person])
   end
 
   def prospectives_submission

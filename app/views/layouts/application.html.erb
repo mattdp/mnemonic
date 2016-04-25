@@ -28,7 +28,7 @@
               <%= link_to "Survey", new_survey_path %>
             </div>
             <div>
-              <%= form_tag({action: "prospectives_submission", controller: "people"}, method: "get") do %>
+              <%= form_tag({action: "navigate_to_person", controller: "people"}, method: "post") do %>
                 <%= select_tag(:navigate_to_person, options_from_collection_for_select(Person.all,"id","name"), multiple: false, class: "chosen-select") %>
                 <%= submit_tag "Go" %>
               <% end %>

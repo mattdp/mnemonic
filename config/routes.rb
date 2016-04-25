@@ -21,6 +21,7 @@ Mnemonic::Application.routes.draw do
   get '/people/generate_names', to: 'people#generate_names', as: 'people_generate_names'
   get '/people/prospectives', to: 'people#prospectives', as: 'people_prospectives'
   match '/people/prospectives_submission', to: 'people#prospectives_submission', via: :post, as: 'prospectives_new_submission'
+  match '/people/navigate_to_person', to: 'people#navigate_to_person', via: :post, as: 'navigate_to_person'
   get '/people/:id', to: 'people#edit'
 
   resources :plans, only: [:index, :show]
