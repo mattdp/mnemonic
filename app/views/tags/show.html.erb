@@ -9,7 +9,7 @@
   <% @taggings.each do |tagging| %>
     <% person = tagging.person %>
     <tr>
-      <td><%= link_to "#{person.name}", "#{person.link_string}" %></td>
+      <td><%= link_to "#{person.name}", edit_person_path(person.id) %></td>
       <td><%= "#{tagging.verb.name}" %></td>
       <td><%= mail_to "#{person.contact_info(:email)}" %></td>
     </tr>
