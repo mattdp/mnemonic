@@ -22,7 +22,7 @@ class Survey < ActiveRecord::Base
     set = ["now_how_happy","now_how_alert","now_how_purposeful","self_reflection"] if set.nil?
     set.each do |name|
       q = Question.find_by_name(name)
-      a = Answer.create({survey_id: self.id, question_id: q.id})
+      Answer.create({survey_id: self.id, question_id: q.id})
     end
   end
 
