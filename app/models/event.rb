@@ -104,14 +104,28 @@ class Event < ActiveRecord::Base
 
   def self.events_by_display_category(date = Event.current_date)
     answer = {}
-    answer[:closest] = Event.joins(:person).where("dismissed = FALSE and start_date <= ?",date)
-    answer[:closest] = answer[:closest].select{|e| e.person.present? and
-      (e.person.relationship_possible == 4 or 
-        (e.person.relationship_possible == 3 and e.person.relationship_current == 3)
-      )
-    }
-    answer[:specific_dates] = Event.where("happening_date IS NOT NULL and dismissed = FALSE and start_date <= ?",date).order(:happening_date)
-    answer[:ranges] = Event.where("happening_date IS NULL and dismissed = FALSE and start_date <= ?",date).order(:start_date).select{|e| !e.fade_date.present? or e.fade_date >= date}
+    answer[:closest] = Event.joins(:person)
+      .where("dismissed = FALSE and start_date <= ?",date)
+      .select{|e| e.person.present? and
+        (e.person.relationship_possible == 4 or 
+          (e.person.relationship_possible == 3 and 
+          e.person.relationship_current == 3)
+        )
+      }
+    answer[:specific_dates] = Event.where("happening_date IS NOT NULL")
+      .where("dismissed = FALSE")
+      .where("start_date <= ?",date)
+      .order(:happening_date)
+    answer[:ranges] = Event.where("happening_date IS NULL")
+      .where("dismissed = FALSE")
+      .where("start_date <= ?",date)
+      .order(:start_date)      
+      .select{|e| !e.fade_date.present? or e.fade_date >= date}
+    #don't want redundancy
+    [:specific_dates,:ranges].each do |key|
+      answer[key].reject!{|e| e.in?(answer[:closest])}
+    end
+
     return answer
   end
 
