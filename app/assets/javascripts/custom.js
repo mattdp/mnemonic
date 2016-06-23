@@ -21,12 +21,12 @@ $.ajax({
 });
 
 function draw_sleep_graph(data_to_draw){
-  var maxValue = 100;
-  var maxBars = 15;
+  var maxValue = 700;
+  var maxBars = 10;
   var dataset = data_to_draw;
 
   var w = 600;
-  var h = 100;
+  var h = 700;
   var barPadding = 1;
   var highlightAbove = 60;
   var barW = w / dataset.length;
