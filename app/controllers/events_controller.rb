@@ -31,6 +31,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new
     @event.content = params[:content]
+    @event.event_type = "manually_created"
     @event.save
 
     tag = @event.make_event_tag
