@@ -1,7 +1,7 @@
 <% provide(:title,"Prospective people handling") %>
 
-<div class="container">
-  <div class="row">
+<div class="row">
+  <div class="col-md-12">
     <% if @people.present? %>
       <%= form_tag action: "prospectives_submission", controller: "people" do %>
         <% @people.each do |person| %>
