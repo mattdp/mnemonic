@@ -11,7 +11,6 @@ $.ajax({
   contentType: "application/json; charset=utf-8",
   url: '/surveys/sleep_data',
   dataType: 'json',
-  data: "{}", 
   success: function (received_data) {
     alert(received_data);
     //var div_where_to_draw = "div.mygraph";
