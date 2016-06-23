@@ -17,7 +17,7 @@ function draw_sleep_graph(raw_hash){
   var key;
   var dataset = [];
   for (key in raw_hash) {
-    dataset.push({'name': key, 'value': raw_hash[key]});
+    dataset.push({'name': key, 'value': raw_hash[key] });
   }
 
   var maxValue = 700;
@@ -33,9 +33,9 @@ function draw_sleep_graph(raw_hash){
   var svg = d3.select("div#sleep-graph")
     .append("svg")
     .attr("width", w)
-    .attr("height", h);
+    .attr("height", h + 50); //leave room for titles
 
-  svg.selectAll("rect")
+  svg.selectAll("svg")
     .data(dataset)
     .enter()
     .append("rect")
@@ -51,7 +51,8 @@ function draw_sleep_graph(raw_hash){
       }
     });
 
-  svg.selectAll("text")
+  //readable values
+  svg.selectAll("svg")
     .data(dataset)
     .enter()
     .append("text")
@@ -75,4 +76,27 @@ function draw_sleep_graph(raw_hash){
         else {return h - d.value*scaledown - 5;} // over bars
       }
     });
+
+  //dates as a guide to when sleep took place
+  //not rendering in any way right now
+  svg.selectAll("svg")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) {
+      return d.name;
+    })
+    .attr({
+      "font-family": "sans-serif",
+      "font-size": "11px",
+      "text-anchor": "middle",
+      "fill": "black",
+      x: function(d,i) { 
+        return (i * barW) + (barW / 2);
+      },
+      y: function() {
+        return (h + 25);
+      }
+    });
+
 }
