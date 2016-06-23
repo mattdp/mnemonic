@@ -78,7 +78,6 @@ function draw_sleep_graph(raw_hash){
     });
 
   //dates as a guide to when sleep took place
-  //not rendering in any way right now
   svg.selectAll("svg")
     .data(dataset)
     .enter()

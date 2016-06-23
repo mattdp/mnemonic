@@ -35,12 +35,11 @@ class SurveysController < ApplicationController
   def get_sleep_data
     #what can i pass in that data will like? date -> value, i assume?
     @sleep_data = {}
-    (1..10).reverse_each do |n|
-      key = (Date.today - n.days).strftime("%a %b %e")
-      #for each of those days, is there sleep # or 0?
-      #might make sense to have a lookup for a date and question, handling 2 surveys on a day
-      val = 400
-      @sleep_data[key] = val
+    question = Question.find_by_name("yesterday_sleep")
+    (0..9).reverse_each do |n|
+      target_date = Date.today - n.days
+      key = (target_date - 1.day).strftime("%a %b %e") #since survey on day X is about day X-1
+      @sleep_data[key] = question.answer_on_date(target_date,0)
     end
 
     respond_to do |format|
