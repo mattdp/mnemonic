@@ -28,6 +28,7 @@ Mnemonic::Application.routes.draw do
   get '/plans/deed/:deed_id', to: 'plans#index', as: "plans_with_deed"
   get '/plans/wip', to: 'plans#wip', as: 'wip'
 
+  get '/surveys/sleep_data', to: 'surveys#get_sleep_data', as: "surveys_get_sleep_data"
   resources :surveys, only: [:new, :create, :show]
 
   resources :taggings, only: [:new, :create]

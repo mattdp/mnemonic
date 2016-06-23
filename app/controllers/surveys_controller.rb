@@ -32,4 +32,8 @@ class SurveysController < ApplicationController
     @survey_purpose, @deed_id = @survey.purpose
   end
 
+  def get_sleep_data
+    @sleep_data = [480,510,0,0,420].to_json
+  end
+
 end
