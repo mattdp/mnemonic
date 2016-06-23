@@ -33,7 +33,7 @@ function draw_sleep_graph(raw_hash){
   var svg = d3.select("div#sleep-graph")
     .append("svg")
     .attr("width", w)
-    .attr("height", h + 50); //leave room for titles
+    .attr("height", h + 15); //leave room for titles
 
   svg.selectAll("svg")
     .data(dataset)
@@ -94,7 +94,7 @@ function draw_sleep_graph(raw_hash){
         return (i * barW) + (barW / 2);
       },
       y: function() {
-        return (h + 25);
+        return (h + 15);
       }
     });
 
