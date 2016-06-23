@@ -28,7 +28,7 @@ function draw_sleep_graph(data_to_draw){
   var w = 600;
   var h = 700;
   var barPadding = 1;
-  var highlightAbove = 60;
+  var highlightBelow = 450; //sleep goal of 7.5h
   var barW = w / dataset.length;
 
   var svg = d3.select("body")
@@ -48,7 +48,7 @@ function draw_sleep_graph(data_to_draw){
     })
     .style({
       fill: function(d) { 
-        if (d > highlightAbove) { return "red"; }
+        if (d < highlightBelow) { return "red"; }
       }
     });
 
