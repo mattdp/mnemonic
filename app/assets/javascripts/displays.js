@@ -1,4 +1,3 @@
-//for sleep chart - not yet scoped to only pages using the chart
 $.ajax({
   type: "GET",
   contentType: "application/json; charset=utf-8",
@@ -17,13 +16,15 @@ function draw_sleep_graph(data_to_draw){
   var maxBars = 10;
   var dataset = data_to_draw;
 
-  var w = 600;
-  var h = 700;
+  var w = 800;
+  var h = 100;
   var barPadding = 1;
   var highlightBelow = 450; //sleep goal of 7.5h
   var barW = w / dataset.length;
 
-  var svg = d3.select("body")
+  var scaledown = h / maxValue;
+
+  var svg = d3.select("div#sleep-graph")
     .append("svg")
     .attr("width", w)
     .attr("height", h);
@@ -34,9 +35,9 @@ function draw_sleep_graph(data_to_draw){
     .append("rect")
     .attr({
       x: function(d,i) { return i * (barW); },
-      y: function(d) { return h - d; },
+      y: function(d) { return h - d*scaledown; },
       width: barW - barPadding,
-      height: function(d) { return d; }
+      height: function(d) { return d*scaledown; }
     })
     .style({
       fill: function(d) { 
@@ -64,8 +65,8 @@ function draw_sleep_graph(data_to_draw){
       },
       y: function(d) { 
         // before, numbers were getting cut off
-        if (d > maxValue / 5) {return h - d + 15;} // in bars
-        else {return h - d - 5;} // over bars
+        if (d > maxValue / 5) {return h - d*scaledown + 15;} // in bars
+        else {return h - d*scaledown - 5;} // over bars
       }
     });
 }
