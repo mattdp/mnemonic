@@ -33,7 +33,7 @@ class SurveysController < ApplicationController
   end
 
   def get_sleep_data
-    @sleep_data = [480,510,0,0,420].to_json
+    @sleep_data = [480,510,0,0,420]
 
     respond_to do |format|
       format.json {render json: @sleep_data}
