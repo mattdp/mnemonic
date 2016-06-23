@@ -4,6 +4,7 @@ $.ajax({
   url: '/surveys/sleep_data',
   dataType: 'json',
   success: function (received_data) {
+    console.log(received_data);
     draw_sleep_graph(received_data);
   },
   error: function (result) {
@@ -11,17 +12,22 @@ $.ajax({
   }
 });
 
-function draw_sleep_graph(data_to_draw){
+function draw_sleep_graph(raw_hash){
+  //way better to do this in rails, but want the js practice
+  var key;
+  var dataset = [];
+  for (key in raw_hash) {
+    dataset.push({'name': key, 'value': raw_hash[key]});
+  }
+
   var maxValue = 700;
   var maxBars = 10;
-  var dataset = data_to_draw;
 
   var w = 800;
   var h = 100;
   var barPadding = 1;
   var highlightBelow = 450; //sleep goal of 7.5h
   var barW = w / dataset.length;
-
   var scaledown = h / maxValue;
 
   var svg = d3.select("div#sleep-graph")
@@ -35,13 +41,13 @@ function draw_sleep_graph(data_to_draw){
     .append("rect")
     .attr({
       x: function(d,i) { return i * (barW); },
-      y: function(d) { return h - d*scaledown; },
+      y: function(d) { return h - d.value*scaledown; },
       width: barW - barPadding,
-      height: function(d) { return d*scaledown; }
+      height: function(d) { return d.value*scaledown; }
     })
     .style({
       fill: function(d) { 
-        if (d < highlightBelow) { return "red"; }
+        if (d.value < highlightBelow) { return "red"; }
       }
     });
 
@@ -50,14 +56,14 @@ function draw_sleep_graph(data_to_draw){
     .enter()
     .append("text")
     .text(function(d) {
-      return d;
+      return d.value;
     })
     .attr({
       "font-family": "sans-serif",
       "font-size": "11px",
       "text-anchor": "middle",
       fill: function(d) {
-        if (d > maxValue / 5) {return "white";}
+        if (d.value > maxValue / 5) {return "white";}
         else {return "black"}
       },
       x: function(d,i) { 
@@ -65,8 +71,8 @@ function draw_sleep_graph(data_to_draw){
       },
       y: function(d) { 
         // before, numbers were getting cut off
-        if (d > maxValue / 5) {return h - d*scaledown + 15;} // in bars
-        else {return h - d*scaledown - 5;} // over bars
+        if (d.value > maxValue / 5) {return h - d.value*scaledown + 15;} // in bars
+        else {return h - d.value*scaledown - 5;} // over bars
       }
     });
 }
