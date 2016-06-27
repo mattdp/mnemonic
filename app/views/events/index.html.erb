@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Manually created events</h1>
+    <p>Note: Only includes events created in or after June 2016</p>
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Attendees</th>
+        <th>Date</th>
+        <th>Link</th>
+      </tr>
+      <% @manual_events.each do |event| %>
+        <tr>
+          <td><%= "#{event.content}" %></td>
+          <td>
+            <% attendees = event.attendee_list %>
+            <% attendees.each do |person| %>
+              <%= link_to "#{person.display_name}", edit_person_path(person) %>
+              <%= "," unless person == attendees.last %>
+            <% end %>
+          </td>
+          <td><%= "#{event.manual_event_date.strftime('%B %d, %Y')}" %></td>
+          <td><%= link_to "Edit", edit_event_path(event) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
 
+  def index
+    @manual_events = Event.where(event_type: "manually_created").reverse
+  end
+
   def dismiss
     @event = Event.find(params[:id])
     @event.dismiss(params[:dismissed_reason])

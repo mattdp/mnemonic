@@ -29,6 +29,17 @@ class Event < ActiveRecord::Base
   #   event is in top list if has a happening date
   #   event is in bottom list if has a start date and no happening date
 
+  def attendee_list
+    people_ids = self.communications.map{|c| c.person_id}
+    clean_people_ids = people_ids.reject{|id| id.nil?}
+    return Person.find(clean_people_ids)
+  end
+
+  def manual_event_date
+    return self.happening_date if self.happening_date.present?
+    return self.created_at
+  end
+
   def make_event_tag
     nfl = Tag.proper_name_for_link(self.content)
 
