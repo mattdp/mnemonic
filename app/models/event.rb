@@ -18,6 +18,19 @@
 #  dismissed_reason :string(255)
 #
 
+"""currently known event_types
+
+'wants'
+'birthday'
+'
+'has'
+'test'
+'auto_generated_communication_reminder'
+nil
+'manually_created'
+
+"""
+
 class Event < ActiveRecord::Base
   belongs_to :person
   has_many :communications, dependent: :destroy
