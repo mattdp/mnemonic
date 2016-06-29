@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '~>4.0.0'
+gem 'rails', '~>4.1.0'
 gem 'bcrypt-ruby'
 gem 'jquery-rails'
 gem 'pg', '0.17.1' #http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
