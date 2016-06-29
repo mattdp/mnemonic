@@ -132,9 +132,13 @@ class Event < ActiveRecord::Base
       .where("start_date <= ?",date)
       .order(:start_date)      
       .select{|e| !e.fade_date.present? or e.fade_date >= date}
+
     #don't want redundancy
-    [:specific_dates,:ranges].each do |key|
-      answer[key].reject!{|e| e.in?(answer[:closest])}
+    if answer[:closest].present?
+      closest_ids = answer[:closest].map{|e| e.id}
+      [:specific_dates,:ranges].each do |key|
+        answer[key] = answer[key].reject{|e| closest_ids.include?(e.id)}
+      end
     end
 
     return answer
