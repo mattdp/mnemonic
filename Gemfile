@@ -4,7 +4,10 @@ ruby "2.1.6"
 gem 'rails', '~>4.1.0'
 gem 'bcrypt-ruby'
 gem 'jquery-rails'
-gem 'pg', '0.17.1' #http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
+#https://jamandbees.net/2014/05/24/postgres-homebrew-and-rails-on-mac-os-x-mavericks/
+#http://stackoverflow.com/questions/17633422/psql-fatal-database-user-does-not-exist#17936043
+#http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
+gem 'pg', '0.17.1' 
 gem 'rails_admin'
 gem 'koala', '~> 1.10.0rc'
 gem 'nokogiri', '1.6.0' #version bumping this causes an error, dunno why
