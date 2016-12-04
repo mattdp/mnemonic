@@ -5,8 +5,8 @@
       <table class="table">
         <thead>
           <th>Time</th>
-          <% @surveys.first.answers.each do |answer| %>
-            <th><%= "#{answer.question.short}" %></th>
+          <% @questions.each do |question| %>
+            <th><%= "#{question.short}" %></th>
           <% end %>
         </thead>
         <tbody>

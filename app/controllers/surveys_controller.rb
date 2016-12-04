@@ -34,6 +34,7 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.last(25).reverse
+    @questions = Question.order("questions.ordering").all
   end
 
   def get_sleep_data
