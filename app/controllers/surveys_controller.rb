@@ -32,6 +32,10 @@ class SurveysController < ApplicationController
     @survey_purpose, @deed_id = @survey.purpose
   end
 
+  def index
+    @surveys = Survey.last(25).reverse
+  end
+
   def get_sleep_data
     #what can i pass in that data will like? date -> value, i assume?
     @sleep_data = {}

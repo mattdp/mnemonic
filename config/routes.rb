@@ -29,7 +29,7 @@ Mnemonic::Application.routes.draw do
   get '/plans/wip', to: 'plans#wip', as: 'wip'
 
   get '/surveys/sleep_data', to: 'surveys#get_sleep_data', as: "surveys_get_sleep_data"
-  resources :surveys, only: [:new, :create, :show]
+  resources :surveys, only: [:new, :create, :index, :show]
 
   resources :taggings, only: [:new, :create]
   match '/taggings/new_submission', to: 'taggings#new_submission', via: :post, as: 'taggings_new_submission'
