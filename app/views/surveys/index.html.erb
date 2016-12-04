@@ -11,10 +11,16 @@
         </thead>
         <tbody>
           <% @surveys.each do |survey| %>
+            <%#= Trying to accomodate future addition or removal of questions, to show blanks instead of fake data %>
+            <% answers = survey.answers.sort_by{|x| x.question.ordering} %>
+            <% answer_counter = 0 %>
             <tr>
               <td><%= survey.created_at.strftime("%a, %b %-d %H:%M") %></td>
-              <% survey.answers.each do |answer| %>
-                <td><%= "#{answer.get_answer}" %></td>
+              <% answers.each do |answer| %>
+                <% if @questions[answer_counter].id == answer.question.id %>
+                  <td><%= "#{answer.get_answer}" %></td>
+                <% end %>
+                <% answer_counter += 1 %>
               <% end %>
             </tr>
           <% end %>
