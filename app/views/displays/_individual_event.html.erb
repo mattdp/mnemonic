@@ -34,6 +34,7 @@
     <% elsif event.event_type == "auto_generated_communication_reminder" %>
       <%= link_to "Defer 7 days", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
       <%= link_to "Defer 30 days", events_snooze_path(event.id,30), class: "btn btn-info btn-sm" %>
+      <%= link_to "Dismiss", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
     <% else %>
       <%= link_to "Dismiss", events_dismiss_path(event.id,:pass), class: "btn btn-warning btn-sm" %>
       <%= link_to "Defer 7 days", events_snooze_path(event.id,7), class: "btn btn-info btn-sm" %>
