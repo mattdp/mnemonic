@@ -39,9 +39,12 @@ class PeopleController < ApplicationController
             ignore: true)
           person.destroy
         else
+          #subverting strong params in an insecure way
+          person.prospective = false
           hash[:person].each do |k,v|
             person.send("#{k}=",v)
           end
+          person.save
           person.controller_save(hash)
           if hash["select_action"] == "attach_to_existing_person"
             surviving_person = Person.find(hash["attach_to_id"][0])
