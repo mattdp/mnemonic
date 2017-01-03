@@ -110,14 +110,18 @@ class Person < ActiveRecord::Base
           info: data["info"])
       end
     end
-    self.prospective = false
-    person_attributes = hash.select{|k,v| Person.overview_attributes.include?(k.to_sym)}
-    self.assign_attributes(person_attributes)
-    self.save
+  end
+
+  def self.general_attributes
+    Person.overview_attributes + Person.relationship_attributes
   end
 
   def self.overview_attributes
-    [:first_name, :last_name, :relationship_current, :relationship_possible, :notes] 
+    [:first_name, :last_name, :notes] 
+  end
+
+  def self.relationship_attributes
+    [:relationship_current, :relationship_possible, :reminder_days, :reminder_manual_override]
   end
 
   #gives back an ignore, a new person, or an existing person

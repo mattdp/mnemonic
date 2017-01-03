@@ -60,6 +60,10 @@
   <div class="col-md-6">
     <%= form_tag person_path(@person), method: :patch do %>
       <div>
+        <p><strong>Change relationship:</strong></p>
+        <%= render partial: "people/relationship_overview", locals: {person: @person, prefix: "person", attributes: Person.relationship_attributes} %>
+      </div>
+      <div>
         <p><strong>Add tags:</strong></p>
         <%= select_tag("#{@prefix}[tags]", options_from_collection_for_select(@tags,"id","name"), multiple: true, class: "chosen-select") %>
       </div>
@@ -68,7 +72,7 @@
         <%= render partial: "people/contact_methods", locals: {person: @person, prefix: "#{@prefix}"} %>
       </div>
       <div>
-        <%= submit_tag "Save tags &| contact methods", class: "top-margin" %>
+        <%= submit_tag "Save changes", class: "top-margin" %>
       </div>
     <% end %>
   </div>

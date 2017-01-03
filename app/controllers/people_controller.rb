@@ -10,6 +10,9 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
+    @person.prospective = false
+    @person.update(person_params)
+
     @person.controller_save(params["modified"])
     redirect_to edit_person_path(@person), notice: 'Person manipulated.'
   end
@@ -61,5 +64,11 @@ class PeopleController < ApplicationController
     @second_most_often = [[4,4]]
     @third_most_often = [[2,4],[1,4],[3,3]]
   end
+
+  private
+
+    def person_params
+      params.require(:person).permit(Person.general_attributes)
+    end
 
 end
