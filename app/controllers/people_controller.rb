@@ -33,17 +33,17 @@ class PeopleController < ApplicationController
     if params["previously_attached_people"].present?
       params["previously_attached_people"].each do |id, hash|
         person = Person.find(id)
-        if hash["select_action"] == "no_longer_prospective"
-          person.controller_save(hash)
-        elsif hash["select_action"] == "attach_to_existing_person"
-          person.controller_save(hash)
-          surviving_person = Person.find(hash["attach_to_id"][0])
-          surviving_person.devour(person)
-        elsif hash["select_action"] == "block_future_email"
+        if hash["select_action"] == "block_future_email"
           ContactMethod.create(filter: "email", 
             info: person.contact_methods[0].info,
             ignore: true)
           person.destroy
+        else
+          person.update(person_params)
+          if hash["select_action"] == "attach_to_existing_person"
+            surviving_person = Person.find(hash["attach_to_id"][0])
+            surviving_person.devour(person)
+          end
         end
       end
     end
