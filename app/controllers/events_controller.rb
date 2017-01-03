@@ -78,6 +78,11 @@ class EventsController < ApplicationController
     if params["previously_attached_people"].present?
       params["previously_attached_people"].each do |id, hash|
         person = Person.find(id)
+        #subverting strong params in an insecure way
+        hash[:person].each do |k,v|
+          person.send("#{k}=",v)
+        end
+        person.save
         person.controller_save(hash)
       end
     end
@@ -99,5 +104,11 @@ class EventsController < ApplicationController
 
     redirect_to edit_event_path(event), notice: "Save attempted."
   end
+
+  private
+
+    def person_params
+      params.require(:person).permit(Person.general_attributes)
+    end
 
 end

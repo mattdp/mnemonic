@@ -39,7 +39,10 @@ class PeopleController < ApplicationController
             ignore: true)
           person.destroy
         else
-          person.update(person_params)
+          hash[:person].each do |k,v|
+            person.send("#{k}=",v)
+          end
+          person.controller_save(hash)
           if hash["select_action"] == "attach_to_existing_person"
             surviving_person = Person.find(hash["attach_to_id"][0])
             surviving_person.devour(person)

@@ -7,8 +7,8 @@
     </p>
     <% person_attributes.each do |attribute| %>
       <p>
-        <%= label_tag "#{prefix}[#{attribute}]", "#{attribute.to_s.titleize}" %>
-        <%= text_field_tag "#{prefix}[#{attribute}]", person.send(attribute) %>
+        <%= label_tag "#{prefix}[person][#{attribute}]", "#{attribute.to_s.titleize}" %>
+        <%= text_field_tag "#{prefix}[person][#{attribute}]", person.send(attribute) %>
       </p>
     <% end %>
     <%= render partial: "people/contact_methods", locals: {person: person, prefix: prefix} %>
