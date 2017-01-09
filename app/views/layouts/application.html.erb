@@ -39,7 +39,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-5">
               <%= form_tag({action: "navigate_to_person", controller: "people"}, method: "post") do %>
-                <%= select_tag(:navigate_to_person, options_from_collection_for_select(Person.all,"id","name"), multiple: false, class: "chosen-select") %>
+                <%= select_tag(:navigate_to_person, options_from_collection_for_select(Person.order('people.name').all,"id","name"), multiple: false, class: "chosen-select") %>
                 <%= submit_tag "Go" %>
               <% end %>
             </div>
