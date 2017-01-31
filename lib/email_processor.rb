@@ -13,7 +13,7 @@ class EmailProcessor
 
     email_of_interest = parsed[:to]
     if !(/@/.match(parsed[:to]))
-      logger.warn "Poorly formatted email! parsed: #{parsed}"
+      Rails.logger.warn "Poorly formatted email! parsed: #{parsed}"
     end
 
     object = Person.react_to_email(email_of_interest)
