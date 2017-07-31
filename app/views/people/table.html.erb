@@ -28,6 +28,8 @@
                 <td class="info">
               <% elsif @third_most_often.include?([r,c]) %>
                 <td class="warning">
+              <% elsif @fourth_most_often.include?([r,c]) %>
+                <td class="alert">                
               <% else %>
                 <td>
               <% end %>  
@@ -52,19 +54,19 @@
       <h3>The numbers</h3>
       <p>Horizontal: potential; Vertical: now</p>
       <dl class="dl-horizontal">
-        <dt>0</dt><dd>Acquaintance</dd>
-        <dt>1</dt><dd>Friend, but not especially close.</dd>
-        <dt>2</dt><dd>Good friend, not inner circle.</dd>
+        <dt>1</dt><dd>Doesn't fit other categories</dd>
+        <dt>2</dt><dd>Friend</dd>
         <dt>3</dt><dd>Edge of inner circle</dd>
         <dt>4</dt><dd>Lifelong friend</dd>
       </dl>
     </div>
     <div class="col-md-6">
-      <h3>The colors, by default</h3>
+      <h3>Substantial interaction at least:</h3>
       <table class="table table-bordered">
-        <tr><td class="success">Talk with at least every 15 days</td></tr>
-        <tr><td class="info">Talk with at least every 30 days</td></tr>
-        <tr><td class="warning">Talk with at least every 90 days</td></tr>
+        <tr><td class="success">4x/year</td></tr>
+        <tr><td class="info">3x/year</td></tr>
+        <tr><td class="warning">2x/year</td></tr>
+        <tr><td class="alert">1x/year</td></tr>
         <tr><td class="active">Improbable and undesirable</td></tr>
       </table>
     </div>
