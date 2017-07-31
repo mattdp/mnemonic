@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "2.1.6"
+ruby "~> 2.1.6"
 
-gem 'rails', '~>4.1.0'
+gem 'rails', '~> 4.1.0'
 gem 'bcrypt-ruby'
 gem 'jquery-rails'
 #https://jamandbees.net/2014/05/24/postgres-homebrew-and-rails-on-mac-os-x-mavericks/

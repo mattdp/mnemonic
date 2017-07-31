@@ -172,11 +172,12 @@ class Person < ActiveRecord::Base
     rd = nil
 
     if self.relationship_possible == 4
-      rd = 90 #4,2 and 4,1
-      rd = 30 if relationship_current == 4 #already at great state
-      rd = 15 if relationship_current == 3 #actively developing
+      rd = 180 #4,2 and 4,1
+      rd = 120 if relationship_current == 3 
+      rd = 90 if relationship_current == 4
     elsif self.relationship_possible == 3
-      rd = 90 if relationship_current == 3 # not pushing dev in this area now
+      rd = 180 if relationship_current == 3
+      rd = 360 if relationship_current == 2
     end
 
     self.reminder_days = rd
