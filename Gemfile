@@ -18,6 +18,7 @@ gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 gem 'chosen-rails'
 gem 'griddler-mailgun'
 gem 'd3-rails'
+gem 'httparty'
 
 group :development, :test do
   gem 'rspec-rails'

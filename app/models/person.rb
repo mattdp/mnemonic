@@ -155,7 +155,7 @@ class Person < ActiveRecord::Base
   #logic for which relationship_current and relationship_possible get reminders...
   #...is in both this method and set_reminder_days
   def self.generate_all_reminder_days!
-    people = Person.where("(relationship_possible = 3 OR relationship_possible = 4) 
+    people = Person.where("(relationship_possible = 2 OR relationship_possible = 3 OR relationship_possible = 4) 
       AND reminder_manual_override = FALSE
       AND relationship_current IS NOT NULL"
       )
